@@ -259,7 +259,7 @@ def mainfunc():
                         date_file.close()
                         day_time=time.strftime("%d", time.localtime())
                     '''
-                    s=open('history_chat.txt','a')
+                    s=open('logs_chat.txt','a')
                     s.write(last_name + ' *_* ' + first_name + ' *_* ' + str(event.obj.from_id) + ' *_* ' + str(event.chat_id) + ' *_* ' + kupi_slona + '\n')
                     s.close()
 
@@ -270,14 +270,14 @@ def mainfunc():
                     # print(den,bd_date.split('.')[0])
 
                     pozdrflag = False
-                    pozdr = open('pozdravlenie.txt', 'r')
+                    pozdr = open('resurses/pozdravlenie.txt', 'r')
                     for i in pozdr:
                         if str(event.obj.from_id) == i[:-1:]:
                             pozdrflag = True
                     pozdr.close()
                     if flagbddate==True and str(dict7[time.strftime("%B", time.localtime())]) == bd_date.split('.')[1] and den == \
                             bd_date.split('.')[0] and pozdrflag is False:
-                        pozdr = open('pozdravlenie.txt', 'a')
+                        pozdr = open('resurses/pozdravlenie.txt', 'a')
                         pozdr.write(str(event.obj.from_id) + '\n')
                         pozdr.close()
                         image_url = 'https://pp.userapi.com/c850128/v850128497/10e229/uPpRrYrMR-4.jpg'
@@ -312,7 +312,7 @@ def mainfunc():
                     flag1 = 0
                     event1 = event.obj.text.split(' ')
                     for i in range(len(event1)):
-                        mat = open('matsp1.txt', 'r')
+                        mat = open('resurses/matsp1.txt', 'r')
                         for k in mat:
                             if str(event1[i]) == k[:-1:]:
                                 flag1 = 1
@@ -334,7 +334,7 @@ def mainfunc():
                                 flag2 = i
 
                     if event.obj.from_id == 13069991:
-                        f = open('andr.txt', 'r')
+                        f = open('resurses/andr.txt', 'r')
                         k = 0
                         for line in f:
                             if k == 0:
@@ -343,7 +343,7 @@ def mainfunc():
                         f.close()
                         if chand == 16:
                             chand = 0
-                        f = open('andr.txt', 'w')
+                        f = open('resurses/andr.txt', 'w')
                         f.write(str(chand))
                         f.close()
                     if event.obj.from_id == 13069991 and chand == 15 and flagtime != True:
@@ -363,11 +363,11 @@ def mainfunc():
 
 
                     if flag1 == 1 and event.obj.text.find('бот отъебись') == -1:
-                        f1 = open('mat.txt', 'a')
+                        f1 = open('resurses/mat.txt', 'a')
                         f1.write(str(event.obj.from_id))
                         f1.write('\n')
                         f1.close()
-                        f1 = open('mat.txt', 'r')
+                        f1 = open('resurses/mat.txt', 'r')
                         chmat = 0
                         for line in f1:
                             if line == str(event.obj.from_id) + '\n':
@@ -477,7 +477,7 @@ def mainfunc():
 
                     elif event.obj.text == 'бот шутку' or event.obj.text == 'шутка' and flkv == True or event.obj.text == 'шутка' and flkv2 == True:
                         cit = random.randint(0, 5329)
-                        for linenum, line in enumerate(open('jokes_clear.txt', 'r')):
+                        for linenum, line in enumerate(open('resurses/jokes_clear.txt', 'r')):
                             if linenum == cit:
                                 messagecit = (line.strip())
                         if messagecit[-1] == ',':
@@ -490,7 +490,7 @@ def mainfunc():
 
                     elif event.obj.text == 'бот мысль' or event.obj.text == 'мысль' and flkv == True or event.obj.text == 'мысль' and flkv2 == True:
                         cit = random.randint(0, 1355)
-                        for linenum, line in enumerate(open('quotes_clear.txt', 'r')):
+                        for linenum, line in enumerate(open('resurses/quotes_clear.txt', 'r')):
                             if linenum == cit:
                                 messagecit = (line.strip())
                         if messagecit[-1] == ',':
@@ -503,7 +503,7 @@ def mainfunc():
 
                     elif event.obj.text == 'бот факт' or event.obj.text == 'факт' and flkv == True or event.obj.text == 'факт' and flkv2 == True:
                         cit = random.randint(0, 764)
-                        for linenum, line in enumerate(open('facts_clear.txt', 'r')):
+                        for linenum, line in enumerate(open('resurses/facts_clear.txt', 'r')):
                             if linenum == cit:
                                 messagecit = (line.strip())
                         if messagecit[-1] == ',':
@@ -516,7 +516,7 @@ def mainfunc():
 
                     elif event.obj.text == 'бот цитату' or event.obj.text == 'цитата' and flkv == True or event.obj.text == 'цитата' and flkv2 == True:
                         cit = random.randint(0, 1391)
-                        for linenum, line in enumerate(open('twtrr.txt', 'r')):
+                        for linenum, line in enumerate(open('resurses/twtrr.txt', 'r')):
                             if linenum == cit:
                                 messagecit = (line.strip())
                         if messagecit[-1] == ',':
@@ -554,7 +554,7 @@ def mainfunc():
 
                     elif event.obj.text == 'бот анекдот' or event.obj.text == 'анекдот' and flkv == True or event.obj.text == 'анекдот' and flkv2 == True:
                         anes = random.randint(0, 130200)
-                        for linenum, line in enumerate(open('anec.txt', 'r')):
+                        for linenum, line in enumerate(open('resurses/anec.txt', 'r')):
                             if linenum == anes:
                                 anecdot = (line.strip()).replace('#', '\n')
                         vk.messages.send(  # Отправляем собщение
