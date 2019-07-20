@@ -463,11 +463,11 @@ def mainfunc():
                         bb = datetime.date(2020,7,4)
                         cc=bb-aa
                         dateAnton=(str(cc).split(',')[0].split(' ')[0])
-                        if dateAnton[-1]=='1' or dateAnton[-1]=='0':
+                        if dateAnton[-1]=='1':
                             date_day='день.'
                         if dateAnton[-1]=='2' or dateAnton[-1]=='3' or dateAnton[-1]=='4':
                             date_day='дня.'
-                        if dateAnton[-1]=='5' or dateAnton[-1]=='6' or dateAnton[-1]=='7' or dateAnton[-1]=='8' or dateAnton[-1]=='9':
+                        if  dateAnton[-1]=='0' or dateAnton[-1]=='5' or dateAnton[-1]=='6' or dateAnton[-1]=='7' or dateAnton[-1]=='8' or dateAnton[-1]=='9':
                             date_day='дней.'
                         vk.messages.send(  # Отправляем собщение
                             chat_id=event.chat_id,
@@ -812,7 +812,7 @@ def mainfunc():
             goroscop1()
             mainfunc()
 
-
+goroscop1()
 mainfunc()
 
 
