@@ -526,7 +526,7 @@ def mainfunc():
                             random_id=get_random_id(),
                             message=str(messagecit)
                         )
-                    elif event.obj.text == 'обнови гороскоп' and event.obj.peer_id == 195310233:
+                    elif event.obj.text == 'обнови гороскоп' and event.obj.from_id == 195310233:
                         goroscop1()
                         vk.messages.send(
                             chat_id=event.chat_id,
