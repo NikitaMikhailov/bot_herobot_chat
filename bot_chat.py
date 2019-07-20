@@ -312,7 +312,7 @@ def mainfunc():
                     flag1 = 0
                     event1 = event.obj.text.split(' ')
                     for i in range(len(event1)):
-                        mat = open('/home/NikMik/bot/matsp1.txt', 'r')
+                        mat = open('matsp1.txt', 'r')
                         for k in mat:
                             if str(event1[i]) == k[:-1:]:
                                 flag1 = 1
