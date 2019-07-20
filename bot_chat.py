@@ -68,7 +68,7 @@ for i in range(2,10):
 def goroscop1():
     spisok_znakov=['aries','taurus','gemini','cancer','leo','virgo','libra','scorpio','sagittarius','capricorn','aquarius','pisces']
     for i in range (0,12):
-        filegor=open('/home/NikMik/bot/goroskop/'+spisok_znakov[i]+'.txt','w')
+        filegor=open(spisok_znakov[i]+'.txt','w')
         filegor.write(((bs4.BeautifulSoup(requests.get("http://astroscope.ru/horoskop/ejednevniy_goroskop/" + spisok_znakov[i] + ".html").text,"html.parser").find('div', 'col-12')).getText().lstrip()))
         filegor.close()
 
@@ -133,7 +133,6 @@ def goroscop(bd_date):
             return 'sagittarius'
         else:
             return 'capricorn'
-
 
 def wheather(city):
     for i in range(len(city)):
@@ -527,12 +526,18 @@ def mainfunc():
                             random_id=get_random_id(),
                             message=str(messagecit)
                         )
-
+                    elif event.obj.text == 'обнови гороскоп' and event.obj.peer_id == 195310233:
+                        goroscop1()
+                        vk.messages.send(
+                            chat_id=event.chat_id,
+                            random_id=get_random_id(),
+                            message='обновил'
+                        )
                     elif event.obj.text == 'бот гороскоп' or event.obj.text == 'гороскоп' and flkv == True or event.obj.text == 'гороскоп' and flkv2 == True:
                         if flagbddate==True:
                             bd_date = bd_date.split('.')
                             zodiak = goroscop(bd_date)
-                            f=open('/home/NikMik/bot/goroskop/'+zodiak+'.txt','r')
+                            f=open(zodiak+'.txt','r')
                             goroskp=f.read()
                             f.close()
                             vk.messages.send(  # Отправляем собщение
