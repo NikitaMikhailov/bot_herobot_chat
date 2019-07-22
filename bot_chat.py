@@ -1,4 +1,7 @@
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
+# vim:fileencoding=utf-8
+
 from vk_api.utils import get_random_id
 from vk_api import VkUpload
 from vk_api.bot_longpoll import VkBotLongPoll, VkBotEventType
@@ -70,7 +73,7 @@ def goroscop1():
     spisok_znakov=['aries','taurus','gemini','cancer','leo','virgo','libra','scorpio','sagittarius','capricorn','aquarius','pisces']
     for i in range (0,12):
         filegor=open('goroskop_files/'+spisok_znakov[i]+'.txt','w')
-        filegor.write(((bs4.BeautifulSoup(requests.get("http://astroscope.ru/horoskop/ejednevniy_goroskop/" + spisok_znakov[i] + ".html").text.encode('utf-8'),"html.parser").find('div', 'col-12')).getText().lstrip()))
+        filegor.write(((bs4.BeautifulSoup(requests.get("http://astroscope.ru/horoskop/ejednevniy_goroskop/" + spisok_znakov[i] + ".html").text,"html.parser").find('div', 'col-12')).getText().lstrip()))
         filegor.close()
 
 def goroscop(bd_date):
