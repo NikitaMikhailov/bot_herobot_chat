@@ -791,28 +791,12 @@ def mainfunc():
                     kolresp += 1
                     '''
     except Exception as err:
-        try:
-            print(err,type(err))
-            if str(err.find("Errno 2"))!=-1:
-                vk.messages.send(
-                    user_id=195310233,
-                    random_id=get_random_id(),
-                    message='Возникла ошибка ' + str(err) + ' в главном цикле программы сообщений бесед, цикл перезапущен\nНа сообщении пользователя: '+first_name+' '+last_name+'\nC текстом сообщения: '+event.obj.text
-                )
-            goroscop1()
-            mainfunc()
-        except:
-            print(err)
-
-            vk.messages.send(
-                user_id=195310233,
-                random_id=get_random_id(),
-                message='Возникла ошибка ' + str(err) + ' в главном цикле программы сообщений бесед, цикл перезапущен\nОшибка без участия пользователя.'
-            )
-            goroscop1()
-            mainfunc()
-
-goroscop1()
+        vk.messages.send(
+            user_id=195310233,
+            random_id=get_random_id(),
+            message='Возникла ошибка ' + str(err) + ' в главном цикле bot_herobot_chat'
+        )
+        mainfunc()
 mainfunc()
 
 
