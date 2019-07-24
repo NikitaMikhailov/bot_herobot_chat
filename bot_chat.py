@@ -52,6 +52,7 @@ keyboard.add_line()  # Переход на вторую строку
 keyboard.add_button('Гороскоп', color=VkKeyboardColor.PRIMARY)
 keyboard.add_button('Мысль', color=VkKeyboardColor.PRIMARY)
 keyboard.add_button('Факт', color=VkKeyboardColor.PRIMARY)
+'''
 keyboard.add_line()
 keyboard.add_button('Отстань', color=VkKeyboardColor.NEGATIVE)
 keyboard.add_button('Вернись', color=VkKeyboardColor.POSITIVE)
@@ -70,7 +71,7 @@ vk.messages.send(
     keyboard=keyboard.get_keyboard(),
     message="Шутки объединены с анекдотами"
 )
-
+'''
 def goroscop1():
     spisok_znakov=['aries','taurus','gemini','cancer','leo','virgo','libra','scorpio','sagittarius','capricorn','aquarius','pisces']
     for i in range (0,12):
