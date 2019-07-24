@@ -55,14 +55,21 @@ keyboard.add_button('Факт', color=VkKeyboardColor.PRIMARY)
 keyboard.add_line()
 keyboard.add_button('Отстань', color=VkKeyboardColor.NEGATIVE)
 keyboard.add_button('Вернись', color=VkKeyboardColor.POSITIVE)
-
-for i in range(1):
+'''
+for i in range(2,10):
     vk.messages.send(
         chat_id=i,
         random_id=get_random_id(),
         keyboard=keyboard.get_keyboard(),
         message="Шутки объединены с анекдотами"
     )
+'''
+vk.messages.send(
+    chat_id=1,
+    random_id=get_random_id(),
+    keyboard=keyboard.get_keyboard(),
+    message="Шутки объединены с анекдотами"
+)
 
 def goroscop1():
     spisok_znakov=['aries','taurus','gemini','cancer','leo','virgo','libra','scorpio','sagittarius','capricorn','aquarius','pisces']
