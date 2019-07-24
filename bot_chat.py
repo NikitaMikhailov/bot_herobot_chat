@@ -68,7 +68,7 @@ for i in range(2,10):
 def goroscop1():
     spisok_znakov=['aries','taurus','gemini','cancer','leo','virgo','libra','scorpio','sagittarius','capricorn','aquarius','pisces']
     for i in range (0,12):
-        filegor=open('goroskop_files/'+spisok_znakov[i]+'.txt','w')
+        filegor=open('resurses/goroskop_files/'+spisok_znakov[i]+'.txt','w')
         filegor.write(((bs4.BeautifulSoup(requests.get("http://astroscope.ru/horoskop/ejednevniy_goroskop/" + spisok_znakov[i] + ".html").text,"html.parser").find('div', 'col-12')).getText().lstrip()))
         filegor.close()
 
@@ -537,7 +537,7 @@ def mainfunc():
                         if flagbddate==True:
                             bd_date = bd_date.split('.')
                             zodiak = goroscop(bd_date)
-                            f=open('goroskop_files/'+zodiak+'.txt','r')
+                            f=open('resurses/goroskop_files/'+zodiak+'.txt','r')
                             goroskp=f.read()
                             f.close()
                             vk.messages.send(  # Отправляем собщение
