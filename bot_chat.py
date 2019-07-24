@@ -48,23 +48,22 @@ keyboard = VkKeyboard(one_time=False)
 keyboard.add_button('Анекдот', color=VkKeyboardColor.PRIMARY)
 keyboard.add_button('Погода', color=VkKeyboardColor.PRIMARY)
 keyboard.add_button('Цитата', color=VkKeyboardColor.PRIMARY)
-keyboard.add_button('Гороскоп', color=VkKeyboardColor.PRIMARY)
 keyboard.add_line()  # Переход на вторую строку
-keyboard.add_button('Шутка', color=VkKeyboardColor.PRIMARY)
+keyboard.add_button('Гороскоп', color=VkKeyboardColor.PRIMARY)
 keyboard.add_button('Мысль', color=VkKeyboardColor.PRIMARY)
 keyboard.add_button('Факт', color=VkKeyboardColor.PRIMARY)
-#keyboard.add_line()
-#keyboard.add_button('Отстань', color=VkKeyboardColor.NEGATIVE)
-#keyboard.add_button('Вернись', color=VkKeyboardColor.POSITIVE)
-'''
-for i in range(2,10):
+keyboard.add_line()
+keyboard.add_button('Отстань', color=VkKeyboardColor.NEGATIVE)
+keyboard.add_button('Вернись', color=VkKeyboardColor.POSITIVE)
+
+for i in range(1):
     vk.messages.send(
         chat_id=i,
         random_id=get_random_id(),
         keyboard=keyboard.get_keyboard(),
-        message="Обновление подъехало, открой клавиатуру"
+        message="Шутки объединены с анекдотами"
     )
-'''
+
 def goroscop1():
     spisok_znakov=['aries','taurus','gemini','cancer','leo','virgo','libra','scorpio','sagittarius','capricorn','aquarius','pisces']
     for i in range (0,12):
@@ -473,19 +472,6 @@ def mainfunc():
                             chat_id=event.chat_id,
                             random_id=get_random_id(),
                             message='Антон вернётся к нам через '+str(dateAnton)+' '+date_day
-                        )
-
-                    elif event.obj.text == 'бот шутку' or event.obj.text == 'шутка' and flkv == True or event.obj.text == 'шутка' and flkv2 == True:
-                        cit = random.randint(0, 5329)
-                        for linenum, line in enumerate(open('resurses/jokes_clear.txt', 'r')):
-                            if linenum == cit:
-                                messagecit = (line.strip())
-                        if messagecit[-1] == ',':
-                            messagecit = messagecit[:-1:]
-                        vk.messages.send(  # Отправляем собщение
-                            chat_id=event.chat_id,
-                            random_id=get_random_id(),
-                            message=str(messagecit)
                         )
 
                     elif event.obj.text == 'бот мысль' or event.obj.text == 'мысль' and flkv == True or event.obj.text == 'мысль' and flkv2 == True:
