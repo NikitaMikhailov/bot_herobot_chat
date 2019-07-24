@@ -56,7 +56,7 @@ keyboard.add_button('Факт', color=VkKeyboardColor.PRIMARY)
 keyboard.add_line()
 keyboard.add_button('Отстань', color=VkKeyboardColor.NEGATIVE)
 keyboard.add_button('Вернись', color=VkKeyboardColor.POSITIVE)
-'''
+
 for i in range(2,10):
     vk.messages.send(
         chat_id=i,
@@ -64,7 +64,7 @@ for i in range(2,10):
         keyboard=keyboard.get_keyboard(),
         message="Шутки объединены с анекдотами"
     )
-'''
+
 vk.messages.send(
     chat_id=1,
     random_id=get_random_id(),
