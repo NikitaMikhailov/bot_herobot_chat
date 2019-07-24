@@ -547,7 +547,7 @@ def mainfunc():
                             )
 
                     elif event.obj.text == 'бот анекдот' or event.obj.text == 'анекдот' and flkv == True or event.obj.text == 'анекдот' and flkv2 == True:
-                        anes = random.randint(0, 120000)
+                        anes = random.randint(0, 135500)
                         print('попал в анекдот')
                         for linenum, line in enumerate(open('resurses/anec.txt', 'r')):
                             if linenum == anes:
