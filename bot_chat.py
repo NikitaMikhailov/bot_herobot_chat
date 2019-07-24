@@ -547,10 +547,12 @@ def mainfunc():
                             )
 
                     elif event.obj.text == 'бот анекдот' or event.obj.text == 'анекдот' and flkv == True or event.obj.text == 'анекдот' and flkv2 == True:
-                        anes = random.randint(0, 130200)
+                        anes = random.randint(0, 120000)
+                        print('попал в анекдот')
                         for linenum, line in enumerate(open('resurses/anec.txt', 'r')):
                             if linenum == anes:
                                 anecdot = (line.strip()).replace('#', '\n')
+                        print(anecdot)
                         vk.messages.send(  # Отправляем собщение
                             chat_id=event.chat_id,
                             random_id=get_random_id(),
