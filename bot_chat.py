@@ -424,7 +424,7 @@ def mainfunc():
                             message='Я ухожу, но обещаю вернуться!\n(На 10 минут)'
                         )
 
-                    elif flagtime is True and event.obj.text == 'бот вернись'  and event.chat_id==1 or event.obj.text == 'вернись' and flkv == True or event.obj.text == 'вернись' and flkv2 == True:
+                    elif flagtime is True and event.obj.text == 'бот вернись'  and event.chat_id==1 or flagtime is True and event.obj.text == 'вернись' and flkv == True or flagtime is True and event.obj.text == 'вернись' and flkv2 == True:
                         flagtime = False
                         fltm1 = False
                         fltm2 = False
