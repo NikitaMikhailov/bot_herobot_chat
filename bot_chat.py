@@ -424,7 +424,17 @@ def mainfunc():
                             message='Я ухожу, но обещаю вернуться!\n(На 10 минут)'
                         )
 
-                    elif event.obj.text == 'бот вернись'  and event.chat_id==1 or event.obj.text == 'вернись' and flkv == True or event.obj.text == 'вернись' and flkv2 == True:
+                    elif flagtime is True and event.obj.text == 'бот вернись'  and event.chat_id==1 or event.obj.text == 'вернись' and flkv == True or event.obj.text == 'вернись' and flkv2 == True:
+                        flagtime = False
+                        fltm1 = False
+                        fltm2 = False
+                        vk.messages.send(  # Отправляем собщение
+                            chat_id=event.chat_id,
+                            random_id=get_random_id(),
+                            message='Я вернулся!'
+                        )
+                          
+                    elif flagtime is False and event.obj.text == 'бот вернись'  and event.chat_id==1 or event.obj.text == 'вернись' and flkv == True or event.obj.text == 'вернись' and flkv2 == True:
                         flagtime = False
                         fltm1 = False
                         fltm2 = False
