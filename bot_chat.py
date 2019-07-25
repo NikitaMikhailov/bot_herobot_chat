@@ -441,7 +441,7 @@ def mainfunc():
                         vk.messages.send(  # Отправляем собщение
                             chat_id=event.chat_id,
                             random_id=get_random_id(),
-                            message='Я вернулся!'
+                            message='Я и не уходил от Вас'
                         )
 
                     if fltm1 is True and flagtime is True and time.time() - stoptime1 >= 600:
