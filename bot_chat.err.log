@@ -6,3 +6,167 @@ supervisor: couldn't exec /root/bot_herobot_chat/bot_chat.py: ENOEXEC
 supervisor: child process was not spawned
 supervisor: couldn't exec /root/bot_herobot_chat/bot_chat.py: ENOEXEC
 supervisor: child process was not spawned
+supervisor: couldn't exec /root/bot_herobot_chat/bot_chat.py: EACCES
+supervisor: child process was not spawned
+supervisor: couldn't exec /root/bot_herobot_chat/bot_chat.py: EACCES
+supervisor: child process was not spawned
+supervisor: couldn't exec /root/bot_herobot_chat/bot_chat.py: EACCES
+supervisor: child process was not spawned
+supervisor: couldn't exec /root/bot_herobot_chat/bot_chat.py: EACCES
+supervisor: child process was not spawned
+supervisor: couldn't exec /root/bot_herobot_chat/bot_chat.py: EACCES
+supervisor: child process was not spawned
+supervisor: couldn't exec /root/bot_herobot_chat/bot_chat.py: EACCES
+supervisor: child process was not spawned
+supervisor: couldn't exec /root/bot_herobot_chat/bot_chat.py: EACCES
+supervisor: child process was not spawned
+supervisor: couldn't exec /root/bot_herobot_chat/bot_chat.py: EACCES
+supervisor: child process was not spawned
+/root/bot_herobot_chat/bot_chat.py: line 5: from: command not found
+/root/bot_herobot_chat/bot_chat.py: line 6: from: command not found
+/root/bot_herobot_chat/bot_chat.py: line 7: from: command not found
+/root/bot_herobot_chat/bot_chat.py: line 8: from: command not found
+/root/bot_herobot_chat/bot_chat.py: line 9: import: command not found
+/root/bot_herobot_chat/bot_chat.py: line 12: dict: command not found
+/root/bot_herobot_chat/bot_chat.py: line 13: dictan: command not found
+/root/bot_herobot_chat/bot_chat.py: line 14: dict2: command not found
+/root/bot_herobot_chat/bot_chat.py: line 15: dict4: command not found
+/root/bot_herobot_chat/bot_chat.py: line 16: dict5: command not found
+/root/bot_herobot_chat/bot_chat.py: line 17: катя,: command not found
+/root/bot_herobot_chat/bot_chat.py: line 18: dictandr: command not found
+/root/bot_herobot_chat/bot_chat.py: line 19: http://risovach.ru/upload/2013/10/mem/chernyj-vlastelin_32124026_orig_.jpg,: No such file or directory
+/root/bot_herobot_chat/bot_chat.py: line 20: http://risovach.ru/thumb/upload/200s400/2015/09/mem/lol_91705151_orig_.jpg?6eduj,: No such file or directory
+/root/bot_herobot_chat/bot_chat.py: line 21: http://risovach.ru/upload/2013/06/mem/moe-lico_21925181_orig_.jpeg,: No such file or directory
+/root/bot_herobot_chat/bot_chat.py: line 22: http://risovach.ru/upload/2013/12/mem/nelzya-prosto-tak-vzyat-i-boromir-mem_37752087_orig_.jpg,: No such file or directory
+/root/bot_herobot_chat/bot_chat.py: line 23: http://risovach.ru/upload/2014/11/mem/tvoe-vyrazhenie-lica_67424388_orig_.jpg,: No such file or directory
+/root/bot_herobot_chat/bot_chat.py: line 24: http://risovach.ru/upload/2014/12/mem/voenkom-polkovnik_68047393_orig_.jpg,: No such file or directory
+/root/bot_herobot_chat/bot_chat.py: line 25: http://risovach.ru/upload/2014/05/mem/petrosyanych_51799328_orig_.jpg,: No such file or directory
+/root/bot_herobot_chat/bot_chat.py: line 26: http://risovach.ru/thumb/upload/200s400/2013/03/mem/sudya-egorova_12558528_orig_.jpg?7cr1v,: No such file or directory
+/root/bot_herobot_chat/bot_chat.py: line 27: http://risovach.ru/upload/2014/01/mem/mudriy-paca_40062800_orig_.jpeg,: No such file or directory
+/root/bot_herobot_chat/bot_chat.py: line 28: http://risovach.ru/thumb/upload/200s400/2017/01/mem/tipichnyy-dolboslav_135762775_orig_.jpg?4cjzt,: No such file or directory
+/root/bot_herobot_chat/bot_chat.py: line 29: https://imgp.golos.io/0x0/https://bm-platform.s3.eu-central-1.amazonaws.com/rJY9bkjhl-%D0%B3%D1%80%D1%83%D1%81%D1%82%D1%8C.jpg,: No such file or directory
+/root/bot_herobot_chat/bot_chat.py: line 30: http://risovach.ru/upload/2013/05/mem/a-chto-esli_19665349_orig_.jpg,: No such file or directory
+/root/bot_herobot_chat/bot_chat.py: line 31: http://abload.de/img/14131859331710h4puk.jpg,: No such file or directory
+/root/bot_herobot_chat/bot_chat.py: line 32: https://ic.pics.livejournal.com/vvfidel/76941342/126686/126686_900.jpg]: No such file or directory
+/root/bot_herobot_chat/bot_chat.py: line 33: dict7: command not found
+/root/bot_herobot_chat/bot_chat.py: line 34: September:: command not found
+/root/bot_herobot_chat/bot_chat.py: line 35: dict8: command not found
+/root/bot_herobot_chat/bot_chat.py: line 36: kolresp: command not found
+/root/bot_herobot_chat/bot_chat.py: line 37: attachments: command not found
+/root/bot_herobot_chat/bot_chat.py: line 38: chand: command not found
+/root/bot_herobot_chat/bot_chat.py: line 39: flagtime: command not found
+/root/bot_herobot_chat/bot_chat.py: line 40: fltm1: command not found
+/root/bot_herobot_chat/bot_chat.py: line 41: fltm2: command not found
+/root/bot_herobot_chat/bot_chat.py: line 45: syntax error near unexpected token `('
+/root/bot_herobot_chat/bot_chat.py: line 45: `session = requests.Session()'
+/root/bot_herobot_chat/bot_chat.py: line 5: from: command not found
+/root/bot_herobot_chat/bot_chat.py: line 6: from: command not found
+/root/bot_herobot_chat/bot_chat.py: line 7: from: command not found
+/root/bot_herobot_chat/bot_chat.py: line 8: from: command not found
+/root/bot_herobot_chat/bot_chat.py: line 9: import: command not found
+/root/bot_herobot_chat/bot_chat.py: line 12: dict: command not found
+/root/bot_herobot_chat/bot_chat.py: line 13: dictan: command not found
+/root/bot_herobot_chat/bot_chat.py: line 14: dict2: command not found
+/root/bot_herobot_chat/bot_chat.py: line 15: dict4: command not found
+/root/bot_herobot_chat/bot_chat.py: line 16: dict5: command not found
+/root/bot_herobot_chat/bot_chat.py: line 17: катя,: command not found
+/root/bot_herobot_chat/bot_chat.py: line 18: dictandr: command not found
+/root/bot_herobot_chat/bot_chat.py: line 19: http://risovach.ru/upload/2013/10/mem/chernyj-vlastelin_32124026_orig_.jpg,: No such file or directory
+/root/bot_herobot_chat/bot_chat.py: line 20: http://risovach.ru/thumb/upload/200s400/2015/09/mem/lol_91705151_orig_.jpg?6eduj,: No such file or directory
+/root/bot_herobot_chat/bot_chat.py: line 21: http://risovach.ru/upload/2013/06/mem/moe-lico_21925181_orig_.jpeg,: No such file or directory
+/root/bot_herobot_chat/bot_chat.py: line 22: http://risovach.ru/upload/2013/12/mem/nelzya-prosto-tak-vzyat-i-boromir-mem_37752087_orig_.jpg,: No such file or directory
+/root/bot_herobot_chat/bot_chat.py: line 23: http://risovach.ru/upload/2014/11/mem/tvoe-vyrazhenie-lica_67424388_orig_.jpg,: No such file or directory
+/root/bot_herobot_chat/bot_chat.py: line 24: http://risovach.ru/upload/2014/12/mem/voenkom-polkovnik_68047393_orig_.jpg,: No such file or directory
+/root/bot_herobot_chat/bot_chat.py: line 25: http://risovach.ru/upload/2014/05/mem/petrosyanych_51799328_orig_.jpg,: No such file or directory
+/root/bot_herobot_chat/bot_chat.py: line 26: http://risovach.ru/thumb/upload/200s400/2013/03/mem/sudya-egorova_12558528_orig_.jpg?7cr1v,: No such file or directory
+/root/bot_herobot_chat/bot_chat.py: line 27: http://risovach.ru/upload/2014/01/mem/mudriy-paca_40062800_orig_.jpeg,: No such file or directory
+/root/bot_herobot_chat/bot_chat.py: line 28: http://risovach.ru/thumb/upload/200s400/2017/01/mem/tipichnyy-dolboslav_135762775_orig_.jpg?4cjzt,: No such file or directory
+/root/bot_herobot_chat/bot_chat.py: line 29: https://imgp.golos.io/0x0/https://bm-platform.s3.eu-central-1.amazonaws.com/rJY9bkjhl-%D0%B3%D1%80%D1%83%D1%81%D1%82%D1%8C.jpg,: No such file or directory
+/root/bot_herobot_chat/bot_chat.py: line 30: http://risovach.ru/upload/2013/05/mem/a-chto-esli_19665349_orig_.jpg,: No such file or directory
+/root/bot_herobot_chat/bot_chat.py: line 31: http://abload.de/img/14131859331710h4puk.jpg,: No such file or directory
+/root/bot_herobot_chat/bot_chat.py: line 32: https://ic.pics.livejournal.com/vvfidel/76941342/126686/126686_900.jpg]: No such file or directory
+/root/bot_herobot_chat/bot_chat.py: line 33: dict7: command not found
+/root/bot_herobot_chat/bot_chat.py: line 34: September:: command not found
+/root/bot_herobot_chat/bot_chat.py: line 35: dict8: command not found
+/root/bot_herobot_chat/bot_chat.py: line 36: kolresp: command not found
+/root/bot_herobot_chat/bot_chat.py: line 37: attachments: command not found
+/root/bot_herobot_chat/bot_chat.py: line 38: chand: command not found
+/root/bot_herobot_chat/bot_chat.py: line 39: flagtime: command not found
+/root/bot_herobot_chat/bot_chat.py: line 40: fltm1: command not found
+/root/bot_herobot_chat/bot_chat.py: line 41: fltm2: command not found
+/root/bot_herobot_chat/bot_chat.py: line 45: syntax error near unexpected token `('
+/root/bot_herobot_chat/bot_chat.py: line 45: `session = requests.Session()'
+/root/bot_herobot_chat/bot_chat.py: line 5: from: command not found
+/root/bot_herobot_chat/bot_chat.py: line 6: from: command not found
+/root/bot_herobot_chat/bot_chat.py: line 7: from: command not found
+/root/bot_herobot_chat/bot_chat.py: line 8: from: command not found
+/root/bot_herobot_chat/bot_chat.py: line 9: import: command not found
+/root/bot_herobot_chat/bot_chat.py: line 12: dict: command not found
+/root/bot_herobot_chat/bot_chat.py: line 13: dictan: command not found
+/root/bot_herobot_chat/bot_chat.py: line 14: dict2: command not found
+/root/bot_herobot_chat/bot_chat.py: line 15: dict4: command not found
+/root/bot_herobot_chat/bot_chat.py: line 16: dict5: command not found
+/root/bot_herobot_chat/bot_chat.py: line 17: катя,: command not found
+/root/bot_herobot_chat/bot_chat.py: line 18: dictandr: command not found
+/root/bot_herobot_chat/bot_chat.py: line 19: http://risovach.ru/upload/2013/10/mem/chernyj-vlastelin_32124026_orig_.jpg,: No such file or directory
+/root/bot_herobot_chat/bot_chat.py: line 20: http://risovach.ru/thumb/upload/200s400/2015/09/mem/lol_91705151_orig_.jpg?6eduj,: No such file or directory
+/root/bot_herobot_chat/bot_chat.py: line 21: http://risovach.ru/upload/2013/06/mem/moe-lico_21925181_orig_.jpeg,: No such file or directory
+/root/bot_herobot_chat/bot_chat.py: line 22: http://risovach.ru/upload/2013/12/mem/nelzya-prosto-tak-vzyat-i-boromir-mem_37752087_orig_.jpg,: No such file or directory
+/root/bot_herobot_chat/bot_chat.py: line 23: http://risovach.ru/upload/2014/11/mem/tvoe-vyrazhenie-lica_67424388_orig_.jpg,: No such file or directory
+/root/bot_herobot_chat/bot_chat.py: line 24: http://risovach.ru/upload/2014/12/mem/voenkom-polkovnik_68047393_orig_.jpg,: No such file or directory
+/root/bot_herobot_chat/bot_chat.py: line 25: http://risovach.ru/upload/2014/05/mem/petrosyanych_51799328_orig_.jpg,: No such file or directory
+/root/bot_herobot_chat/bot_chat.py: line 26: http://risovach.ru/thumb/upload/200s400/2013/03/mem/sudya-egorova_12558528_orig_.jpg?7cr1v,: No such file or directory
+/root/bot_herobot_chat/bot_chat.py: line 27: http://risovach.ru/upload/2014/01/mem/mudriy-paca_40062800_orig_.jpeg,: No such file or directory
+/root/bot_herobot_chat/bot_chat.py: line 28: http://risovach.ru/thumb/upload/200s400/2017/01/mem/tipichnyy-dolboslav_135762775_orig_.jpg?4cjzt,: No such file or directory
+/root/bot_herobot_chat/bot_chat.py: line 29: https://imgp.golos.io/0x0/https://bm-platform.s3.eu-central-1.amazonaws.com/rJY9bkjhl-%D0%B3%D1%80%D1%83%D1%81%D1%82%D1%8C.jpg,: No such file or directory
+/root/bot_herobot_chat/bot_chat.py: line 30: http://risovach.ru/upload/2013/05/mem/a-chto-esli_19665349_orig_.jpg,: No such file or directory
+/root/bot_herobot_chat/bot_chat.py: line 31: http://abload.de/img/14131859331710h4puk.jpg,: No such file or directory
+/root/bot_herobot_chat/bot_chat.py: line 32: https://ic.pics.livejournal.com/vvfidel/76941342/126686/126686_900.jpg]: No such file or directory
+/root/bot_herobot_chat/bot_chat.py: line 33: dict7: command not found
+/root/bot_herobot_chat/bot_chat.py: line 34: September:: command not found
+/root/bot_herobot_chat/bot_chat.py: line 35: dict8: command not found
+/root/bot_herobot_chat/bot_chat.py: line 36: kolresp: command not found
+/root/bot_herobot_chat/bot_chat.py: line 37: attachments: command not found
+/root/bot_herobot_chat/bot_chat.py: line 38: chand: command not found
+/root/bot_herobot_chat/bot_chat.py: line 39: flagtime: command not found
+/root/bot_herobot_chat/bot_chat.py: line 40: fltm1: command not found
+/root/bot_herobot_chat/bot_chat.py: line 41: fltm2: command not found
+/root/bot_herobot_chat/bot_chat.py: line 45: syntax error near unexpected token `('
+/root/bot_herobot_chat/bot_chat.py: line 45: `session = requests.Session()'
+/root/bot_herobot_chat/bot_chat.py: line 5: from: command not found
+/root/bot_herobot_chat/bot_chat.py: line 6: from: command not found
+/root/bot_herobot_chat/bot_chat.py: line 7: from: command not found
+/root/bot_herobot_chat/bot_chat.py: line 8: from: command not found
+/root/bot_herobot_chat/bot_chat.py: line 9: import: command not found
+/root/bot_herobot_chat/bot_chat.py: line 12: dict: command not found
+/root/bot_herobot_chat/bot_chat.py: line 13: dictan: command not found
+/root/bot_herobot_chat/bot_chat.py: line 14: dict2: command not found
+/root/bot_herobot_chat/bot_chat.py: line 15: dict4: command not found
+/root/bot_herobot_chat/bot_chat.py: line 16: dict5: command not found
+/root/bot_herobot_chat/bot_chat.py: line 17: катя,: command not found
+/root/bot_herobot_chat/bot_chat.py: line 18: dictandr: command not found
+/root/bot_herobot_chat/bot_chat.py: line 19: http://risovach.ru/upload/2013/10/mem/chernyj-vlastelin_32124026_orig_.jpg,: No such file or directory
+/root/bot_herobot_chat/bot_chat.py: line 20: http://risovach.ru/thumb/upload/200s400/2015/09/mem/lol_91705151_orig_.jpg?6eduj,: No such file or directory
+/root/bot_herobot_chat/bot_chat.py: line 21: http://risovach.ru/upload/2013/06/mem/moe-lico_21925181_orig_.jpeg,: No such file or directory
+/root/bot_herobot_chat/bot_chat.py: line 22: http://risovach.ru/upload/2013/12/mem/nelzya-prosto-tak-vzyat-i-boromir-mem_37752087_orig_.jpg,: No such file or directory
+/root/bot_herobot_chat/bot_chat.py: line 23: http://risovach.ru/upload/2014/11/mem/tvoe-vyrazhenie-lica_67424388_orig_.jpg,: No such file or directory
+/root/bot_herobot_chat/bot_chat.py: line 24: http://risovach.ru/upload/2014/12/mem/voenkom-polkovnik_68047393_orig_.jpg,: No such file or directory
+/root/bot_herobot_chat/bot_chat.py: line 25: http://risovach.ru/upload/2014/05/mem/petrosyanych_51799328_orig_.jpg,: No such file or directory
+/root/bot_herobot_chat/bot_chat.py: line 26: http://risovach.ru/thumb/upload/200s400/2013/03/mem/sudya-egorova_12558528_orig_.jpg?7cr1v,: No such file or directory
+/root/bot_herobot_chat/bot_chat.py: line 27: http://risovach.ru/upload/2014/01/mem/mudriy-paca_40062800_orig_.jpeg,: No such file or directory
+/root/bot_herobot_chat/bot_chat.py: line 28: http://risovach.ru/thumb/upload/200s400/2017/01/mem/tipichnyy-dolboslav_135762775_orig_.jpg?4cjzt,: No such file or directory
+/root/bot_herobot_chat/bot_chat.py: line 29: https://imgp.golos.io/0x0/https://bm-platform.s3.eu-central-1.amazonaws.com/rJY9bkjhl-%D0%B3%D1%80%D1%83%D1%81%D1%82%D1%8C.jpg,: No such file or directory
+/root/bot_herobot_chat/bot_chat.py: line 30: http://risovach.ru/upload/2013/05/mem/a-chto-esli_19665349_orig_.jpg,: No such file or directory
+/root/bot_herobot_chat/bot_chat.py: line 31: http://abload.de/img/14131859331710h4puk.jpg,: No such file or directory
+/root/bot_herobot_chat/bot_chat.py: line 32: https://ic.pics.livejournal.com/vvfidel/76941342/126686/126686_900.jpg]: No such file or directory
+/root/bot_herobot_chat/bot_chat.py: line 33: dict7: command not found
+/root/bot_herobot_chat/bot_chat.py: line 34: September:: command not found
+/root/bot_herobot_chat/bot_chat.py: line 35: dict8: command not found
+/root/bot_herobot_chat/bot_chat.py: line 36: kolresp: command not found
+/root/bot_herobot_chat/bot_chat.py: line 37: attachments: command not found
+/root/bot_herobot_chat/bot_chat.py: line 38: chand: command not found
+/root/bot_herobot_chat/bot_chat.py: line 39: flagtime: command not found
+/root/bot_herobot_chat/bot_chat.py: line 40: fltm1: command not found
+/root/bot_herobot_chat/bot_chat.py: line 41: fltm2: command not found
+/root/bot_herobot_chat/bot_chat.py: line 45: syntax error near unexpected token `('
+/root/bot_herobot_chat/bot_chat.py: line 45: `session = requests.Session()'
