@@ -195,6 +195,8 @@ def wheather(city,zavtra,zavtra_1):
                 wind4_1 += i
 
         result = ''
+        if zavtra == 8:
+            result += "Погода на завтра в городе "+city.capitalize()+'\n'
         result = result + ('Ночью : ' + weather1 + ', Ветер: ' + wind1_1) + '\n'
         result = result + ('Утром : ' + weather2 + ', Ветер: ' + wind2_1) + '\n'
         result = result + ('Днём : ' + weather3 + ', Ветер: ' + wind3_1) + '\n'
@@ -598,19 +600,7 @@ def mainfunc():
                         )
 
                     elif event.obj.text.find('бот погода на завтра в городе') != -1:
-                        # print(datetime.date.today()+datetime.timedelta(days=1))
-                        city = event.obj.text[30::] + "/" + str(datetime.date.today() + datetime.timedelta(days=1))
-                        result = wheather(city,8,1)
-                        vk.messages.send(  # Отправляем собщение
-                            chat_id=event.chat_id,
-                            random_id=get_random_id(),
-                            message=result
-                        )
-
-                    elif event.obj.text.find('бот погода в городе') != -1 and event.obj.text.find('на завтра') != -1:
-                        # print(datetime.date.today()+datetime.timedelta(days=1))
-                        city = event.obj.text[20:-10:] + "/" + str(datetime.date.today() + datetime.timedelta(days=1))
-                        # print(city)
+                        city = event.obj.text[30::]
                         result = wheather(city,8,1)
                         vk.messages.send(  # Отправляем собщение
                             chat_id=event.chat_id,
@@ -619,11 +609,10 @@ def mainfunc():
                         )
 
                     elif event.obj.text.find('бот погода на завтра') != -1:
-                        # print(datetime.date.today()+datetime.timedelta(days=1))
                         try:
-                            city = fio.text[14::].split(',')[7].split(':')[1][1:-5:].lower() + "/" + str(datetime.date.today() + datetime.timedelta(days=1))
+                            city = fio.text[14::].split(',')[7].split(':')[1][1:-5:].lower()
                         except:
-                            city = "москва" + "/" + str(datetime.date.today() + datetime.timedelta(days=1))
+                            city = "москва"
                             vk.messages.send(  # Отправляем собщение
                                 chat_id=event.chat_id,
                                 random_id=get_random_id(),
