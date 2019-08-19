@@ -151,7 +151,6 @@ def wheather(city,zavtra,zavtra_1):
             city = city[:i:] + '-' + city[i + 1::]
     request = requests.get("https://sinoptik.com.ru/погода-" + city)
     b = bs4.BeautifulSoup(request.text, "html.parser")
-#print(b)
 
     try:
         article=b.find_all("div","weather__article_description-text")
@@ -196,7 +195,7 @@ def wheather(city,zavtra,zavtra_1):
 
         result = ''
         if zavtra == 8:
-            result += "Погода на завтра в городе "+city.capitalize()+'\n'
+            result += "Погода на завтра в городе "+city.capitalize()+':\n\n'
         result = result + ('Ночью : ' + weather1 + ', Ветер: ' + wind1_1) + '\n'
         result = result + ('Утром : ' + weather2 + ', Ветер: ' + wind2_1) + '\n'
         result = result + ('Днём : ' + weather3 + ', Ветер: ' + wind3_1) + '\n'
