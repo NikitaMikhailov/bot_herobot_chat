@@ -145,7 +145,7 @@ def goroscop(bd_date):
         else:
             return 'capricorn'
 
-def wheather(city):
+def wheather(city,zavtra,zavtra_1):
     for i in range(len(city)):
         if city[i] == ' ':
             city = city[:i:] + '-' + city[i + 1::]
@@ -158,37 +158,37 @@ def wheather(city):
         temperature = b.find_all("div","table__temp")
         wind=b.find_all("div","table__wind")
 
-        weather1 = temperature[0].getText()
+        weather1 = temperature[0+zavtra].getText()
         wind1=''
-        wind1+=str(wind[0]).split(' ')[3][7:-5:1]+', '
-        wind1+=wind[0].getText()+' м/с.'
+        wind1+=str(wind[0+zavtra]).split(' ')[3][7:-5:1]+', '
+        wind1+=wind[0+zavtra].getText()+' м/с.'
         wind1_1=''
         for i in wind1:
             if i!='\n':
                 wind1_1+=i
 
-        weather2 = temperature[2].getText()
+        weather2 = temperature[2+zavtra].getText()
         wind2=''
-        wind2+=str(wind[2]).split(' ')[3][7:-5:1]+', '
-        wind2+=wind[2].getText()+' м/с.'
+        wind2+=str(wind[2+zavtra]).split(' ')[3][7:-5:1]+', '
+        wind2+=wind[2+zavtra].getText()+' м/с.'
         wind2_1=''
         for i in wind2:
             if i!='\n':
                 wind2_1+=i
 
-        weather3 = temperature[4].getText()
+        weather3 = temperature[4+zavtra].getText()
         wind3 = ''
-        wind3 += str(wind[4]).split(' ')[3][7:-5:1] + ', '
-        wind3 += wind[4].getText() + ' м/с.'
+        wind3 += str(wind[4+zavtra]).split(' ')[3][7:-5:1] + ', '
+        wind3 += wind[4+zavtra].getText() + ' м/с.'
         wind3_1 = ''
         for i in wind3:
             if i != '\n':
                 wind3_1 += i
 
-        weather4 = temperature[6].getText()
+        weather4 = temperature[6+zavtra].getText()
         wind4 = ''
-        wind4 += str(wind[6]).split(' ')[3][7:-5:1] + ', '
-        wind4 += wind[6].getText() + ' м/с.'
+        wind4 += str(wind[6+zavtra]).split(' ')[3][7:-5:1] + ', '
+        wind4 += wind[6+zavtra].getText() + ' м/с.'
         wind4_1 = ''
         for i in wind4:
             if i != '\n':
@@ -199,7 +199,7 @@ def wheather(city):
         result = result + ('Утром : ' + weather2 + ', Ветер: ' + wind2_1) + '\n'
         result = result + ('Днём : ' + weather3 + ', Ветер: ' + wind3_1) + '\n'
         result = result + ('Вечером : ' + weather4 + ', Ветер: ' + wind4_1) + 2 * '\n'
-        result+=article[0].getText()
+        result+=article[0+zavtra_1].getText()
         return result
     except IndexError:
         return 'Такого города не найдено'
@@ -600,7 +600,7 @@ def mainfunc():
                     elif event.obj.text.find('бот погода на завтра в городе') != -1:
                         # print(datetime.date.today()+datetime.timedelta(days=1))
                         city = event.obj.text[30::] + "/" + str(datetime.date.today() + datetime.timedelta(days=1))
-                        result = wheather(city)
+                        result = wheather(city,8,1)
                         vk.messages.send(  # Отправляем собщение
                             chat_id=event.chat_id,
                             random_id=get_random_id(),
@@ -611,7 +611,7 @@ def mainfunc():
                         # print(datetime.date.today()+datetime.timedelta(days=1))
                         city = event.obj.text[20:-10:] + "/" + str(datetime.date.today() + datetime.timedelta(days=1))
                         # print(city)
-                        result = wheather(city)
+                        result = wheather(city,8,1)
                         vk.messages.send(  # Отправляем собщение
                             chat_id=event.chat_id,
                             random_id=get_random_id(),
@@ -629,7 +629,7 @@ def mainfunc():
                                 random_id=get_random_id(),
                                 message="У Вас не указан город ВК, по умолчанию выставлена Москва"
                             )
-                        result = wheather(city)
+                        result = wheather(city,8,1)
                         vk.messages.send(  # Отправляем собщение
                             chat_id=event.chat_id,
                             random_id=get_random_id(),
@@ -638,7 +638,7 @@ def mainfunc():
 
                     elif event.obj.text.find('бот погода в городе') != -1:
                         city = event.obj.text[20::]
-                        result = wheather(city)
+                        result = wheather(city,0,0)
                         vk.messages.send(  # Отправляем собщение
                             chat_id=event.chat_id,
                             random_id=get_random_id(),
@@ -656,7 +656,7 @@ def mainfunc():
                                 random_id=get_random_id(),
                                 message="У Вас не указан город ВК, по умолчанию выставлена Москва"
                             )
-                        result = wheather(city)
+                        result = wheather(city,0,0)
                         vk.messages.send(  # Отправляем собщение
                             chat_id=event.chat_id,
                             random_id=get_random_id(),
