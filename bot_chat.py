@@ -501,6 +501,7 @@ def mainfunc():
                         dateAntonstart=(str(hh).split(',')[0].split(' ')[0])
                         
                         def Antontime(dateAnton):
+                            dateAnton=str(dateAnton)
                             if dateAnton[-1]=='1':
                                 return 'день.'
                             if dateAnton[-1]=='2' or dateAnton[-1]=='3' or dateAnton[-1]=='4':
