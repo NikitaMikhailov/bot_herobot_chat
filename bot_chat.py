@@ -493,19 +493,25 @@ def mainfunc():
 
                     elif event.obj.text == 'бот антон':
                         aa = datetime.date.today()
-                        bb = datetime.date(2020,7,4)
+                        bb = datetime.date(2020,7,3)
                         cc=bb-aa
-                        dateAnton=(str(cc).split(',')[0].split(' ')[0])
-                        if dateAnton[-1]=='1':
-                            date_day='день.'
-                        if dateAnton[-1]=='2' or dateAnton[-1]=='3' or dateAnton[-1]=='4':
-                            date_day='дня.'
-                        if  dateAnton[-1]=='0' or dateAnton[-1]=='5' or dateAnton[-1]=='6' or dateAnton[-1]=='7' or dateAnton[-1]=='8' or dateAnton[-1]=='9':
-                            date_day='дней.'
+                        dd=datetime.date(2019,7,3)
+                        hh=aa-dd
+                        dateAntonfinish=(str(cc).split(',')[0].split(' ')[0])
+                        dateAntonstart=(str(hh).split(',')[0].split(' ')[0])
+                        
+                        def Antontime(dateAnton):
+                            if dateAnton[-1]=='1':
+                                return 'день.'
+                            if dateAnton[-1]=='2' or dateAnton[-1]=='3' or dateAnton[-1]=='4':
+                                return 'дня.'
+                            if  dateAnton[-1]=='0' or dateAnton[-1]=='5' or dateAnton[-1]=='6' or dateAnton[-1]=='7' or dateAnton[-1]=='8' or dateAnton[-1]=='9':
+                                return 'дней.'
+                        
                         vk.messages.send(  # Отправляем собщение
                             chat_id=event.chat_id,
                             random_id=get_random_id(),
-                            message='Антон вернётся к нам через '+str(dateAnton)+' '+date_day
+                            message='Антон вернётся к нам через '+str(dateAntonfinish)+' '+Antontime(dateAntonfinish)+'\nОн уже служит '+str(dateAntonstart)+' '+Antontime(dateAntonstart)+'\nУже прошло '+int(dateAntonstart)//366+'% Aрмии'                                                                    
                         )
 
                     elif event.obj.text == 'бот мысль' or event.obj.text == 'мысль' and flkv == True or event.obj.text == 'мысль' and flkv2 == True:
