@@ -495,13 +495,15 @@ def mainfunc():
                         aa = datetime.date.today()
                         bb = datetime.date(2020,7,3)
                         cc=bb-aa
-                        dd=datetime.date(2019,7,3)
+                        dd=datetime.date(2019,7,5)
                         hh=aa-dd
                         dateAntonfinish=(str(cc).split(',')[0].split(' ')[0])
                         dateAntonstart=(str(hh).split(',')[0].split(' ')[0])
                         
                         def Antontime(dateAnton):
                             dateAnton=str(dateAnton)
+                            if dateAnton[-2::]=='12' or dateAnton[-2::]=='11' or dateAnton[-2::]=='13' or dateAnton[-2::]=='14':
+                                return 'дней.'
                             if dateAnton[-1]=='1':
                                 return 'день.'
                             if dateAnton[-1]=='2' or dateAnton[-1]=='3' or dateAnton[-1]=='4':
@@ -512,7 +514,7 @@ def mainfunc():
                         vk.messages.send(  # Отправляем собщение
                             chat_id=event.chat_id,
                             random_id=get_random_id(),
-                            message='Антон вернётся к нам через '+str(dateAntonfinish)+' '+Antontime(dateAntonfinish)+'\nОн уже служит '+str(dateAntonstart)+' '+Antontime(dateAntonstart)+'\nУже прошло '+str(int(dateAntonstart)//366)+'% Aрмии'                                                                    
+                            message='Антон вернётся к нам через ' + str(dateAntonfinish) + ' ' + Antontime(dateAntonfinish) + '\nОн уже служит ' + str(dateAntonstart) + ' ' + Antontime(dateAntonstart) + '\nУже прошло ' + str(int(dateAntonstart) // 3.66)[:-2:] + '% Aрмии.'                                                                    
                         )
 
                     elif event.obj.text == 'бот мысль' or event.obj.text == 'мысль' and flkv == True or event.obj.text == 'мысль' and flkv2 == True:
