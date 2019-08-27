@@ -513,7 +513,7 @@ def mainfunc():
                         percent = str(int(dateAntonstart) // 3.66)[:-2:]
                         progress_bar = ''
                         for i in range(1,51):
-                            if i<int(percent)//2:
+                            if i<=int(percent)//2:
                             progress_bar += '❙'
                         else:
                             progress_bar += '❘'
