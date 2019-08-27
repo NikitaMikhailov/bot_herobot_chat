@@ -520,7 +520,7 @@ def mainfunc():
                         vk.messages.send(  # Отправляем собщение
                             chat_id=event.chat_id,
                             random_id=get_random_id(),
-                            message='Антон вернётся к нам через ' + str(dateAntonfinish) + ' ' + Antontime(dateAntonfinish) + '\nОн уже служит ' + str(dateAntonstart) + ' ' + Antontime(dateAntonstart) + '\nУже прошло ' + str(percent) + '% Aрмии.'+'\n'+progress_bar'                                                                    
+                            message='Антон вернётся к нам через ' + str(dateAntonfinish) + ' ' + Antontime(dateAntonfinish) + '\nОн уже служит ' + str(dateAntonstart) + ' ' + Antontime(dateAntonstart) + '\nУже прошло ' + str(percent) + '% Aрмии.'+'\n'+progress_bar
                         )
 
                     elif event.obj.text == 'бот мысль' or event.obj.text == 'мысль' and flkv == True or event.obj.text == 'мысль' and flkv2 == True:
