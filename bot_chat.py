@@ -510,11 +510,17 @@ def mainfunc():
                                 return 'дня.'
                             if  dateAnton[-1]=='0' or dateAnton[-1]=='5' or dateAnton[-1]=='6' or dateAnton[-1]=='7' or dateAnton[-1]=='8' or dateAnton[-1]=='9':
                                 return 'дней.'
-                        
+                        percent = str(int(dateAntonstart) // 3.66)[:-2:]
+                        progress_bar = ''
+                        for i in range(1,51):
+                            if i<int(percent)//2:
+                            progress_bar += '❙'
+                        else:
+                            progress_bar += '❘'
                         vk.messages.send(  # Отправляем собщение
                             chat_id=event.chat_id,
                             random_id=get_random_id(),
-                            message='Антон вернётся к нам через ' + str(dateAntonfinish) + ' ' + Antontime(dateAntonfinish) + '\nОн уже служит ' + str(dateAntonstart) + ' ' + Antontime(dateAntonstart) + '\nУже прошло ' + str(int(dateAntonstart) // 3.66)[:-2:] + '% службы.'                                                                    
+                            message='Антон вернётся к нам через ' + str(dateAntonfinish) + ' ' + Antontime(dateAntonfinish) + '\nОн уже служит ' + str(dateAntonstart) + ' ' + Antontime(dateAntonstart) + '\nУже прошло ' + str(percent) + '% Aрмии.'+'\n'+progress_bar'                                                                    
                         )
 
                     elif event.obj.text == 'бот мысль' or event.obj.text == 'мысль' and flkv == True or event.obj.text == 'мысль' and flkv2 == True:
