@@ -514,9 +514,9 @@ def mainfunc():
                         progress_bar = ''
                         for i in range(1,51):
                             if i<=int(percent)//2:
-                            progress_bar += '❙'
-                        else:
-                            progress_bar += '❘'
+                                progress_bar += '❙'
+                            else:
+                                progress_bar += '❘'
                         vk.messages.send(  # Отправляем собщение
                             chat_id=event.chat_id,
                             random_id=get_random_id(),
