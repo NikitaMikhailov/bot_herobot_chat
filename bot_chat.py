@@ -561,7 +561,7 @@ def mainfunc():
                             message='обновил'
                         )
 
-                    elif event.obj.text == '!пидор дня' and (event.chat_id == 1 or event.chat_id == 1):
+                    elif event.obj.text == '!пидор дня' and event.chat_id == 1:
                         f1 = open('resurses/pidor_today.txt', 'r')
                         pidor_2 = f1.read()
                         f1.close()
@@ -571,7 +571,7 @@ def mainfunc():
                             message="Сегодня пидор дня "+pidor_2
                         )
 
-                    elif event.obj.text == '!пидоры' and event.chat_id == 1 or event.chat_id == 1:
+                    elif event.obj.text == '!пидоры' and event.chat_id == 1:
                         spisok_chata = {195310233: "Никита Михайлов",
                                         38375746: "Антон Фокин",
                                         120727528: "Ольга Меркулова",
