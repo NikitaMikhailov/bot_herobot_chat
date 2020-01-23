@@ -42,33 +42,36 @@ keyboard.add_line()  # Переход на вторую строку
 keyboard.add_button('Цитата', color=VkKeyboardColor.PRIMARY)
 keyboard.add_button('Мысль', color=VkKeyboardColor.PRIMARY)
 keyboard.add_button('Факт', color=VkKeyboardColor.PRIMARY)
-'''
 keyboard.add_line()
 keyboard.add_button('Отстань', color=VkKeyboardColor.NEGATIVE)
 keyboard.add_button('Вернись', color=VkKeyboardColor.POSITIVE)
-'''
+
 for i in range(2,10):
     vk.messages.send(
         chat_id=i,
         random_id=get_random_id(),
         keyboard=keyboard.get_keyboard(),
-        message="Поправлена клавиатура, изменения в синтаксисе команд (список доступен по команде ""), поправлена погода
-         и добавлена ежедневная пасхалка"
+        message='Поправлена клавиатура, изменен синтаксис команд (список доступен по команде "!help / !хелп / !помощь"), поправлена погода'
     )
 
 vk.messages.send(
-    chat_id=5,
+    chat_id=1,
     random_id=get_random_id(),
     keyboard=keyboard.get_keyboard(),
-    message="Поправлена клавиатура, изменения в синтаксисе команд (список доступен по команде ""), поправлена погода"
+    message=''
 )
 '''
+
 def goroscop1():
-    spisok_znakov=['aries','taurus','gemini','cancer','leo','virgo','libra','scorpio','sagittarius','capricorn','aquarius','pisces']
-    for i in range (0,12):
-        filegor=open('resurses/goroskop_files/'+spisok_znakov[i]+'.txt','w')
-        filegor.write(((bs4.BeautifulSoup(requests.get("http://astroscope.ru/horoskop/ejednevniy_goroskop/" + spisok_znakov[i] + ".html").text,"html.parser").find('div', 'col-12')).getText().lstrip()))
+    spisok_znakov = ['aries', 'taurus', 'gemini', 'cancer', 'leo', 'virgo', 'libra', 'scorpio', 'sagittarius',
+                     'capricorn', 'aquarius', 'pisces']
+    for i in range(0, 12):
+        filegor = open('resurses/goroskop_files/' + spisok_znakov[i] + '.txt', 'w')
+        filegor.write(((bs4.BeautifulSoup(
+            requests.get("http://astroscope.ru/horoskop/ejednevniy_goroskop/" + spisok_znakov[i] + ".html").text,
+            "html.parser").find('div', 'col-12')).getText().lstrip()))
         filegor.close()
+
 
 def goroscop(bd_date):
     if bd_date[1] == '1':
@@ -216,6 +219,7 @@ def wheather(city,zavtra,zavtra_1):
 
 
 def mainfunc():
+
     attachments = []
     chand = 0
     flagtime = False
@@ -437,7 +441,7 @@ def mainfunc():
                             random_id=get_random_id(),
                             message='Я вернулся!'
                         )
-                          
+
                     elif flagtime is False and event.obj.text == '!вернись'  and event.chat_id==1 or flagtime is False and event.obj.text == 'вернись' and flkv == True or flagtime is False and event.obj.text == 'вернись' and flkv2 == True:
                         flagtime = False
                         fltm1 = False
@@ -487,7 +491,7 @@ def mainfunc():
                         hh=aa-dd
                         dateAntonfinish=(str(cc).split(',')[0].split(' ')[0])
                         dateAntonstart=(str(hh).split(',')[0].split(' ')[0])
-                        
+
                         def Antontime(dateAnton):
                             dateAnton=str(dateAnton)
                             if dateAnton[-2::]=='12' or dateAnton[-2::]=='11' or dateAnton[-2::]=='13' or dateAnton[-2::]=='14':
@@ -557,17 +561,17 @@ def mainfunc():
                             message='обновил'
                         )
 
-                    elif event.obj.text == '!пидор дня' and event.chat_id == 1:
+                    elif event.obj.text == '!пидор дня' and (event.chat_id == 1 or event.chat_id == 1):
                         f1 = open('resurses/pidor_today.txt', 'r')
                         pidor_2 = f1.read()
                         f1.close()
                         vk.messages.send(
-                            chat_id=event.chat_id,
+                            chat_id=1,
                             random_id=get_random_id(),
                             message="Сегодня пидор дня "+pidor_2
                         )
 
-                    elif event.obj.text == '!пидоры' and event.chat_id == 1:
+                    elif event.obj.text == '!пидоры' and event.chat_id == 1 or event.chat_id == 1:
                         spisok_chata = {195310233: "Никита Михайлов",
                                         38375746: "Антон Фокин",
                                         120727528: "Ольга Меркулова",
@@ -592,9 +596,13 @@ def mainfunc():
                                 dism[i]=0
                         pidors_1 = []
                         smile={"1":"𝟭","2":"𝟮","3":"𝟯","4":"𝟰","5":"𝟱","6":"𝟲","7":"𝟳","8":"𝟴","9":"𝟵","0":"𝟬"}
-
+                        print(dism)
                         for i in dism:
+<<<<<<< HEAD
 			    if i == '':
+=======
+                            if i == '':
+>>>>>>> 668a16b0333c17bfc24b99882dacd16d8ddd66cd
                                 continue
                             number_1 = ''
                             for k in str(dism[i]):
@@ -605,7 +613,7 @@ def mainfunc():
                         #print(pidors_1)
 
                         vk.messages.send(
-                            chat_id=event.chat_id,
+                            chat_id=1,
                             random_id=get_random_id(),
                             message=pidors_1
                         )
