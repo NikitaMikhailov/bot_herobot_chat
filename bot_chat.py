@@ -401,7 +401,7 @@ def mainfunc():
                             random_id=get_random_id(),
                             message='Привет! В Беседах мне доступны следующие функции:\n1) !погода\n2) !погода в городе ...\n'
                                     '3) !погода на завтра в городе ...\n4) !погода на завтра\n5) !анекдот\n6) !цитатa\n'
-                                    '7) !кубик ...\n8) !гороскоп\n9)Купи слона\n10) !мысль\n11) !шутка\n12) !факт\n'
+                                    '7) !кубик ...\n8) !гороскоп\n9)Купи слона\n10) !мысль\n11) !факт\n'
                                     'Остальное время я буду просто реагировать на некоторые контекстные фразы'
                         )
 
@@ -536,8 +536,7 @@ def mainfunc():
                             message=str(messagecit)
                         )
 
-                    elif event.obj.text == '!цитатa' or event.obj.text == 'цитата' and flkv == True or event.obj.text == 'цитата' and flkv2 == True:
-                        print(1223)
+                    elif event.obj.text == '!цитата' or event.obj.text == 'цитата' and flkv == True or event.obj.text == 'цитата' and flkv2 == True:
                         cit = random.randint(0, 1391)
                         for linenum, line in enumerate(open('resurses/twtrr.txt', 'r')):
                             if linenum == cit:
