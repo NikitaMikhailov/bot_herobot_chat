@@ -375,8 +375,7 @@ def mainfunc():
 
                     if flag1 == 1 and event.obj.text.find('!отъебись') == -1:
                         f1 = open('resurses/mat.txt', 'a')
-                        f1.write(str(event.obj.from_id))
-                        f1.write('\n')
+                        f1.write(str(event.obj.from_id)+'\n')
                         f1.close()
                         f1 = open('resurses/mat.txt', 'r')
                         chmat = 0
@@ -560,6 +559,35 @@ def mainfunc():
                             random_id=get_random_id(),
                             message='обновил'
                         )
+                    elif event.obj.text == '!маты' and event.obj.from_id == 195310233:
+                        f = open('resurses/mat.txt', 'r')
+                        dism = {}
+                        for line in f:
+                            if line in dism:
+                                dism[line] += 1
+                            else:
+                                dism[line] = 1
+                        f.close()
+                        mat = []
+                        for i in dism:
+                            smile = {"1": "𝟭", "2": "𝟮", "3": "𝟯", "4": "𝟰", "5": "𝟱", "6": "𝟲", "7": "𝟳",
+                                     "8": "𝟴", "9": "𝟵", "0": "𝟬"}
+                            if i == '':
+                                continue
+                            number_2 = ''
+                            for k in str(dism[i]):
+                                number_2 += smile[k]
+                            fio_1 = requests.get("https://api.vk.com/method/users.get?user_ids=" + str(i)[
+                              :-1:] + "&fields=bdate&access_token=b78c719302827104f6346bd3b63df9edd8dee2ef58f84a4e1a4f108cb149fed5d2d53c795ae00ee69f419&v=5.92")
+                            first_name_1 = fio_1.text[14::].split(',')[1].split(':')[1][1:-1:]
+                            last_name_1 = fio_1.text[14::].split(',')[2].split(':')[1][1:-1:]
+                            mat.append(first_name_1 + ' ' + last_name_1 + ' :' + str(number_2) + ' раз(а)\n')
+                        mat = ''.join(mat)
+                        vk.messages.send(
+                            chat_id=event.chat_id,
+                            random_id=get_random_id(),
+                            message=mat
+                        )
 
                     elif event.obj.text == '!пидор дня' and event.chat_id == 1:
                         f1 = open('resurses/pidor_today.txt', 'r')
@@ -585,28 +613,37 @@ def mainfunc():
                         pidors = open('resurses/pidors.txt', 'r')
                         dism = {}
                         for line in pidors:
-                            if line in dism:
+                            if line[:-1:] in dism:
                                 dism[line[:-1:]] += 1
                             else:
                                 dism[line[:-1:]] = 1
                         pidors.close()
-                        #print(dism)
                         for i in spisok_chata:
                             if str(i) not in dism:
                                 dism[i]=0
                         pidors_1 = []
                         smile={"1":"𝟭","2":"𝟮","3":"𝟯","4":"𝟰","5":"𝟱","6":"𝟲","7":"𝟳","8":"𝟴","9":"𝟵","0":"𝟬"}
                         print(dism)
+                        kolp=[]
                         for i in dism:
-                            if i == '':
-                                continue
-                            number_1 = ''
-                            for k in str(dism[i]):
-                                number_1 += smile[k]
-                            #print(spisok_chata[int(i)])
-                            pidors_1.append(spisok_chata[int(i)]+': ' + number_1 + ' раз(а)\n')
+                            kolp.append(dism[i])
+                        kolp.sort()
+                        kolp.reverse()
+                        print(kolp)
+                        jstr = []
+                        for i in kolp:
+                            for j in dism:
+                                if j == '':
+                                    continue
+                                if str(dism[j]) == str(i) and j not in jstr:
+                                    jstr.append(j)
+                                    number_1 = ''
+                                    for k in str(dism[j]):
+                                        number_1 += smile[k]
+                                    pidors_1.append(spisok_chata[int(j)]+': ' + number_1 + ' раз(а)\n')
+
+
                         pidors_1 = ''.join(pidors_1)
-                        #print(pidors_1)
 
                         vk.messages.send(
                             chat_id=1,

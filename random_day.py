@@ -18,8 +18,8 @@ pidor_id = random.choice(list(spisok_chata.keys()))
 pidor = spisok_chata[pidor_id]
 
 f1 = open('resurses/pidors.txt', 'a')
-f1.write(str(pidor_id))
-f1.write('\n')
+f1.write(str(pidor_id)+'\n')
+
 f1.close()
 
 f1 = open('resurses/pidor_today.txt', 'w')
@@ -31,6 +31,7 @@ vk.messages.send(
     random_id=get_random_id(),
     message='Пидор дня обновлен в фоновом режиме, это [id' + str(pidor_id) + '|' + pidor + "]"
 )
+
 attachments = []
 image_url = 'https://pp.userapi.com/c621701/v621701407/73af/RYLX4AO4K7s.jpg'
 image = session.get(image_url, stream=True)

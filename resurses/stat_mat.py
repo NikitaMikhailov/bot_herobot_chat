@@ -27,14 +27,6 @@ for i in dism:
     mat.append(first_name+' '+last_name+' '+str(dism[i])+'\n')
 print(mat)
 mat=''.join(mat)
-'''
-vk.messages.send(
-    chat_id=1,
-    random_id=get_random_id(),
-    #keyboard=keyboard.get_keyboard(),
-    message="Статистика мата\n"+mat
-)
-'''
 vk.messages.send(
     user_id=195310233,
     random_id=get_random_id(),
