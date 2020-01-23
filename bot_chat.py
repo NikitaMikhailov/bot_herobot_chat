@@ -555,6 +555,58 @@ def mainfunc():
                             random_id=get_random_id(),
                             message='обновил'
                         )
+
+                    elif event.obj.text == '!пидор дня' and event.chat_id == 5:
+                        f1 = open('resurses/pidor_today.txt', 'r')
+                        pidor_2 = f1.read()
+                        f1.close()
+                        vk.messages.send(
+                            chat_id=event.chat_id,
+                            random_id=get_random_id(),
+                            message="Сегодня пидор дня "+pidor_2
+                        )
+
+                    elif event.obj.text == '!пидоры' and event.chat_id == 5:
+                        spisok_chata = {195310233: "Никита Михайлов",
+                                        38375746: "Антон Фокин",
+                                        120727528: "Ольга Меркулова",
+                                        51556033: "Петр Евдокимов",
+                                        13069991: "Андрей Петранов",
+                                        20765196: "Катя Горюнова",
+                                        109828457: "Александр Маслов",
+                                        206947265: "Fidl Di-Di",
+                                        12403758: "Вика Карпеева",
+                                        135053737: "Анастасия Живых"}
+                        pidors = open('resurses/pidors.txt', 'r')
+                        dism = {}
+                        for line in pidors:
+                            if line in dism:
+                                dism[line[:-1:]] += 1
+                            else:
+                                dism[line[:-1:]] = 1
+                        pidors.close()
+                        #print(dism)
+                        for i in spisok_chata:
+                            if str(i) not in dism:
+                                dism[i]=0
+                        pidors_1 = []
+                        smile={"1":"𝟭","2":"𝟮","3":"𝟯","4":"𝟰","5":"𝟱","6":"𝟲","7":"𝟳","8":"𝟴","9":"𝟵","0":"𝟬"}
+
+                        for i in dism:
+                            number_1 = ''
+                            for k in str(dism[i]):
+                                number_1 += smile[k]
+                            #print(spisok_chata[int(i)])
+                            pidors_1.append(spisok_chata[int(i)]+': ' + number_1 + ' раз(а)\n')
+                        pidors_1 = ''.join(pidors_1)
+                        #print(pidors_1)
+
+                        vk.messages.send(
+                            chat_id=event.chat_id,
+                            random_id=get_random_id(),
+                            message=pidors_1
+                        )
+
                     elif event.obj.text == '!гороскоп' or event.obj.text == 'гороскоп' and flkv == True or event.obj.text == 'гороскоп' and flkv2 == True:
                         if flagbddate==True:
                             bd_date = bd_date.split('.')
