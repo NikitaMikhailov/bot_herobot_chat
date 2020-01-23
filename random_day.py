@@ -36,23 +36,22 @@ image_url = 'https://pp.userapi.com/c621701/v621701407/73af/RYLX4AO4K7s.jpg'
 image = session.get(image_url, stream=True)
 photo = upload.photo_messages(photos=image.raw)[0]
 attachments.append('photo{}_{}'.format(photo['owner_id'], photo['id']))
-'''
+
 vk.messages.send(
-    chat_id=5,
+    chat_id=1,
     random_id=get_random_id(),
     attachment=','.join(attachments),
     message="Так-так-так, у нас ежедневная рубрика!"
 )
 time.sleep(10)
 vk.messages.send(
-    chat_id=5,
+    chat_id=1,
     random_id=get_random_id(),
     message="Вот это неожиданность, оказывается, что ..."
 )
 time.sleep(10)
 vk.messages.send(
-    chat_id=5,
+    chat_id=1,
     random_id=get_random_id(),
     message="[id"+str(pidor_id)+'|'+pidor+"] Ты пидор дня."
 )
-'''
