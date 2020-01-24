@@ -589,8 +589,11 @@ def mainfunc():
                                     :-1:] + "&fields=bdate&access_token=b78c719302827104f6346bd3b63df9edd8dee2ef58f84a4e1a4f108cb149fed5d2d53c795ae00ee69f419&v=5.92")
                                     first_name_1 = fio_1.text[14::].split(',')[1].split(':')[1][1:-1:]
                                     last_name_1 = fio_1.text[14::].split(',')[2].split(':')[1][1:-1:]
-                                    mat.append(first_name_1 + ' ' + last_name_1 + ' :' + str(number_2) + ' раз(а)\n')
+                                    mat.append(first_name_1 + ' ' + last_name_1 + ': ' + str(number_2) + ' раз(а)\n')
+                        for i in range (0,len(mat)):
+                            mat[i] = str(i+1) + ") " + mat[i]
                         mat = ''.join(mat)
+                        mat = "ТОП мата:\n\n" + mat
                         vk.messages.send(
                             chat_id=event.chat_id,
                             random_id=get_random_id(),
@@ -647,8 +650,11 @@ def mainfunc():
                                         number_1 += smile[k]
                                     pidors_1.append(spisok_chata[int(j)]+': ' + number_1 + ' раз(а)\n')
 
-
+                        for i in range (0,len(pidors_1)):
+                            pidors_1[i] = str(i+1) + ") " + pidors_1[i]
                         pidors_1 = ''.join(pidors_1)
+                        pidors_1 = "ТОП пидоров дня:\n\n" + pidors_1
+
 
                         vk.messages.send(
                             chat_id=1,
