@@ -615,10 +615,10 @@ def mainfunc():
                         pidors = open('resurses/pidors.txt', 'r')
                         dism = {}
                         for line in pidors:
-                            if line[:-1:] in dism:
-                                dism[line[:-1:]] += 1
+                            if line in dism:
+                                dism[line] += 1
                             else:
-                                dism[line[:-1:]] = 1
+                                dism[line] = 1
                         pidors.close()
                         for i in spisok_chata:
                             if str(i) not in dism:

@@ -1,3 +1,8 @@
+#!/usr/bin/env bash
+#!/bin/bash
+#!/bin/sh
+#!/bin/sh -
+
 from vk_api.utils import get_random_id
 from vk_api.bot_longpoll import VkBotLongPoll, VkBotEventType
 from vk_api import VkUpload
@@ -56,3 +61,4 @@ vk.messages.send(
     random_id=get_random_id(),
     message="[id"+str(pidor_id)+'|'+pidor+"] Ты пидор дня."
 )
+
