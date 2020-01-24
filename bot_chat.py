@@ -9,6 +9,7 @@ from vk_api.keyboard import VkKeyboard, VkKeyboardColor
 import time, datetime, bs4, random, requests, vk_api
 
 
+smile={"1":"𝟭","2":"𝟮","3":"𝟯","4":"𝟰","5":"𝟱","6":"𝟲","7":"𝟳","8":"𝟴","9":"𝟵","0":"𝟬"}
 dict = [".", ",", "!", "?", ")", "(", ":", ";", "'", ']', '[', '"']
 dictan = [")", "(", ":", ";", "'", ']', '[', '"', '\\', 'n', '&', 'q', 'u', 'o', 't']
 dict2 = ["пидр", "сука", "лох", "пидрила", "мудак", "дурак", "тупой", "тормоз", "дебил", "дибил","дурачок"]
@@ -568,22 +569,27 @@ def mainfunc():
                             else:
                                 dism[line] = 1
                         f.close()
-                        print(dism)
                         mat = []
+                        kolp = []
                         for i in dism:
-                            smile = {"1": "𝟭", "2": "𝟮", "3": "𝟯", "4": "𝟰", "5": "𝟱", "6": "𝟲", "7": "𝟳",
-                                     "8": "𝟴", "9": "𝟵", "0": "𝟬"}
-                            if i == '' or i=='\n':
-                                continue
-                            number_2 = ''
-                            for k in str(dism[i]):
-                                number_2 += smile[k]
-                                print(number_2)
-                            fio_1 = requests.get("https://api.vk.com/method/users.get?user_ids=" + str(i)[
-                              :-1:] + "&fields=bdate&access_token=b78c719302827104f6346bd3b63df9edd8dee2ef58f84a4e1a4f108cb149fed5d2d53c795ae00ee69f419&v=5.92")
-                            first_name_1 = fio_1.text[14::].split(',')[1].split(':')[1][1:-1:]
-                            last_name_1 = fio_1.text[14::].split(',')[2].split(':')[1][1:-1:]
-                            mat.append(first_name_1 + ' ' + last_name_1 + ' :' + str(number_2) + ' раз(а)\n')
+                            kolp.append(dism[i])
+                        kolp.sort()
+                        kolp.reverse()
+                        jstr = []
+                        for i in kolp:
+                            for j in dism:
+                                if j == '' or j == '\n':
+                                    continue
+                                if str(dism[j]) == str(i) and j not in jstr:
+                                    jstr.append(j)
+                                    number_2 = ''
+                                    for k in str(dism[j]):
+                                        number_2 += smile[k]
+                                    fio_1 = requests.get("https://api.vk.com/method/users.get?user_ids=" + str(j)[
+                                    :-1:] + "&fields=bdate&access_token=b78c719302827104f6346bd3b63df9edd8dee2ef58f84a4e1a4f108cb149fed5d2d53c795ae00ee69f419&v=5.92")
+                                    first_name_1 = fio_1.text[14::].split(',')[1].split(':')[1][1:-1:]
+                                    last_name_1 = fio_1.text[14::].split(',')[2].split(':')[1][1:-1:]
+                                    mat.append(first_name_1 + ' ' + last_name_1 + ' :' + str(number_2) + ' раз(а)\n')
                         mat = ''.join(mat)
                         vk.messages.send(
                             chat_id=event.chat_id,
@@ -624,14 +630,11 @@ def mainfunc():
                             if str(i) not in dism:
                                 dism[i]=0
                         pidors_1 = []
-                        smile={"1":"𝟭","2":"𝟮","3":"𝟯","4":"𝟰","5":"𝟱","6":"𝟲","7":"𝟳","8":"𝟴","9":"𝟵","0":"𝟬"}
-                        print(dism)
                         kolp=[]
                         for i in dism:
                             kolp.append(dism[i])
                         kolp.sort()
                         kolp.reverse()
-                        print(kolp)
                         jstr = []
                         for i in kolp:
                             for j in dism:
