@@ -246,7 +246,6 @@ def mainfunc():
                     event.obj.text = event.obj.text
                 else:
                     event.obj.text = evtxt
-                print(evtxt)
                 if event.obj.text[:24:] == 'club178949259|ботхеработ':
                     event.obj.text = event.obj.text[25::]
                     flkv = True
@@ -399,14 +398,26 @@ def mainfunc():
                             )
                             f1.close()
 
-                    elif event.obj.text == '!help' or event.obj.text == "!помощь" or event.obj.text == "!хелп":
+                    elif (event.obj.text == '!help' or event.obj.text == "!помощь" or event.obj.text == "!хелп") \
+                            and (event.chat_id == 1) :
                         vk.messages.send(
                             chat_id=event.chat_id,
                             random_id=get_random_id(),
                             message='Привет! В Беседах мне доступны следующие функции:\n1) !погода\n2) !погода в городе ...\n'
-                                    '3) !погода на завтра в городе ...\n4) !погода на завтра\n5) !анекдот\n6) !цитатa\n'
-                                    '7) !кубик ...\n8) !гороскоп\n9) купи слона\n10) !мысль\n11) !факт\n'
-                                    '12) !пидор дня\n13) !пидоры\n'
+                                    '3) !погода на завтра в городе ...\n4) !погода на завтра\n5) !кубик ...\n6) !гороскоп\n'
+                                    '7) анекдот\n8) !цитата\n9) !факт\n10) !мысль\n11) купи слона\n'
+                                    '12) !пидор дня\n13) !пидоры\n14) !отстань, !отъебись, !вернись\n'
+                                    'Остальное время я буду просто реагировать на некоторые контекстные фразы'
+                        )
+
+                    elif (event.obj.text == '!help' or event.obj.text == "!помощь" or event.obj.text == "!хелп") \
+                            and (event.chat_id != 1) :
+                        vk.messages.send(
+                            chat_id=event.chat_id,
+                            random_id=get_random_id(),
+                            message='Привет! В Беседах мне доступны следующие функции:\n1) !погода\n2) !погода в городе ...\n'
+                                    '3) !погода на завтра в городе ...\n4) !погода на завтра\n5) !кубик ...\n6) !гороскоп\n'
+                                    '7) анекдот\n8) !цитата\n9) !факт\n10) !мысль\n11) купи слона\n'
                                     'Остальное время я буду просто реагировать на некоторые контекстные фразы'
                         )
 
@@ -633,7 +644,6 @@ def mainfunc():
                         for i in spisok_chata:
                             if str(i) not in dism:
                                 dism[i]=0
-                        print(dism)
                         pidors_1 = []
                         kolp=[]
                         for i in dism:
@@ -687,11 +697,9 @@ def mainfunc():
 
                     elif event.obj.text == '!анекдот' or event.obj.text == 'анекдот' and flkv == True or event.obj.text == 'анекдот' and flkv2 == True:
                         anes = random.randint(0, 135500)
-                        print('попал в анекдот')
                         for linenum, line in enumerate(open('resurses/anec.txt', 'r')):
                             if linenum == anes:
                                 anecdot = (line.strip()).replace('#', '\n')
-                        print(anecdot)
                         vk.messages.send(  # Отправляем собщение
                             chat_id=event.chat_id,
                             random_id=get_random_id(),
@@ -745,7 +753,6 @@ def mainfunc():
 
                     elif event.obj.text.find('!погода в городе') != -1:
                         city = event.obj.text[17::]
-                        print(city)
                         result = wheather(city,0,0)
                         vk.messages.send(  # Отправляем собщение
                             chat_id=event.chat_id,
