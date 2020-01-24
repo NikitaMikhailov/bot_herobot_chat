@@ -610,7 +610,8 @@ def mainfunc():
                             message="Сегодня пидор дня "+pidor_2
                         )
 
-                    elif event.obj.text == '!пидоры' and event.chat_id == 1:
+                    elif event.obj.text == '!пидоры' and (event.chat_id == 1 or event.chat_id == 5):
+
                         spisok_chata = {195310233: "Никита Михайлов",
                                         38375746: "Антон Фокин",
                                         120727528: "Ольга Меркулова",
@@ -632,6 +633,7 @@ def mainfunc():
                         for i in spisok_chata:
                             if str(i) not in dism:
                                 dism[i]=0
+                        print(dism)
                         pidors_1 = []
                         kolp=[]
                         for i in dism:
@@ -639,11 +641,13 @@ def mainfunc():
                         kolp.sort()
                         kolp.reverse()
                         jstr = []
+                        nstr = []
                         for i in kolp:
                             for j in dism:
                                 if j == '' or j=='\n':
                                     continue
-                                if str(dism[j]) == str(i) and j not in jstr:
+                                if str(dism[j]) == str(i) and j not in jstr and spisok_chata[int(j)] not in nstr:
+                                    nstr.append(spisok_chata[int(j)])
                                     jstr.append(j)
                                     number_1 = ''
                                     for k in str(dism[j]):
@@ -657,7 +661,7 @@ def mainfunc():
 
 
                         vk.messages.send(
-                            chat_id=1,
+                            chat_id=event.chat_id,
                             random_id=get_random_id(),
                             message=pidors_1
                         )
