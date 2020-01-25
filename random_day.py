@@ -15,6 +15,11 @@ longpoll = VkBotLongPoll(vk_session, '178949259')
 vk = vk_session.get_api()
 upload = VkUpload(vk_session)
 
+vk.messages.send(
+    user_id=195310233,
+    random_id=get_random_id(),
+    message='11'
+)
 
 spisok_chata = {195310233:"Никита Михайлов",38375746:"Антон Фокин",120727528:"Ольга Меркулова",51556033:"Петр Евдокимов",
                   13069991:"Андрей Петранов",20765196:"Катя Горюнова",109828457:"Александр Маслов",206947265:"Fidl Di-Di",
@@ -22,12 +27,23 @@ spisok_chata = {195310233:"Никита Михайлов",38375746:"Антон �
 pidor_id = random.choice(list(spisok_chata.keys()))
 pidor = spisok_chata[pidor_id]
 
+vk.messages.send(
+    user_id=195310233,
+    random_id=get_random_id(),
+    message='22'
+)
+
 f1 = open('/root/bot_herobot_chat/resurses/pidors.txt', 'a')
 f1.write(str(pidor_id)+'\n')
-
 f1.close()
 
-f1 = open('/root/bot_herabot_chat/resurses/pidor_today.txt', 'w')
+vk.messages.send(
+    user_id=195310233,
+    random_id=get_random_id(),
+    message='33'
+)
+
+f1 = open('/root/bot_herobot_chat/resurses/pidor_today.txt', 'w')
 f1.write(str(pidor))
 f1.close()
 
