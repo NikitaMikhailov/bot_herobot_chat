@@ -34,19 +34,32 @@ longpoll = VkBotLongPoll(vk_session, '178949259')
 vk = vk_session.get_api()
 upload = VkUpload(vk_session)
 
-keyboard = VkKeyboard(one_time=False)
-keyboard.add_button('Анекдот', color=VkKeyboardColor.PRIMARY)
-keyboard.add_button('Погода', color=VkKeyboardColor.PRIMARY)
-keyboard.add_button('Гороскоп', color=VkKeyboardColor.PRIMARY)
-'''
-keyboard.add_line()  # Переход на вторую строку
-keyboard.add_button('Цитата', color=VkKeyboardColor.PRIMARY)
-keyboard.add_button('Мысль', color=VkKeyboardColor.PRIMARY)
-keyboard.add_button('Факт', color=VkKeyboardColor.PRIMARY)
-keyboard.add_line()
-keyboard.add_button('Отстань', color=VkKeyboardColor.NEGATIVE)
-keyboard.add_button('Вернись', color=VkKeyboardColor.POSITIVE)
+keyboard1 = VkKeyboard(one_time=False)
+keyboard1.add_button('Анекдот', color=VkKeyboardColor.PRIMARY)
+keyboard1.add_button('Погода', color=VkKeyboardColor.PRIMARY)
+keyboard1.add_button('Гороскоп', color=VkKeyboardColor.PRIMARY)
 
+keyboard2 = VkKeyboard(one_time=False)
+keyboard2.add_button('Анекдот', color=VkKeyboardColor.PRIMARY)
+keyboard2.add_button('Погода', color=VkKeyboardColor.PRIMARY)
+keyboard2.add_button('Гороскоп', color=VkKeyboardColor.PRIMARY)
+keyboard2.add_line()  # Переход на вторую строку
+keyboard2.add_button('Цитата', color=VkKeyboardColor.PRIMARY)
+keyboard2.add_button('Мысль', color=VkKeyboardColor.PRIMARY)
+keyboard2.add_button('Факт', color=VkKeyboardColor.PRIMARY)
+
+keyboard3 = VkKeyboard(one_time=False)
+keyboard3.add_button('Анекдот', color=VkKeyboardColor.PRIMARY)
+keyboard3.add_button('Погода', color=VkKeyboardColor.PRIMARY)
+keyboard3.add_button('Гороскоп', color=VkKeyboardColor.PRIMARY)
+keyboard3.add_line()  # Переход на вторую строку
+keyboard3.add_button('Цитата', color=VkKeyboardColor.PRIMARY)
+keyboard3.add_button('Мысль', color=VkKeyboardColor.PRIMARY)
+keyboard3.add_button('Факт', color=VkKeyboardColor.PRIMARY)
+keyboard3.add_line()
+keyboard3.add_button('Отстань', color=VkKeyboardColor.NEGATIVE)
+keyboard3.add_button('Вернись', color=VkKeyboardColor.POSITIVE)
+'''
 for i in range(2,10):
     vk.messages.send(
         chat_id=i,
@@ -616,7 +629,7 @@ def mainfunc():
                         pidor_2 = f1.read()
                         f1.close()
                         vk.messages.send(
-                            chat_id=1,
+                            chat_id=event.chat_id,
                             random_id=get_random_id(),
                             message="Сегодня пидор дня "+pidor_2
                         )
