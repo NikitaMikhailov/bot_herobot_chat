@@ -497,8 +497,6 @@ def mainfunc():
                         )
 
 
-
-
                     elif flag == 1 and flagobr == 0 and flagtime != True:
                         vk.messages.send(  # Отправляем сообщение
                             chat_id=event.chat_id,
@@ -546,9 +544,12 @@ def mainfunc():
                                 messagecit = (line.strip())
                         if messagecit[-1] == ',':
                             messagecit = messagecit[:-1:]
+                        keyboardquotes = VkKeyboard(one_time=False, inline=True)
+                        keyboardquotes.add_button('Мысль', color=VkKeyboardColor.PRIMARY)
                         vk.messages.send(  # Отправляем собщение
                             chat_id=event.chat_id,
                             random_id=get_random_id(),
+                            keyboard=keyboardquotes.get_keyboard(),
                             message=str(messagecit)
                         )
 
@@ -559,9 +560,12 @@ def mainfunc():
                                 messagecit = (line.strip())
                         if messagecit[-1] == ',':
                             messagecit = messagecit[:-1:]
+                        keyboardfacts = VkKeyboard(one_time=False, inline=True)
+                        keyboardfacts.add_button('Факт', color=VkKeyboardColor.PRIMARY)
                         vk.messages.send(  # Отправляем собщение
                             chat_id=event.chat_id,
                             random_id=get_random_id(),
+                            keyboard=keyboardfacts.get_keyboard(),
                             message=str(messagecit)
                         )
 
@@ -572,9 +576,12 @@ def mainfunc():
                                 messagecit = (line.strip())
                         if messagecit[-1] == ',':
                             messagecit = messagecit[:-1:]
+                        keyboardtwtrr= VkKeyboard(one_time=False, inline=True)
+                        keyboardtwtrr.add_button('Цитата', color=VkKeyboardColor.PRIMARY)
                         vk.messages.send(  # Отправляем собщение
                             chat_id=event.chat_id,
                             random_id=get_random_id(),
+                            keyboard=keyboardtwtrr.get_keyboard(),
                             message=str(messagecit)
                         )
                     elif event.obj.text == '!обнови гороскоп' and event.obj.from_id == 195310233:
@@ -712,9 +719,12 @@ def mainfunc():
                         for linenum, line in enumerate(open('resurses/anec.txt', 'r')):
                             if linenum == anes:
                                 anecdot = (line.strip()).replace('#', '\n')
+                        keyboardanec= VkKeyboard(one_time=False, inline=True)
+                        keyboardanec.add_button('Цитата', color=VkKeyboardColor.PRIMARY)
                         vk.messages.send(  # Отправляем собщение
                             chat_id=event.chat_id,
                             random_id=get_random_id(),
+                            keyboard=keyboardanec.get_keyboard(),
                             message=anecdot
                         )
 
