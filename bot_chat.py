@@ -611,7 +611,7 @@ def mainfunc():
                             message=mat
                         )
 
-                    elif event.obj.text == '!пидор дня' and event.chat_id == 1:
+                    elif event.obj.text == '!пидор дня' and (event.chat_id == 1 or event.chat_id == 5):
                         f1 = open('resurses/pidor_today.txt', 'r')
                         pidor_2 = f1.read()
                         f1.close()
