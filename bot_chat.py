@@ -719,7 +719,7 @@ def mainfunc():
                         for linenum, line in enumerate(open('resurses/anec.txt', 'r')):
                             if linenum == anes:
                                 anecdot = (line.strip()).replace('#', '\n')
-                        keyboardanec= VkKeyboard(one_time=False, inline=False)
+                        keyboardanec= VkKeyboard(inline=True)
                         keyboardanec.add_button('Анекдот', color=VkKeyboardColor.PRIMARY)
                         vk.messages.send(  # Отправляем собщение
                             chat_id=event.chat_id,
