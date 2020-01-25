@@ -22,12 +22,12 @@ spisok_chata = {195310233:"Никита Михайлов",38375746:"Антон �
 pidor_id = random.choice(list(spisok_chata.keys()))
 pidor = spisok_chata[pidor_id]
 
-f1 = open('resurses/pidors.txt', 'a')
+f1 = open('/root/bot_herobot_chat/resurses/pidors.txt', 'a')
 f1.write(str(pidor_id)+'\n')
 
 f1.close()
 
-f1 = open('resurses/pidor_today.txt', 'w')
+f1 = open('/root/bot_herabot_chat/resurses/pidor_today.txt', 'w')
 f1.write(str(pidor))
 f1.close()
 
@@ -44,20 +44,20 @@ photo = upload.photo_messages(photos=image.raw)[0]
 attachments.append('photo{}_{}'.format(photo['owner_id'], photo['id']))
 
 vk.messages.send(
-    chat_id=1,
+    chat_id=5,
     random_id=get_random_id(),
     attachment=','.join(attachments),
     message="Так-так-так, у нас ежедневная рубрика!"
 )
 time.sleep(10)
 vk.messages.send(
-    chat_id=1,
+    chat_id=5,
     random_id=get_random_id(),
     message="Вот это неожиданность, оказывается, что ..."
 )
 time.sleep(10)
 vk.messages.send(
-    chat_id=1,
+    chat_id=5,
     random_id=get_random_id(),
     message="[id"+str(pidor_id)+'|'+pidor+"] Ты пидор дня."
 )
