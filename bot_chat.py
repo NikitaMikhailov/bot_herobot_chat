@@ -441,7 +441,7 @@ def mainfunc():
                         vk.messages.send(
                             chat_id=event.chat_id,
                             random_id=get_random_id(),
-                            keyboard=keyboard1.get_keyboard(),
+                            keyboard=keyboard3.get_keyboard(),
                             message='Клавиатура тип 3 включена'
                         )
                     elif (event.obj.text == '!клавиатура выкл'):
