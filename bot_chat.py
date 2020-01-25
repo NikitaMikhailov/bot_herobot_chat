@@ -7,6 +7,7 @@ from vk_api import VkUpload
 from vk_api.bot_longpoll import VkBotLongPoll, VkBotEventType
 from vk_api.keyboard import VkKeyboard, VkKeyboardColor
 import time, datetime, bs4, random, requests, vk_api
+print(vk_api.__version__)
 
 
 smile={"1":"𝟭","2":"𝟮","3":"𝟯","4":"𝟰","5":"𝟱","6":"𝟲","7":"𝟳","8":"𝟴","9":"𝟵","0":"𝟬"}
@@ -422,6 +423,35 @@ def mainfunc():
                                     '12) !пидор дня\n13) !пидоры\n14) !отстань, !отъебись, !вернись\n'
                                     'Остальное время я буду просто реагировать на некоторые контекстные фразы'
                         )
+                    elif (event.obj.text == '!клавиатура1 вкл' or event.obj.text == '!клавиатура вкл'):
+                        vk.messages.send(
+                            chat_id=event.chat_id,
+                            random_id=get_random_id(),
+                            keyboard=keyboard1.get_keyboard(),
+                            message='Клавиатура тип 1 включена'
+                        )
+                    elif (event.obj.text == '!клавиатура2 вкл'):
+                        vk.messages.send(
+                            chat_id=event.chat_id,
+                            random_id=get_random_id(),
+                            keyboard=keyboard2.get_keyboard(),
+                            message='Клавиатура тип 2 включена'
+                        )
+                    elif (event.obj.text == '!клавиатура3 вкл'):
+                        vk.messages.send(
+                            chat_id=event.chat_id,
+                            random_id=get_random_id(),
+                            keyboard=keyboard1.get_keyboard(),
+                            message='Клавиатура тип 3 включена'
+                        )
+                    elif (event.obj.text == '!клавиатура выкл'):
+                        vk.messages.send(
+                            chat_id=event.chat_id,
+                            random_id=get_random_id(),
+                            keyboard=keyboard1.get_empty_keyboard(),
+                            message='Клавиатура выключена'
+                        )
+
 
                     elif (event.obj.text == '!help' or event.obj.text == "!помощь" or event.obj.text == "!хелп") \
                             and (event.chat_id != 1) :
@@ -715,11 +745,13 @@ def mainfunc():
                             )
 
                     elif event.obj.text == '!анекдот' or event.obj.text == 'анекдот' and flkv == True or event.obj.text == 'анекдот' and flkv2 == True:
+
                         anes = random.randint(0, 135500)
                         for linenum, line in enumerate(open('resurses/anec.txt', 'r')):
                             if linenum == anes:
                                 anecdot = (line.strip()).replace('#', '\n')
-                        keyboardanec= VkKeyboard(inline=True)
+
+                        keyboardanec= VkKeyboard(one_time=False, inline=True)
                         keyboardanec.add_button('Анекдот', color=VkKeyboardColor.PRIMARY)
                         vk.messages.send(  # Отправляем собщение
                             chat_id=event.chat_id,
