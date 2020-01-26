@@ -1,33 +1,37 @@
 #!/usr/bin/env bash
-#!/bin/bash
-#!/bin/sh
-#!/bin/sh -
+# !/bin/bash
+# !/bin/sh
+# !/bin/sh -
 from vk_api.utils import get_random_id
 from vk_api import VkUpload
 from vk_api.bot_longpoll import VkBotLongPoll, VkBotEventType
 from vk_api.keyboard import VkKeyboard, VkKeyboardColor
 import time, datetime, bs4, random, requests, vk_api
+
 print(vk_api.__version__)
 
-
-smile={"1":"𝟭","2":"𝟮","3":"𝟯","4":"𝟰","5":"𝟱","6":"𝟲","7":"𝟳","8":"𝟴","9":"𝟵","0":"𝟬"}
+smile = {"1": "𝟭", "2": "𝟮", "3": "𝟯", "4": "𝟰", "5": "𝟱", "6": "𝟲", "7": "𝟳", "8": "𝟴", "9": "𝟵", "0": "𝟬"}
 dict = [".", ",", "!", "?", ")", "(", ":", ";", "'", ']', '[', '"']
 dictan = [")", "(", ":", ";", "'", ']', '[', '"', '\\', 'n', '&', 'q', 'u', 'o', 't']
-dict2 = ["пидр", "сука", "лох", "пидрила", "мудак", "дурак", "тупой", "тормоз", "дебил", "дибил","дурачок"]
+dict2 = ["пидр", "сука", "лох", "пидрила", "мудак", "дурак", "тупой", "тормоз", "дебил", "дибил", "дурачок"]
 dict4 = ["кушать", "пить", "есть", "поесть", "жрать"]
 dict5 = ["вик", "ксюх", "ксюш", "ксень", "саш", "сань", "петь", "петя", "петро", "кать",
          "катя", "катюх", "андрей", "андрюх", "оля", "оль", "ник"]
 dict7 = {'January': 1, 'February': 2, 'March': 3, 'April': 4, 'May': 5, 'June': 6, 'July': 7, 'August': 8,
          'September': 9, 'October': 10, 'November': 11, 'December': 12}
-dict8 = {'овен':'aries','телец':'taurus' ,'близнецы':'gemini' ,'рак':'cancer' ,'лев':'leo' ,'дева':'virgo' ,'весы':'libra' ,'скорпион':'scorpio' ,'стрелец':'sagittarius','козерог':'capricorn' ,'водолей':'aquarius' ,'рыбы':'pisces'}
+dict8 = {'овен': 'aries', 'телец': 'taurus', 'близнецы': 'gemini', 'рак': 'cancer', 'лев': 'leo', 'дева': 'virgo',
+         'весы': 'libra', 'скорпион': 'scorpio', 'стрелец': 'sagittarius', 'козерог': 'capricorn',
+         'водолей': 'aquarius', 'рыбы': 'pisces'}
+im_text={'Переменная облачность':'⛅','Облачно с прояснениями':'⛅','Небольшая облачность':'⛅',
+         'Сплошная облачность':'☁','Ясно':'☀'}
+im_text_2={'дождь':'💧','сильный дождь':'💧','мелкий дождь':'💧','снег':'❄','небольшой снег':'❄','сильный снег':'❄'}
 kolresp = 0
 attachments = []
 chand = 0
 flagtime = False
 fltm1 = False
 fltm2 = False
-flaggoroscop=False
-
+flaggoroscop = False
 
 session = requests.Session()
 vk_session = vk_api.VkApi(token='b78c719302827104f6346bd3b63df9edd8dee2ef58f84a4e1a4f108cb149fed5d2d53c795ae00ee69f419')
@@ -76,6 +80,7 @@ vk.messages.send(
     message=''
 )
 '''
+
 
 def goroscop1():
     spisok_znakov = ['aries', 'taurus', 'gemini', 'cancer', 'leo', 'virgo', 'libra', 'scorpio', 'sagittarius',
@@ -150,52 +155,97 @@ def goroscop(bd_date):
         else:
             return 'capricorn'
 
-def wheather(city,zavtra,zavtra_1):
+
+def wheather(city, zavtra, zavtra_1):
     for i in range(len(city)):
         if city[i] == ' ':
             city = city[:i:] + '-' + city[i + 1::]
     request = requests.get("https://sinoptik.com.ru/погода-" + city)
     b = bs4.BeautifulSoup(request.text, "html.parser")
-
+    #print(b)
     try:
-        article=b.find_all("div","weather__article_description-text")
-        temperature = b.find_all("div","table__temp")
-        wind=b.find_all("div","table__wind")
-        #print(wind)
+        article = b.find_all("div", "weather__article_description-text")
+        temperature = b.find_all("div", "table__temp")
+        image = b.find_all("div","table__time_img")
+        wind = b.find_all("div", "table__wind")
+        #print(image)
 
-        weather1 = temperature[0+zavtra].getText()
-        #print(weather1)
-        wind1=''
-        wind1+=str(wind[0+zavtra]).split(' ')[3][7:-5:1]+', '
-        wind1+=wind[0+zavtra].getText()+' м/с.'
+        weather1 = temperature[0 + zavtra].getText()
+
+        image1=image[0].getText()
+        image1_1=''
+        for i in image1:
+            if i != '\n':
+                image1_1 += i
+        image1 = image1_1
+        image1 = image1.split(', ')
+        cloud1 = im_text[image1[0]]
+        if len(image1) == 2:
+            rain1 = im_text_2[image1[1]]
+        else: rain1=''
+        #print(cloud1,rain1)
+
+        wind1 = ''
+        wind1 += str(wind[0 + zavtra]).split(' ')[3][7:-5:1] + ', '
+        wind1 += wind[0 + zavtra].getText() + ' м/с.'
         wind1 = wind1.split(' ')
         wind1 = wind1[1::]
         wind1[0] = wind1[0].split('\n')
         wind1[0] = ''.join(wind1[0][-1::])
         wind1 = ' '.join(wind1[:-1:])
-        wind1_1=''
+        wind1_1 = ''
         for i in wind1:
-            if i!='\n':
-                wind1_1+=i
+            if i != '\n':
+                wind1_1 += i
 
-        weather2 = temperature[2+zavtra].getText()
-        wind2=''
-        wind2+=str(wind[2+zavtra]).split(' ')[3][7:-5:1]+', '
-        wind2+=wind[2+zavtra].getText()+' м/с.'
+        weather2 = temperature[2 + zavtra].getText()
+
+        image2 = image[2].getText()
+        image2_1 = ''
+        for i in image2:
+            if i != '\n':
+                image2_1 += i
+        image2 = image2_1
+        image2 = image2.split(', ')
+        cloud2 = im_text[image2[0]]
+        if len(image2) == 2:
+            rain2 = im_text_2[image2[1]]
+        else:
+            rain2 = ''
+        #print(cloud2, rain2)
+
+        wind2 = ''
+        wind2 += str(wind[2 + zavtra]).split(' ')[3][7:-5:1] + ', '
+        wind2 += wind[2 + zavtra].getText() + ' м/с.'
         wind2 = wind2.split(' ')
         wind2 = wind2[1::]
         wind2[0] = wind2[0].split('\n')
         wind2[0] = ''.join(wind2[0][-1::])
         wind2 = ' '.join(wind2[:-1:])
-        wind2_1=''
+        wind2_1 = ''
         for i in wind2:
-            if i!='\n':
-                wind2_1+=i
+            if i != '\n':
+                wind2_1 += i
 
-        weather3 = temperature[4+zavtra].getText()
+        weather3 = temperature[4 + zavtra].getText()
+
+        image3 = image[4].getText()
+        image3_1 = ''
+        for i in image3:
+            if i != '\n':
+                image3_1 += i
+        image3 = image3_1
+        image3 = image3.split(', ')
+        cloud3 = im_text[image3[0]]
+        if len(image3) == 2:
+            rain3 = im_text_2[image3[1]]
+        else:
+            rain3 = ''
+        #print(cloud3, rain3)
+
         wind3 = ''
-        wind3 += str(wind[4+zavtra]).split(' ')[3][7:-5:1] + ', '
-        wind3 += wind[4+zavtra].getText() + ' м/с.'
+        wind3 += str(wind[4 + zavtra]).split(' ')[3][7:-5:1] + ', '
+        wind3 += wind[4 + zavtra].getText() + ' м/с.'
         wind3 = wind3.split(' ')
         wind3 = wind3[1::]
         wind3[0] = wind3[0].split('\n')
@@ -206,10 +256,25 @@ def wheather(city,zavtra,zavtra_1):
             if i != '\n':
                 wind3_1 += i
 
-        weather4 = temperature[6+zavtra].getText()
+        weather4 = temperature[6 + zavtra].getText()
+
+        image4 = image[6].getText()
+        image4_1 = ''
+        for i in image4:
+            if i != '\n':
+                image4_1 += i
+        image4 = image4_1
+        image4 = image4.split(', ')
+        cloud4 = im_text[image4[0]]
+        if len(image4) == 2:
+            rain4 = im_text_2[image4[1]]
+        else:
+            rain4 = ''
+        #print(cloud4, rain4)
+
         wind4 = ''
-        wind4 += str(wind[6+zavtra]).split(' ')[3][7:-5:1] + ', '
-        wind4 += wind[6+zavtra].getText() + ' м/с.'
+        wind4 += str(wind[6 + zavtra]).split(' ')[3][7:-5:1] + ', '
+        wind4 += wind[6 + zavtra].getText() + ' м/с.'
         wind4 = wind4.split(' ')
         wind4 = wind4[1::]
         wind4[0] = wind4[0].split('\n')
@@ -222,12 +287,12 @@ def wheather(city,zavtra,zavtra_1):
 
         result = ''
         if zavtra == 8:
-            result += "Погода на завтра в городе "+city.capitalize()+':\n\n'
-        result = result + ('Ночью : ' + weather1 + ', Ветер: ' + wind1_1+'.') + '\n'
-        result = result + ('Утром : ' + weather2 + ', Ветер: ' + wind2_1+'.') + '\n'
-        result = result + ('Днём : ' + weather3 + ', Ветер: ' + wind3_1+'.') + '\n'
-        result = result + ('Вечером : ' + weather4 + ', Ветер: ' + wind4_1+'.') + 2 * '\n'
-        result+=article[0+zavtra_1].getText()
+            result += "Погода на завтра в городе " + city.capitalize() + ':\n\n'
+        result = result + ('Ночью : ' + cloud1 + rain1 + ' ' + weather1 + ', Ветер: ' + wind1_1 + '.') + '\n'
+        result = result + ('Утром : ' + cloud2 + rain2 + ' ' + weather2 + ', Ветер: ' + wind2_1 + '.') + '\n'
+        result = result + ('Днём : ' + cloud3 + rain3 + ' ' + weather3 + ', Ветер: ' + wind3_1 + '.') + '\n'
+        result = result + ('Вечером : ' + cloud4 + rain4 + ' ' + weather4 + ', Ветер: ' + wind4_1 + '.') + 2 * '\n'
+        result += article[0 + zavtra_1].getText()
         return result
     except IndexError:
         return 'Такого города не найдено'
@@ -245,7 +310,7 @@ def mainfunc():
             if event.type == VkBotEventType.MESSAGE_NEW and event.obj.text:
 
                 # преобразование текста сообщения
-                kupi_slona=event.obj.text
+                kupi_slona = event.obj.text
                 event.obj.text = event.obj.text.lower();
                 evtxt = ''
                 for i in range(0, len(event.obj.text)):
@@ -263,45 +328,45 @@ def mainfunc():
                     event.obj.text = event.obj.text[29::]
                     flkv2 = True
 
-
-
-                #получение даты рождения, имени и фамилии
-                if event.from_chat and event.obj.from_id!=-183679552:
+                # получение даты рождения, имени и фамилии
+                if event.from_chat and event.obj.from_id != -183679552:
                     fio = requests.get("https://api.vk.com/method/users.get?user_ids=" + str(
                         event.obj.from_id) + "&fields=bdate, city&access_token=b78c719302827104f6346bd3b63df9edd8dee2ef58f84a4e1a4f108cb149fed5d2d53c795ae00ee69f419&v=5.92")
                     first_name = fio.text[14::].split(',')[1].split(':')[1][1:-1:]
                     last_name = fio.text[14::].split(',')[2].split(':')[1][1:-1:]
                     try:
-                        proverochka=fio.text[14::].split(',')[7].split(':')[1][1:-5:].lower()
-                        flagbddate=True
+                        proverochka = fio.text[14::].split(',')[7].split(':')[1][1:-5:].lower()
+                        flagbddate = True
                         bd_date = fio.text[14::].split(',')[5].split(':')[1][1:-1:]
                     except:
                         try:
-                            flagbddate=True
+                            flagbddate = True
                             bd_date = fio.text[14::].split(',')[5].split(':')[1][1:-4:]
                         except:
-                            flagbddate=False
-                            bd_date=None
+                            flagbddate = False
+                            bd_date = None
 
-                    #запись сообщения в лог файл
-                    s=open('logs_chat.txt','a')
-                    s.write(last_name + ' *_* ' + first_name + ' *_* ' + str(event.obj.from_id) + ' *_* ' + str(event.chat_id) + ' *_* ' + kupi_slona + '\n')
+                    # запись сообщения в лог файл
+                    s = open('logs_chat.txt', 'a')
+                    s.write(last_name + ' *_* ' + first_name + ' *_* ' + str(event.obj.from_id) + ' *_* ' + str(
+                        event.chat_id) + ' *_* ' + kupi_slona + '\n')
                     s.close()
 
-                    #получение текущего дня
+                    # получение текущего дня
                     if time.strftime("%d", time.localtime())[0] == '0':
                         den = time.strftime("%d", time.localtime())[1::]
                     else:
                         den = time.strftime("%d", time.localtime())
 
-                    #проверка на поздравление с др и поздравление
+                    # проверка на поздравление с др и поздравление
                     pozdrflag = False
                     pozdr = open('resurses/pozdravlenie.txt', 'r')
                     for i in pozdr:
                         if str(event.obj.from_id) == i[:-1:]:
                             pozdrflag = True
                     pozdr.close()
-                    if flagbddate==True and str(dict7[time.strftime("%B", time.localtime())]) == bd_date.split('.')[1] and den == \
+                    if flagbddate == True and str(dict7[time.strftime("%B", time.localtime())]) == bd_date.split('.')[
+                        1] and den == \
                             bd_date.split('.')[0] and pozdrflag is False:
                         pozdr = open('resurses/pozdravlenie.txt', 'a')
                         pozdr.write(str(event.obj.from_id) + '\n')
@@ -317,32 +382,35 @@ def mainfunc():
                             message="О, " + first_name + ", Поздравляю тебя с Днём Рождения! Моё железное сердце всегда радуется твоим сообщениям!"
                         )
 
-                    #флаг на обращение к конкретному пользователю, бот игнорирует, если True
+                    # флаг на обращение к конкретному пользователю, бот игнорирует, если True
                     flagobr = 0
                     for i in range(len(dict5)):
                         if event.obj.text.find(dict5[i]) != -1:
                             flagobr = 1
 
-                    #флаг на триггер к картинке "пить"
+                    # флаг на триггер к картинке "пить"
                     flag3 = 0
                     event1 = event.obj.text.split(' ')
                     for i in range(len(event1)):
                         for k in dict4:
                             if k == str(event1[i]):
-                                if event.obj.text.find('хочешь')!=-1 or event.obj.text.find('будем')!=-1 or event.obj.text.find('будешь')!=-1\
-                                        or event.obj.text.find('пошли')!=-1 or event.obj.text.find('где')!=-1 or event.obj.text.find('го')!=-1 \
-                                        or event.obj.text.find('погнали')!=-1 or event.obj.text.find('куда')!=-1 or event.obj.text.find('гоу')!=-1 and k=='есть':
+                                if event.obj.text.find('хочешь') != -1 or event.obj.text.find(
+                                        'будем') != -1 or event.obj.text.find('будешь') != -1 \
+                                        or event.obj.text.find('пошли') != -1 or event.obj.text.find(
+                                    'где') != -1 or event.obj.text.find('го') != -1 \
+                                        or event.obj.text.find('погнали') != -1 or event.obj.text.find(
+                                    'куда') != -1 or event.obj.text.find('гоу') != -1 and k == 'есть':
                                     flag3 = 1
                                     flag2 = k
                                 else:
-                                    if k!='есть':
+                                    if k != 'есть':
                                         flag3 = 1
                                         flag2 = k
 
-                    #флаг на матные  слова в тексте сообщения, подсчет их количества
+                    # флаг на матные  слова в тексте сообщения, подсчет их количества
                     flag1 = 0
                     kol_mat_in_text = 0
-                    sp_mat=[]
+                    sp_mat = []
                     event1 = event.obj.text.split(' ')
                     for i in range(len(event1)):
                         mat = open('resurses/matsp1.txt', mode='r')
@@ -353,7 +421,7 @@ def mainfunc():
                                 kol_mat_in_text += 1
                         mat.close()
 
-                    #флаг на фразу "пиздуй учиться"
+                    # флаг на фразу "пиздуй учиться"
                     flag10 = 0
                     event1 = event.obj.text.split(' ')
                     for i in range(len(event1)):
@@ -361,7 +429,7 @@ def mainfunc():
                                 event1[i]) == 'ботать':
                             flag10 = 1
 
-                    #флаг на фразу "сам такой"
+                    # флаг на фразу "сам такой"
                     flag = 0
                     event1 = event.obj.text.split(' ')
                     for i in range(len(dict2)):
@@ -370,11 +438,11 @@ def mainfunc():
                                 flag = 1
                                 flag2 = i
 
-                    #обработка мата в сообщении
+                    # обработка мата в сообщении
                     if flag1 == 1 and event.obj.text.find('!отъебись') == -1:
-                        for i in range(0,kol_mat_in_text):
+                        for i in range(0, kol_mat_in_text):
                             f1 = open('resurses/mat.txt', 'a')
-                            f1.write(str(event.obj.from_id)+'\n')
+                            f1.write(str(event.obj.from_id) + '\n')
                             f1.close()
                         f1 = open('resurses/mat.txt', 'r')
                         chmat = 0
@@ -385,7 +453,8 @@ def mainfunc():
                             vk.messages.send(
                                 user_id=event.obj.from_id,
                                 random_id=get_random_id(),
-                                message='Теперь у тебя ' + str(chmat) + ' грязных словечек в чате, я всё вижу, ' + first_name + "."
+                                message='Теперь у тебя ' + str(
+                                    chmat) + ' грязных словечек в чате, я всё вижу, ' + first_name + "."
                             )
                             f1.close()
                         except vk_api.exceptions.VkApiError:
@@ -397,9 +466,9 @@ def mainfunc():
                             )
                             f1.close()
 
-                    #обработка команды помощи
+                    # обработка команды помощи
                     elif (event.obj.text == '!help' or event.obj.text == "!помощь" or event.obj.text == "!хелп") \
-                            and (event.chat_id == 1) :
+                            and (event.chat_id == 1):
                         vk.messages.send(
                             chat_id=event.chat_id,
                             random_id=get_random_id(),
@@ -420,7 +489,7 @@ def mainfunc():
                                     'Остальное время я буду просто реагировать на некоторые контекстные фразы'
                         )
 
-                    #обработка клавиатур для чатов
+                    # обработка клавиатур для чатов
                     elif (event.obj.text == '!клавиатура1 вкл' or event.obj.text == '!клавиатура вкл'):
                         vk.messages.send(
                             chat_id=event.chat_id,
@@ -457,8 +526,8 @@ def mainfunc():
                             message='Клавиатура выключена'
                         )
 
-                    #обработка выключения бота на время (нужно доделать для разных чатов)
-                    elif event.obj.text == '!отъебись' and event.chat_id==1:
+                    # обработка выключения бота на время (нужно доделать для разных чатов)
+                    elif event.obj.text == '!отъебись' and event.chat_id == 1:
                         fltm1 = False
                         stoptime2 = time.time()
                         flagtime = True
@@ -469,7 +538,7 @@ def mainfunc():
                             message='Я ухожу, но обещаю вернуться!\n(На один час)'
                         )
 
-                    elif event.obj.text == '!отстань'  and event.chat_id==1 or event.obj.text == 'отстань' and flkv == True or event.obj.text == 'отстань' and flkv2 == True:
+                    elif event.obj.text == '!отстань' and event.chat_id == 1 or event.obj.text == 'отстань' and flkv == True or event.obj.text == 'отстань' and flkv2 == True:
                         fltm2 = False
                         stoptime1 = time.time()
                         flagtime = True
@@ -480,7 +549,7 @@ def mainfunc():
                             message='Я ухожу, но обещаю вернуться!\n(На 10 минут)'
                         )
 
-                    elif flagtime is True and event.obj.text == '!вернись'  and event.chat_id==1 or flagtime is True and event.obj.text == 'вернись' and flkv == True or flagtime is True and event.obj.text == 'вернись' and flkv2 == True:
+                    elif flagtime is True and event.obj.text == '!вернись' and event.chat_id == 1 or flagtime is True and event.obj.text == 'вернись' and flkv == True or flagtime is True and event.obj.text == 'вернись' and flkv2 == True:
                         flagtime = False
                         fltm1 = False
                         fltm2 = False
@@ -490,7 +559,7 @@ def mainfunc():
                             message='Я вернулся!'
                         )
 
-                    elif flagtime is False and event.obj.text == '!вернись'  and event.chat_id==1 or flagtime is False and event.obj.text == 'вернись' and flkv == True or flagtime is False and event.obj.text == 'вернись' and flkv2 == True:
+                    elif flagtime is False and event.obj.text == '!вернись' and event.chat_id == 1 or flagtime is False and event.obj.text == 'вернись' and flkv == True or flagtime is False and event.obj.text == 'вернись' and flkv2 == True:
                         flagtime = False
                         fltm1 = False
                         fltm2 = False
@@ -501,7 +570,6 @@ def mainfunc():
                         )
 
                     if fltm1 is True and flagtime is True and time.time() - stoptime1 >= 600:
-
                         flagtime = False
                         fltm1 = False
                         vk.messages.send(  # Отправляем собщение
@@ -528,40 +596,46 @@ def mainfunc():
                             message='Сам такой, ' + dict2[flag2] + ', ' + last_name
                         )
 
-                    #обработка срока армии Антона(нужно доделать прогресс бар)
+                    # обработка срока армии Антона(нужно доделать прогресс бар)
                     elif event.obj.text == '!антон':
                         aa = datetime.date.today()
-                        bb = datetime.date(2020,7,3)
-                        cc=bb-aa
-                        dd=datetime.date(2019,7,5)
-                        hh=aa-dd
-                        dateAntonfinish=(str(cc).split(',')[0].split(' ')[0])
-                        dateAntonstart=(str(hh).split(',')[0].split(' ')[0])
+                        bb = datetime.date(2020, 7, 3)
+                        cc = bb - aa
+                        dd = datetime.date(2019, 7, 5)
+                        hh = aa - dd
+                        dateAntonfinish = (str(cc).split(',')[0].split(' ')[0])
+                        dateAntonstart = (str(hh).split(',')[0].split(' ')[0])
 
                         def Antontime(dateAnton):
-                            dateAnton=str(dateAnton)
-                            if dateAnton[-2::]=='12' or dateAnton[-2::]=='11' or dateAnton[-2::]=='13' or dateAnton[-2::]=='14':
+                            dateAnton = str(dateAnton)
+                            if dateAnton[-2::] == '12' or dateAnton[-2::] == '11' or dateAnton[
+                                                                                     -2::] == '13' or dateAnton[
+                                                                                                      -2::] == '14':
                                 return 'дней.'
-                            if dateAnton[-1]=='1':
+                            if dateAnton[-1] == '1':
                                 return 'день.'
-                            if dateAnton[-1]=='2' or dateAnton[-1]=='3' or dateAnton[-1]=='4':
+                            if dateAnton[-1] == '2' or dateAnton[-1] == '3' or dateAnton[-1] == '4':
                                 return 'дня.'
-                            if  dateAnton[-1]=='0' or dateAnton[-1]=='5' or dateAnton[-1]=='6' or dateAnton[-1]=='7' or dateAnton[-1]=='8' or dateAnton[-1]=='9':
+                            if dateAnton[-1] == '0' or dateAnton[-1] == '5' or dateAnton[-1] == '6' or dateAnton[
+                                -1] == '7' or dateAnton[-1] == '8' or dateAnton[-1] == '9':
                                 return 'дней.'
+
                         percent = str(int(dateAntonstart) // 3.66)[:-2:]
                         progress_bar = ''
-                        for i in range(1,51):
-                            if i<=int(percent)//2:
+                        for i in range(1, 51):
+                            if i <= int(percent) // 2:
                                 progress_bar += '❙'
                             else:
                                 progress_bar += '❘'
                         vk.messages.send(  # Отправляем собщение
                             chat_id=event.chat_id,
                             random_id=get_random_id(),
-                            message='Антон вернётся к нам через ' + str(dateAntonfinish) + ' ' + Antontime(dateAntonfinish) + '\nОн уже служит ' + str(dateAntonstart) + ' ' + Antontime(dateAntonstart) + '\nУже прошло ' + str(percent) + '% Aрмии.'+'\n'+progress_bar
+                            message='Антон вернётся к нам через ' + str(dateAntonfinish) + ' ' + Antontime(
+                                dateAntonfinish) + '\nОн уже служит ' + str(dateAntonstart) + ' ' + Antontime(
+                                dateAntonstart) + '\nУже прошло ' + str(percent) + '% Aрмии.' + '\n' + progress_bar
                         )
 
-                    #обработка однословных команд бота
+                    # обработка однословных команд бота
                     elif event.obj.text == '!мысль' or event.obj.text == 'мысль' and flkv == True or event.obj.text == 'мысль' and flkv2 == True:
                         cit = random.randint(0, 1355)
                         for linenum, line in enumerate(open('resurses/quotes_clear.txt', 'r')):
@@ -601,7 +675,7 @@ def mainfunc():
                                 messagecit = (line.strip())
                         if messagecit[-1] == ',':
                             messagecit = messagecit[:-1:]
-                        keyboardtwtrr= VkKeyboard(one_time=False, inline=True)
+                        keyboardtwtrr = VkKeyboard(one_time=False, inline=True)
                         keyboardtwtrr.add_button('Цитата', color=VkKeyboardColor.PRIMARY)
                         vk.messages.send(  # Отправляем собщение
                             chat_id=event.chat_id,
@@ -610,7 +684,7 @@ def mainfunc():
                             message=str(messagecit)
                         )
 
-                        
+
                     elif event.obj.text == '!анекдот' or event.obj.text == 'анекдот' and flkv == True or event.obj.text == 'анекдот' and flkv2 == True:
 
                         anes = random.randint(0, 135500)
@@ -661,12 +735,12 @@ def mainfunc():
                                     for k in str(dism[j]):
                                         number_2 += smile[k]
                                     fio_1 = requests.get("https://api.vk.com/method/users.get?user_ids=" + str(j)[
-                                    :-1:] + "&fields=bdate&access_token=b78c719302827104f6346bd3b63df9edd8dee2ef58f84a4e1a4f108cb149fed5d2d53c795ae00ee69f419&v=5.92")
+                                                                                                           :-1:] + "&fields=bdate&access_token=b78c719302827104f6346bd3b63df9edd8dee2ef58f84a4e1a4f108cb149fed5d2d53c795ae00ee69f419&v=5.92")
                                     first_name_1 = fio_1.text[14::].split(',')[1].split(':')[1][1:-1:]
                                     last_name_1 = fio_1.text[14::].split(',')[2].split(':')[1][1:-1:]
                                     mat.append(first_name_1 + ' ' + last_name_1 + ': ' + str(number_2) + ' раз(а)\n')
-                        for i in range (0,len(mat)):
-                            mat[i] = str(i+1) + ") " + mat[i]
+                        for i in range(0, len(mat)):
+                            mat[i] = str(i + 1) + ") " + mat[i]
                         mat = ''.join(mat)
                         mat = "ТОП мата:\n\n" + mat
                         vk.messages.send(
@@ -682,7 +756,7 @@ def mainfunc():
                         vk.messages.send(
                             chat_id=event.chat_id,
                             random_id=get_random_id(),
-                            message="Сегодня пидор дня "+pidor_2
+                            message="Сегодня пидор дня " + pidor_2
                         )
 
                     elif event.obj.text == '!пидоры' and (event.chat_id == 1 or event.chat_id == 5):
@@ -706,9 +780,9 @@ def mainfunc():
                         pidors.close()
                         for i in spisok_chata:
                             if str(i) not in dism:
-                                dism[i]=0
+                                dism[i] = 0
                         pidors_1 = []
-                        kolp=[]
+                        kolp = []
                         for i in dism:
                             kolp.append(dism[i])
                         kolp.sort()
@@ -717,7 +791,7 @@ def mainfunc():
                         nstr = []
                         for i in kolp:
                             for j in dism:
-                                if j == '' or j=='\n':
+                                if j == '' or j == '\n':
                                     continue
                                 if str(dism[j]) == str(i) and j not in jstr and spisok_chata[int(j)] not in nstr:
                                     nstr.append(spisok_chata[int(j)])
@@ -725,13 +799,12 @@ def mainfunc():
                                     number_1 = ''
                                     for k in str(dism[j]):
                                         number_1 += smile[k]
-                                    pidors_1.append(spisok_chata[int(j)]+': ' + number_1 + ' раз(а)\n')
+                                    pidors_1.append(spisok_chata[int(j)] + ': ' + number_1 + ' раз(а)\n')
 
-                        for i in range (0,len(pidors_1)):
-                            pidors_1[i] = str(i+1) + ") " + pidors_1[i]
+                        for i in range(0, len(pidors_1)):
+                            pidors_1[i] = str(i + 1) + ") " + pidors_1[i]
                         pidors_1 = ''.join(pidors_1)
                         pidors_1 = "ТОП пидоров дня:\n\n" + pidors_1
-
 
                         vk.messages.send(
                             chat_id=event.chat_id,
@@ -740,11 +813,11 @@ def mainfunc():
                         )
 
                     elif event.obj.text == '!гороскоп' or event.obj.text == 'гороскоп' and flkv == True or event.obj.text == 'гороскоп' and flkv2 == True:
-                        if flagbddate==True:
+                        if flagbddate == True:
                             bd_date = bd_date.split('.')
                             zodiak = goroscop(bd_date)
-                            f=open('resurses/goroskop_files/'+zodiak+'.txt','r')
-                            goroskp=f.read()
+                            f = open('resurses/goroskop_files/' + zodiak + '.txt', 'r')
+                            goroskp = f.read()
                             f.close()
                             vk.messages.send(  # Отправляем собщение
                                 chat_id=event.chat_id,
@@ -774,10 +847,11 @@ def mainfunc():
 
                     elif event.obj.text.find('!погода на завтра в городе') != -1:
                         tommor = str(datetime.date.today()).split('-')
-                        tommor[-1]=str(int(tommor[-1])+1)
-                        tommor='-'.join(tommor)
-                        city = event.obj.text[27::]+'/'+tommor
-                        result = wheather(city,0,0)
+                        tommor[-1] = str(int(tommor[-1]) + 1)
+                        tommor = '-'.join(tommor)
+                        city = event.obj.text[27::] + '/' + tommor
+                        result = wheather(city, 0, 0)
+                        result += "Погода на завтра в городе " + city.capitalize() + ':\n\n'
                         vk.messages.send(  # Отправляем собщение
                             chat_id=event.chat_id,
                             random_id=get_random_id(),
@@ -789,7 +863,7 @@ def mainfunc():
                             tommor = str(datetime.date.today()).split('-')
                             tommor[-1] = str(int(tommor[-1]) + 1)
                             tommor = '-'.join(tommor)
-                            city = fio.text[14::].split(',')[7].split(':')[1][1:-5:].lower()+'/'+tommor
+                            city = fio.text[14::].split(',')[7].split(':')[1][1:-5:].lower() + '/' + tommor
                         except:
                             city = "москва"
                             vk.messages.send(  # Отправляем собщение
@@ -797,7 +871,8 @@ def mainfunc():
                                 random_id=get_random_id(),
                                 message="У Вас не указан город ВК, по умолчанию выставлена Москва"
                             )
-                        result = wheather(city,0,0)
+                        result = wheather(city, 0, 0)
+                        result += "Погода на завтра в городе " + city.capitalize() + ':\n\n'
                         vk.messages.send(  # Отправляем собщение
                             chat_id=event.chat_id,
                             random_id=get_random_id(),
@@ -806,7 +881,7 @@ def mainfunc():
 
                     elif event.obj.text.find('!погода в городе') != -1:
                         city = event.obj.text[17::]
-                        result = wheather(city,0,0)
+                        result = wheather(city, 0, 0)
                         vk.messages.send(  # Отправляем собщение
                             chat_id=event.chat_id,
                             random_id=get_random_id(),
@@ -824,7 +899,7 @@ def mainfunc():
                                 random_id=get_random_id(),
                                 message="У Вас не указан город ВК, по умолчанию выставлена Москва"
                             )
-                        result = wheather(city,0,0)
+                        result = wheather(city, 0, 0)
                         vk.messages.send(  # Отправляем собщение
                             chat_id=event.chat_id,
                             random_id=get_random_id(),
@@ -921,8 +996,6 @@ def mainfunc():
                             message='Сковорода!'
                         )
 
-
-
                     '''
                     else:
 
@@ -986,8 +1059,9 @@ def mainfunc():
             message='Возникла ошибка ' + str(err) + ' в главном цикле bot_herobot_chat'
         )
         mainfunc()
-mainfunc()
 
+
+mainfunc()
 
 '''
                     elif event.obj.text == 'бот время':
