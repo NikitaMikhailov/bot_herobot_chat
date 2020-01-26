@@ -24,7 +24,7 @@ dict8 = {'овен': 'aries', 'телец': 'taurus', 'близнецы': 'gemin
          'водолей': 'aquarius', 'рыбы': 'pisces'}
 im_text={'Переменная облачность':'⛅','Облачно с прояснениями':'⛅','Небольшая облачность':'⛅',
          'Сплошная облачность':'☁','Ясно':'☀'}
-im_text_2={'дождь':'💧','сильный дождь':'💧','мелкий дождь':'💧','снег':'❄','небольшой снег':'❄','сильный снег':'❄'}
+im_text_2={'дождь':'💧','снег':'❄'}
 kolresp = 0
 attachments = []
 chand = 0
@@ -181,7 +181,10 @@ def wheather(city, zavtra, zavtra_1):
         image1 = image1.split(', ')
         cloud1 = im_text[image1[0]]
         if len(image1) == 2:
-            rain1 = im_text_2[image1[1]]
+            if image1[1].find("снег") != -1:
+                rain1 = im_text_2["снег"]
+            if image1[1].find("дождь") != -1:
+                rain1 = im_text_2["дождь"]
         else: rain1=''
         #print(cloud1,rain1)
 
@@ -209,7 +212,10 @@ def wheather(city, zavtra, zavtra_1):
         image2 = image2.split(', ')
         cloud2 = im_text[image2[0]]
         if len(image2) == 2:
-            rain2 = im_text_2[image2[1]]
+            if image2[1].find("снег") != -1:
+                rain2 = im_text_2["снег"]
+            if image2[1].find("дождь") != -1:
+                rain2 = im_text_2["дождь"]
         else:
             rain2 = ''
         #print(cloud2, rain2)
@@ -238,7 +244,10 @@ def wheather(city, zavtra, zavtra_1):
         image3 = image3.split(', ')
         cloud3 = im_text[image3[0]]
         if len(image3) == 2:
-            rain3 = im_text_2[image3[1]]
+            if image3[1].find("снег") != -1:
+                rain3 = im_text_2["снег"]
+            if image3[1].find("дождь") != -1:
+                rain3 = im_text_2["дождь"]
         else:
             rain3 = ''
         #print(cloud3, rain3)
@@ -267,7 +276,10 @@ def wheather(city, zavtra, zavtra_1):
         image4 = image4.split(', ')
         cloud4 = im_text[image4[0]]
         if len(image4) == 2:
-            rain4 = im_text_2[image4[1]]
+            if image4[1].find("снег") != -1:
+                rain4 = im_text_2["снег"]
+            if image4[1].find("дождь") != -1:
+                rain4 = im_text_2["дождь"]
         else:
             rain4 = ''
         #print(cloud4, rain4)
