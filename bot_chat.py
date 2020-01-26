@@ -364,11 +364,13 @@ def mainfunc():
 
                     flag1 = 0
                     kol_mat_in_text = 0
+                    sp_mat=[]
                     event1 = event.obj.text.split(' ')
                     for i in range(len(event1)):
-                        mat = open('resurses/matsp1.txt', 'r')
+                        mat = open('resurses/matsp1.txt', mode='r')
                         for k in mat:
-                            if str(event1[i]) == k[:-1:]:
+                            if str(event1[i]) == k[:-1:] and (k[:-1:] not in sp_mat):
+                                sp_mat.append(k[:-1:])
                                 flag1 = 1
                                 kol_mat_in_text += 1
                         mat.close()
@@ -387,7 +389,6 @@ def mainfunc():
                             if event1[k] == dict2[i]:
                                 flag = 1
                                 flag2 = i
-
 
                     if flag1 == 1 and event.obj.text.find('!отъебись') == -1:
                         for i in range(0,kol_mat_in_text):
