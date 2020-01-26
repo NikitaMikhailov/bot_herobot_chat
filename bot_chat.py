@@ -300,10 +300,10 @@ def wheather(city, zavtra, zavtra_1):
         result = ''
         if zavtra == 8:
             result += "Погода на завтра в городе " + city.capitalize() + ':\n\n'
-        result = result + ('Ночью : ' + cloud1 + rain1 + ' ' + weather1 + ', Ветер: ' + wind1_1 + '.') + '\n'
-        result = result + ('Утром : ' + cloud2 + rain2 + ' ' + weather2 + ', Ветер: ' + wind2_1 + '.') + '\n'
-        result = result + ('Днём : ' + cloud3 + rain3 + ' ' + weather3 + ', Ветер: ' + wind3_1 + '.') + '\n'
-        result = result + ('Вечером : ' + cloud4 + rain4 + ' ' + weather4 + ', Ветер: ' + wind4_1 + '.') + 2 * '\n'
+        result = result + ('Ночью : ' + cloud1 + rain1 + ' ' + weather1 + ',\nВетер: ' + wind1_1 + '.') + '\n\n'
+        result = result + ('Утром : ' + cloud2 + rain2 + ' ' + weather2 + ',\nВетер: ' + wind2_1 + '.') + '\n\n'
+        result = result + ('Днём : ' + cloud3 + rain3 + ' ' + weather3 + ',\nВетер: ' + wind3_1 + '.') + '\n\n'
+        result = result + ('Вечером : ' + cloud4 + rain4 + ' ' + weather4 + ',\nВетер: ' + wind4_1 + '.') + 2 * '\n'
         result += article[0 + zavtra_1].getText()
         return result
     except IndexError:
