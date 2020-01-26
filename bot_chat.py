@@ -863,7 +863,7 @@ def mainfunc():
                         tommor = '-'.join(tommor)
                         city = event.obj.text[27::] + '/' + tommor
                         result = wheather(city, 0, 0)
-                        result = "Погода на завтра в городе " + city.capitalize() + ':\n\n' + result
+                        result = "Погода на завтра в городе " + city.capitalize().split('/')[0] + ':\n\n' + result
                         vk.messages.send(  # Отправляем собщение
                             chat_id=event.chat_id,
                             random_id=get_random_id(),
@@ -884,7 +884,7 @@ def mainfunc():
                                 message="У Вас не указан город ВК, по умолчанию выставлена Москва"
                             )
                         result = wheather(city, 0, 0)
-                        result = "Погода на завтра в городе " + city.capitalize() + ':\n\n' + result
+                        result = "Погода на завтра в городе " + city.capitalize().split('/')[0] + ':\n\n' + result
                         vk.messages.send(  # Отправляем собщение
                             chat_id=event.chat_id,
                             random_id=get_random_id(),
