@@ -234,21 +234,16 @@ def wheather(city,zavtra,zavtra_1):
 
 
 def mainfunc():
-
-    attachments = []
-    chand = 0
     flagtime = False
     fltm1 = False
     fltm2 = False
-    #day_time=time.strftime("%d", time.localtime())
     try:
         for event in longpoll.listen():
-            kolresp=0
             attachments = []
             flkv = False
             flkv2 = False
             if event.type == VkBotEventType.MESSAGE_NEW and event.obj.text:
-                #print(event.chat_id)
+
                 # преобразование текста сообщения
                 kupi_slona=event.obj.text
                 event.obj.text = event.obj.text.lower();
@@ -270,56 +265,36 @@ def mainfunc():
 
 
 
-
+                #получение даты рождения, имени и фамилии
                 if event.from_chat and event.obj.from_id!=-183679552:
                     fio = requests.get("https://api.vk.com/method/users.get?user_ids=" + str(
                         event.obj.from_id) + "&fields=bdate, city&access_token=b78c719302827104f6346bd3b63df9edd8dee2ef58f84a4e1a4f108cb149fed5d2d53c795ae00ee69f419&v=5.92")
                     first_name = fio.text[14::].split(',')[1].split(':')[1][1:-1:]
                     last_name = fio.text[14::].split(',')[2].split(':')[1][1:-1:]
-                    #print(fio.text[14::].split(',')[7].split(':')[1][1:-5:].lower())
-                    #print(fio.text)
                     try:
                         proverochka=fio.text[14::].split(',')[7].split(':')[1][1:-5:].lower()
                         flagbddate=True
                         bd_date = fio.text[14::].split(',')[5].split(':')[1][1:-1:]
-                        #print(bd_date)
                     except:
                         try:
                             flagbddate=True
                             bd_date = fio.text[14::].split(',')[5].split(':')[1][1:-4:]
-                            #print(bd_date)
                         except:
                             flagbddate=False
                             bd_date=None
-                    '''
-                    print(time.strftime("%d", time.localtime()),day_time)
 
-                    if day_time is None:
-                        day_time=time.strftime("%d", time.localtime())
-
-                    if time.strftime("%d", time.localtime())!=day_time:
-                        date_file=open('anton.txt','r')
-                        k = 0
-                        for line in date_file:
-                            if k == 0:
-                                date_anton = int(line[0]) - 1
-                            k += 1
-                        date_file.close()
-                        date_file=open('anton.txt','w')
-                        date_file.write(date_anton)
-                        date_file.close()
-                        day_time=time.strftime("%d", time.localtime())
-                    '''
+                    #запись сообщения в лог файл
                     s=open('logs_chat.txt','a')
                     s.write(last_name + ' *_* ' + first_name + ' *_* ' + str(event.obj.from_id) + ' *_* ' + str(event.chat_id) + ' *_* ' + kupi_slona + '\n')
                     s.close()
 
+                    #получение текущего дня
                     if time.strftime("%d", time.localtime())[0] == '0':
                         den = time.strftime("%d", time.localtime())[1::]
                     else:
                         den = time.strftime("%d", time.localtime())
-                    # print(den,bd_date.split('.')[0])
 
+                    #проверка на поздравление с др и поздравление
                     pozdrflag = False
                     pozdr = open('resurses/pozdravlenie.txt', 'r')
                     for i in pozdr:
@@ -342,11 +317,13 @@ def mainfunc():
                             message="О, " + first_name + ", Поздравляю тебя с Днём Рождения! Моё железное сердце всегда радуется твоим сообщениям!"
                         )
 
+                    #флаг на обращение к конкретному пользователю, бот игнорирует, если True
                     flagobr = 0
                     for i in range(len(dict5)):
                         if event.obj.text.find(dict5[i]) != -1:
                             flagobr = 1
 
+                    #флаг на триггер к картинке "пить"
                     flag3 = 0
                     event1 = event.obj.text.split(' ')
                     for i in range(len(event1)):
@@ -362,6 +339,7 @@ def mainfunc():
                                         flag3 = 1
                                         flag2 = k
 
+                    #флаг на матные  слова в тексте сообщения, подсчет их количества
                     flag1 = 0
                     kol_mat_in_text = 0
                     sp_mat=[]
@@ -375,6 +353,7 @@ def mainfunc():
                                 kol_mat_in_text += 1
                         mat.close()
 
+                    #флаг на фразу "пиздуй учиться"
                     flag10 = 0
                     event1 = event.obj.text.split(' ')
                     for i in range(len(event1)):
@@ -382,6 +361,7 @@ def mainfunc():
                                 event1[i]) == 'ботать':
                             flag10 = 1
 
+                    #флаг на фразу "сам такой"
                     flag = 0
                     event1 = event.obj.text.split(' ')
                     for i in range(len(dict2)):
@@ -390,6 +370,7 @@ def mainfunc():
                                 flag = 1
                                 flag2 = i
 
+                    #обработка мата в сообщении
                     if flag1 == 1 and event.obj.text.find('!отъебись') == -1:
                         for i in range(0,kol_mat_in_text):
                             f1 = open('resurses/mat.txt', 'a')
@@ -416,6 +397,7 @@ def mainfunc():
                             )
                             f1.close()
 
+                    #обработка команды помощи
                     elif (event.obj.text == '!help' or event.obj.text == "!помощь" or event.obj.text == "!хелп") \
                             and (event.chat_id == 1) :
                         vk.messages.send(
@@ -427,6 +409,18 @@ def mainfunc():
                                     '12) !пидор дня\n13) !пидоры\n14) !отстань, !отъебись, !вернись\n'
                                     'Остальное время я буду просто реагировать на некоторые контекстные фразы'
                         )
+                    elif (event.obj.text == '!help' or event.obj.text == "!помощь" or event.obj.text == "!хелп") \
+                            and (event.chat_id != 1):
+                        vk.messages.send(
+                            chat_id=event.chat_id,
+                            random_id=get_random_id(),
+                            message='Привет! В Беседах мне доступны следующие функции:\n1) !погода\n2) !погода в городе ...\n'
+                                    '3) !погода на завтра в городе ...\n4) !погода на завтра\n5) !кубик ...\n6) !гороскоп\n'
+                                    '7) !анекдот\n8) !цитата\n9) !факт\n10) !мысль\n11) купи слона\n'
+                                    'Остальное время я буду просто реагировать на некоторые контекстные фразы'
+                        )
+
+                    #обработка клавиатур для чатов
                     elif (event.obj.text == '!клавиатура1 вкл' or event.obj.text == '!клавиатура вкл'):
                         vk.messages.send(
                             chat_id=event.chat_id,
@@ -463,18 +457,7 @@ def mainfunc():
                             message='Клавиатура выключена'
                         )
 
-
-                    elif (event.obj.text == '!help' or event.obj.text == "!помощь" or event.obj.text == "!хелп") \
-                            and (event.chat_id != 1) :
-                        vk.messages.send(
-                            chat_id=event.chat_id,
-                            random_id=get_random_id(),
-                            message='Привет! В Беседах мне доступны следующие функции:\n1) !погода\n2) !погода в городе ...\n'
-                                    '3) !погода на завтра в городе ...\n4) !погода на завтра\n5) !кубик ...\n6) !гороскоп\n'
-                                    '7) !анекдот\n8) !цитата\n9) !факт\n10) !мысль\n11) купи слона\n'
-                                    'Остальное время я буду просто реагировать на некоторые контекстные фразы'
-                        )
-
+                    #обработка выключения бота на время (нужно доделать для разных чатов)
                     elif event.obj.text == '!отъебись' and event.chat_id==1:
                         fltm1 = False
                         stoptime2 = time.time()
@@ -545,7 +528,7 @@ def mainfunc():
                             message='Сам такой, ' + dict2[flag2] + ', ' + last_name
                         )
 
-
+                    #обработка срока армии Антона(нужно доделать прогресс бар)
                     elif event.obj.text == '!антон':
                         aa = datetime.date.today()
                         bb = datetime.date(2020,7,3)
@@ -578,6 +561,7 @@ def mainfunc():
                             message='Антон вернётся к нам через ' + str(dateAntonfinish) + ' ' + Antontime(dateAntonfinish) + '\nОн уже служит ' + str(dateAntonstart) + ' ' + Antontime(dateAntonstart) + '\nУже прошло ' + str(percent) + '% Aрмии.'+'\n'+progress_bar
                         )
 
+                    #обработка однословных команд бота
                     elif event.obj.text == '!мысль' or event.obj.text == 'мысль' and flkv == True or event.obj.text == 'мысль' and flkv2 == True:
                         cit = random.randint(0, 1355)
                         for linenum, line in enumerate(open('resurses/quotes_clear.txt', 'r')):
@@ -625,6 +609,24 @@ def mainfunc():
                             keyboard=keyboardtwtrr.get_keyboard(),
                             message=str(messagecit)
                         )
+
+                        
+                    elif event.obj.text == '!анекдот' or event.obj.text == 'анекдот' and flkv == True or event.obj.text == 'анекдот' and flkv2 == True:
+
+                        anes = random.randint(0, 135500)
+                        for linenum, line in enumerate(open('resurses/anec.txt', 'r')):
+                            if linenum == anes:
+                                anecdot = (line.strip()).replace('#', '\n')
+
+                        keyboardanec = VkKeyboard(one_time=False, inline=True)
+                        keyboardanec.add_button('Анекдот', color=VkKeyboardColor.PRIMARY)
+                        vk.messages.send(  # Отправляем собщение
+                            chat_id=event.chat_id,
+                            random_id=get_random_id(),
+                            keyboard=keyboardanec.get_keyboard(),
+                            message=anecdot
+                        )
+
                     elif event.obj.text == '!обнови гороскоп' and event.obj.from_id == 195310233:
                         goroscop1()
                         vk.messages.send(
@@ -632,6 +634,7 @@ def mainfunc():
                             random_id=get_random_id(),
                             message='обновил'
                         )
+
                     elif event.obj.text == '!маты' and event.obj.from_id == 195310233:
                         f = open('resurses/mat.txt', 'r')
                         dism = {}
@@ -755,21 +758,6 @@ def mainfunc():
                                 message='У тебя нет даты Рождения ВК'
                             )
 
-                    elif event.obj.text == '!анекдот' or event.obj.text == 'анекдот' and flkv == True or event.obj.text == 'анекдот' and flkv2 == True:
-
-                        anes = random.randint(0, 135500)
-                        for linenum, line in enumerate(open('resurses/anec.txt', 'r')):
-                            if linenum == anes:
-                                anecdot = (line.strip()).replace('#', '\n')
-
-                        keyboardanec= VkKeyboard(one_time=False, inline=True)
-                        keyboardanec.add_button('Анекдот', color=VkKeyboardColor.PRIMARY)
-                        vk.messages.send(  # Отправляем собщение
-                            chat_id=event.chat_id,
-                            random_id=get_random_id(),
-                            keyboard=keyboardanec.get_keyboard(),
-                            message=anecdot
-                        )
 
                     elif flag3 == 1 and flagobr == 0 and flagtime != True:
                         image_url = 'https://pp.userapi.com/c851020/v851020736/cb17f/BgYwz2bShuc.jpg'
