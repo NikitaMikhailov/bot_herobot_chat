@@ -363,12 +363,14 @@ def mainfunc():
                                         flag2 = k
 
                     flag1 = 0
+                    kol_mat_in_text = 0
                     event1 = event.obj.text.split(' ')
                     for i in range(len(event1)):
                         mat = open('resurses/matsp1.txt', 'r')
                         for k in mat:
                             if str(event1[i]) == k[:-1:]:
                                 flag1 = 1
+                                kol_mat_in_text += 1
                         mat.close()
 
                     flag10 = 0
@@ -388,9 +390,10 @@ def mainfunc():
 
 
                     if flag1 == 1 and event.obj.text.find('!отъебись') == -1:
-                        f1 = open('resurses/mat.txt', 'a')
-                        f1.write(str(event.obj.from_id)+'\n')
-                        f1.close()
+                        for i in range(0,kol_mat_in_text):
+                            f1 = open('resurses/mat.txt', 'a')
+                            f1.write(str(event.obj.from_id)+'\n')
+                            f1.close()
                         f1 = open('resurses/mat.txt', 'r')
                         chmat = 0
                         for line in f1:
@@ -400,7 +403,7 @@ def mainfunc():
                             vk.messages.send(
                                 user_id=event.obj.from_id,
                                 random_id=get_random_id(),
-                                message='Это твоё ' + str(chmat) + ' грязное словечко в чате, я всё вижу, ' + first_name
+                                message='Теперь у тебя ' + str(chmat) + ' грязных словечек в чате, я всё вижу, ' + first_name + "."
                             )
                             f1.close()
                         except vk_api.exceptions.VkApiError:
