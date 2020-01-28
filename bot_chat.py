@@ -870,7 +870,8 @@ def mainfunc():
                             message=result
                         )
 
-                    elif event.obj.text.find('!погода на завтра') != -1:
+                    elif event.obj.text.find('!погода на завтра') != -1  or event.obj.text.find(
+                            'погода на завтра') != -1 and flkv == True or event.obj.text.find('погода на завтра') != -1 and flkv2 == True:
                         try:
                             tommor = str(datetime.date.today()).split('-')
                             tommor[-1] = str(int(tommor[-1]) + 1)
@@ -911,10 +912,13 @@ def mainfunc():
                                 random_id=get_random_id(),
                                 message="У Вас не указан город ВК, по умолчанию выставлена Москва"
                             )
+                        keyboardweather = VkKeyboard(one_time=False, inline=True)
+                        keyboardweather.add_button('Погода на завтра', color=VkKeyboardColor.PRIMARY)
                         result = wheather(city, 0, 0)
                         vk.messages.send(  # Отправляем собщение
                             chat_id=event.chat_id,
                             random_id=get_random_id(),
+                            keyboard=keyboardweather.get_keyboard(),
                             message=result
                         )
 
