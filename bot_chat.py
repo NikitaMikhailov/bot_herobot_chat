@@ -479,7 +479,8 @@ def mainfunc():
                             f1.close()
 
                     # обработка команды помощи
-                    elif (event.obj.text == '!help' or event.obj.text == "!помощь" or event.obj.text == "!хелп") \
+                    elif (event.obj.text == '!help' or event.obj.text == "!помощь" or event.obj.text == "!хелп" or
+                          event.obj.text == '! help' or event.obj.text == "! помощь" or event.obj.text == "! хелп") \
                             and (event.chat_id == 1):
                         vk.messages.send(
                             chat_id=event.chat_id,
@@ -490,7 +491,8 @@ def mainfunc():
                                     '12) !пидор дня\n13) !пидоры\n14) !отстань, !отъебись, !вернись\n'
                                     'Остальное время я буду просто реагировать на некоторые контекстные фразы'
                         )
-                    elif (event.obj.text == '!help' or event.obj.text == "!помощь" or event.obj.text == "!хелп") \
+                    elif (event.obj.text == '!help' or event.obj.text == "!помощь" or event.obj.text == "!хелп" or
+                          event.obj.text == '! help' or event.obj.text == "! помощь" or event.obj.text == "! хелп") \
                             and (event.chat_id != 1):
                         vk.messages.send(
                             chat_id=event.chat_id,
@@ -502,21 +504,22 @@ def mainfunc():
                         )
 
                     # обработка клавиатур для чатов
-                    elif (event.obj.text == '!клавиатура1 вкл' or event.obj.text == '!клавиатура вкл'):
+                    elif (event.obj.text == '!клавиатура1 вкл' or event.obj.text == '!клавиатура вкл' or
+                          event.obj.text == '! клавиатура1 вкл' or event.obj.text == '! клавиатура вкл'):
                         vk.messages.send(
                             chat_id=event.chat_id,
                             random_id=get_random_id(),
                             keyboard=keyboard1.get_keyboard(),
                             message='Клавиатура тип 1 включена'
                         )
-                    elif (event.obj.text == '!клавиатура2 вкл'):
+                    elif (event.obj.text == '!клавиатура2 вкл' or event.obj.text == '! клавиатура2 вкл'):
                         vk.messages.send(
                             chat_id=event.chat_id,
                             random_id=get_random_id(),
                             keyboard=keyboard2.get_keyboard(),
                             message='Клавиатура тип 2 включена'
                         )
-                    elif (event.obj.text == '!клавиатура3 вкл'):
+                    elif (event.obj.text == '!клавиатура3 вкл' or event.obj.text == '! клавиатура3 вкл'):
                         if event.chat_id == 1:
                             vk.messages.send(
                                 chat_id=event.chat_id,
@@ -530,7 +533,7 @@ def mainfunc():
                                 random_id=get_random_id(),
                                 message='Данный тип клавиатуры не доступен в этом чате'
                             )
-                    elif (event.obj.text == '!клавиатура выкл'):
+                    elif (event.obj.text == '!клавиатура выкл' or event.obj.text == '! клавиатура выкл'):
                         vk.messages.send(
                             chat_id=event.chat_id,
                             random_id=get_random_id(),
@@ -539,7 +542,7 @@ def mainfunc():
                         )
 
                     # обработка выключения бота на время (нужно доделать для разных чатов)
-                    elif event.obj.text == '!отъебись' and event.chat_id == 1:
+                    elif (event.obj.text == '!отъебись' or event.obj.text == '! отъебись') and event.chat_id == 1:
                         fltm1 = False
                         stoptime2 = time.time()
                         flagtime = True
@@ -550,7 +553,8 @@ def mainfunc():
                             message='Я ухожу, но обещаю вернуться!\n(На один час)'
                         )
 
-                    elif event.obj.text == '!отстань' and event.chat_id == 1 or event.obj.text == 'отстань' and flkv == True or event.obj.text == 'отстань' and flkv2 == True:
+                    elif (event.obj.text == '!отстань' or event.obj.text == '! отстань') and event.chat_id == 1 or\
+                            event.obj.text == 'отстань' and flkv == True or event.obj.text == 'отстань' and flkv2 == True:
                         fltm2 = False
                         stoptime1 = time.time()
                         flagtime = True
@@ -561,7 +565,9 @@ def mainfunc():
                             message='Я ухожу, но обещаю вернуться!\n(На 10 минут)'
                         )
 
-                    elif flagtime is True and event.obj.text == '!вернись' and event.chat_id == 1 or flagtime is True and event.obj.text == 'вернись' and flkv == True or flagtime is True and event.obj.text == 'вернись' and flkv2 == True:
+                    elif flagtime is True and (event.obj.text == '!вернись' or event.obj.text == '! вернись') and\
+                            event.chat_id == 1 or flagtime is True and event.obj.text == 'вернись' and flkv == True or\
+                            flagtime is True and event.obj.text == 'вернись' and flkv2 == True:
                         flagtime = False
                         fltm1 = False
                         fltm2 = False
@@ -571,7 +577,9 @@ def mainfunc():
                             message='Я вернулся!'
                         )
 
-                    elif flagtime is False and event.obj.text == '!вернись' and event.chat_id == 1 or flagtime is False and event.obj.text == 'вернись' and flkv == True or flagtime is False and event.obj.text == 'вернись' and flkv2 == True:
+                    elif flagtime is False and (event.obj.text == '!вернись' or event.obj.text == '! вернись') and \
+                            event.chat_id == 1 or flagtime is False and event.obj.text == 'вернись' and flkv == True or \
+                            flagtime is False and event.obj.text == 'вернись' and flkv2 == True:
                         flagtime = False
                         fltm1 = False
                         fltm2 = False
@@ -609,7 +617,7 @@ def mainfunc():
                         )
 
                     # обработка срока армии Антона(нужно доделать прогресс бар)
-                    elif event.obj.text == '!антон':
+                    elif event.obj.text == '!антон' or event.obj.text == '! антон':
                         aa = datetime.date.today()
                         bb = datetime.date(2020, 7, 3)
                         cc = bb - aa
@@ -648,7 +656,8 @@ def mainfunc():
                         )
 
                     # обработка однословных команд бота
-                    elif event.obj.text == '!мысль' or event.obj.text == 'мысль' and flkv == True or event.obj.text == 'мысль' and flkv2 == True:
+                    elif event.obj.text == '!мысль' or event.obj.text == '! мысль' or\
+                            event.obj.text == 'мысль' and flkv == True or event.obj.text == 'мысль' and flkv2 == True:
                         cit = random.randint(0, 1355)
                         for linenum, line in enumerate(open('resurses/quotes_clear.txt', 'r')):
                             if linenum == cit:
@@ -664,7 +673,8 @@ def mainfunc():
                             message=str(messagecit)
                         )
 
-                    elif event.obj.text == '!факт' or event.obj.text == 'факт' and flkv == True or event.obj.text == 'факт' and flkv2 == True:
+                    elif event.obj.text == '!факт' or event.obj.text == '! факт' or event.obj.text == 'факт' and\
+                            flkv == True or event.obj.text == 'факт' and flkv2 == True:
                         cit = random.randint(0, 764)
                         for linenum, line in enumerate(open('resurses/facts_clear.txt', 'r')):
                             if linenum == cit:
@@ -680,7 +690,8 @@ def mainfunc():
                             message=str(messagecit)
                         )
 
-                    elif event.obj.text == '!цитата' or event.obj.text == 'цитата' and flkv == True or event.obj.text == 'цитата' and flkv2 == True:
+                    elif event.obj.text == '!цитата' or event.obj.text == '! цитата' or event.obj.text == 'цитата' and\
+                            flkv == True or event.obj.text == 'цитата' and flkv2 == True:
                         cit = random.randint(0, 1391)
                         for linenum, line in enumerate(open('resurses/twtrr.txt', 'r')):
                             if linenum == cit:
@@ -697,7 +708,8 @@ def mainfunc():
                         )
 
 
-                    elif event.obj.text == '!анекдот' or event.obj.text == 'анекдот' and flkv == True or event.obj.text == 'анекдот' and flkv2 == True:
+                    elif event.obj.text == '!анекдот' or event.obj.text == '! анекдот' or event.obj.text == 'анекдот' and\
+                            flkv == True or event.obj.text == 'анекдот' and flkv2 == True:
 
                         anes = random.randint(0, 135500)
                         for linenum, line in enumerate(open('resurses/anec.txt', 'r')):
@@ -713,7 +725,7 @@ def mainfunc():
                             message=anecdot
                         )
 
-                    elif event.obj.text == '!обнови гороскоп' and event.obj.from_id == 195310233:
+                    elif (event.obj.text == '!обнови гороскоп' or event.obj.text == '! обнови гороскоп') and event.obj.from_id == 195310233:
                         goroscop1()
                         vk.messages.send(
                             chat_id=event.chat_id,
@@ -721,7 +733,7 @@ def mainfunc():
                             message='обновил'
                         )
 
-                    elif event.obj.text == '!маты' and event.obj.from_id == 195310233:
+                    elif (event.obj.text == '!маты' or event.obj.text == '! маты') and event.obj.from_id == 195310233:
                         f = open('resurses/mat.txt', 'r')
                         dism = {}
                         for line in f:
@@ -761,7 +773,7 @@ def mainfunc():
                             message=mat
                         )
 
-                    elif event.obj.text == '!пидор дня' and (event.chat_id == 1 or event.chat_id == 5):
+                    elif (event.obj.text == '!пидор дня' or event.obj.text == '! пидор дня') and (event.chat_id == 1 or event.chat_id == 5):
                         f1 = open('resurses/pidor_today.txt', 'r')
                         pidor_2 = f1.read()
                         f1.close()
@@ -771,7 +783,7 @@ def mainfunc():
                             message="Сегодня пидор дня " + pidor_2
                         )
 
-                    elif event.obj.text == '!пидоры' and (event.chat_id == 1 or event.chat_id == 5):
+                    elif (event.obj.text == '!пидоры' or event.obj.text == '! пидоры') and (event.chat_id == 1 or event.chat_id == 5):
                         spisok_chata = {195310233: "Никита Михайлов",
                                         38375746: "Антон Фокин",
                                         120727528: "Ольга Меркулова",
@@ -824,7 +836,7 @@ def mainfunc():
                             message=pidors_1
                         )
 
-                    elif event.obj.text == '!гороскоп' or event.obj.text == 'гороскоп' and flkv == True or event.obj.text == 'гороскоп' and flkv2 == True:
+                    elif event.obj.text == '!гороскоп' or event.obj.text == '! гороскоп' or event.obj.text == 'гороскоп' and flkv == True or event.obj.text == 'гороскоп' and flkv2 == True:
                         if flagbddate == True:
                             bd_date = bd_date.split('.')
                             zodiak = goroscop(bd_date)
@@ -870,7 +882,7 @@ def mainfunc():
                             message=result
                         )
 
-                    elif event.obj.text.find('!погода на завтра') != -1  or event.obj.text.find(
+                    elif event.obj.text.find('!погода на завтра') != -1 or event.obj.text.find('! погода на завтра') != -1 or event.obj.text.find(
                             'погода на завтра') != -1 and flkv == True or event.obj.text.find('погода на завтра') != -1 and flkv2 == True:
                         try:
                             tommor = str(datetime.date.today()).split('-')
@@ -901,7 +913,7 @@ def mainfunc():
                             message=result
                         )
 
-                    elif event.obj.text.find('!погода') != -1 or event.obj.text.find(
+                    elif event.obj.text.find('!погода') != -1 or event.obj.text.find('! погода') != -1 or event.obj.text.find(
                             'погода') != -1 and flkv == True or event.obj.text.find('погода') != -1 and flkv2 == True:
                         try:
                             city = fio.text[14::].split(',')[7].split(':')[1][1:-5:].lower()
