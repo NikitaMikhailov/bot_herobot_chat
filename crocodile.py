@@ -29,3 +29,4 @@ for event in longpoll.listen():
         if event.obj.text == '!крокодил' or event.obj.text == '! крокодил':
 
 
+

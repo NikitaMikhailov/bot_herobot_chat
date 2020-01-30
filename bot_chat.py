@@ -427,7 +427,7 @@ def mainfunc():
                     for i in range(len(event1)):
                         mat = open('resurses/matsp1.txt', mode='r')
                         for k in mat:
-                            if str(event1[i]) == k[:-1:] and (k[:-1:] not in sp_mat) and event1[i] != '! пидоры' and event1[i] != '! пидор дня':
+                            if str(event1[i]) == k[:-1:] and (k[:-1:] not in sp_mat):
                                 sp_mat.append(k[:-1:])
                                 flag1 = 1
                                 kol_mat_in_text += 1
@@ -451,7 +451,8 @@ def mainfunc():
                                 flag2 = i
 
                     # обработка мата в сообщении
-                    if flag1 == 1 and event.obj.text.find('!отъебись') == -1:
+                    if flag1 == 1 and event.obj.text.find('!отъебись') == -1 and event.obj.text.find('! пидоры') == -1 \
+                            and event.obj.text.find('! пидор дня') == -1:
                         for i in range(0, kol_mat_in_text):
                             f1 = open('resurses/mat.txt', 'a')
                             f1.write(str(event.obj.from_id) + '\n')
