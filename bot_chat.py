@@ -427,7 +427,7 @@ def mainfunc():
                     for i in range(len(event1)):
                         mat = open('resurses/matsp1.txt', mode='r')
                         for k in mat:
-                            if str(event1[i]) == k[:-1:] and (k[:-1:] not in sp_mat):
+                            if str(event1[i]) == k[:-1:] and (k[:-1:] not in sp_mat) and event1[i] != '! пидоры' and event1[i] != '! пидор дня':
                                 sp_mat.append(k[:-1:])
                                 flag1 = 1
                                 kol_mat_in_text += 1
