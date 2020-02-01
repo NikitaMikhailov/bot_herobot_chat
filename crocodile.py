@@ -31,7 +31,7 @@ def sent_message_ls(text, user_id, keyboard):
     )
 
 def vubor_slova():
-    cit = random.randint(0, 299)
+    cit = random.randint(0, 402)
     for linenum, line in enumerate(open("/root/bot_herobot_chat/resurses/crocodile_files/crocodile_hard1.txt", mode="r")):
         if linenum == cit:
             messagecit = (line.strip())
