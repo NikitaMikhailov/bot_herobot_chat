@@ -894,6 +894,8 @@ def mainfunc():
                         try:
                             tommor = str(datetime.date.today()).split('-')
                             tommor[-1] = str(int(tommor[-1]) + 1)
+                            if len(str(int(tommor[-1]))) == 1:
+                                tommor[-1] = "0" + str(int(tommor[-1]))
                             tommor = '-'.join(tommor)
                             city = fio.text[14::].split(',')[7].split(':')[1][1:-5:].lower() + '/' + tommor
                         except:
