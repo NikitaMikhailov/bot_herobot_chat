@@ -740,7 +740,7 @@ def mainfunc():
 
 
                     elif (event.obj.text == '!крокодил стата' or event.obj.text == '! крокодил стата'):
-                        f = open('resurses/crocodile_files/stat.txt', 'r')
+                        f = open('/root/bot_herobot_chat/resurses/crocodile_files/stat.txt', 'r')
                         dism = {}
                         for line in f:
                             if line in dism:
