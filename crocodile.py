@@ -32,7 +32,7 @@ def sent_message_ls(text, user_id, keyboard):
 
 def vubor_slova():
     cit = random.randint(0, 299)
-    for linenum, line in enumerate(open("/root/bot_herobot_chat/resurses/crocodile_files/crocodile_hard.txt", mode="r")):
+    for linenum, line in enumerate(open("/root/bot_herobot_chat/resurses/crocodile_files/crocodile_hard1.txt", mode="r")):
         if linenum == cit:
             messagecit = (line.strip())
     messagecit = messagecit.split("***")
@@ -42,11 +42,17 @@ def vubor_slova():
 
 '''
 f=open("resurses/crocodile_files/crocodile_hard.txt",mode="r")
+f1=open("resurses/crocodile_files/crocodile_hard1.txt",mode="w", encoding="utf-8")
+print(f.encoding)
+print(f1.encoding)
 k=0
 for line in f:
     k+=1
-    print(line.split("***"))
+    f1.write(line)
+    #print(line.split("***"))
 print(k)
+f.close()
+f1.close()
 '''
 #пустая клавиатура keyboard=keyboard1.get_empty_keyboard()
 
@@ -60,9 +66,11 @@ igra_okonchena = False
 igra_nachata = False
 
 '''
-f=open("resurses/crocodile_files/stat.txt", "w")
+f=open("resurses/crocodile_files/stat.txt", mode="w", encoding="utf-8")
+print(f.encoding)
 f.close()
 '''
+
 keyboardemh = VkKeyboard(one_time=False, inline=True)
 
 
