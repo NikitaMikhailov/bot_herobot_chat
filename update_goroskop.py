@@ -18,7 +18,7 @@ def goroscop1():
         #print(f.text)
         text_gor=(bs4.BeautifulSoup(f.text,"html.parser").find('div', 'col-12'))
         print(str(str(text_gor).split('\n')[2]).lstrip())
-        filegor=open('resurses/goroskop_files/'+spisok_znakov[i]+'.txt','w')  #/root/bot_herobot_chat
+        filegor=open('/root/bot_herobot_chat/resurses/goroskop_files/'+spisok_znakov[i]+'.txt','w')  #/root/bot_herobot_chat
         filegor.write(str(str(text_gor).split('\n')[2]).lstrip())
         filegor.close()
         
