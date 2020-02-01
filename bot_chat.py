@@ -90,7 +90,7 @@ def goroscop1():
             "http://astroscope.ru/horoskop/ejednevniy_goroskop/" + spisok_znakov[i] + ".html")  # .text,"html.parser"
         f.encoding = 'utf-8'
         text_gor = (bs4.BeautifulSoup(f.text, "html.parser").find('div', 'col-12'))
-        print(str(str(text_gor).split('\n')[2]).lstrip())
+        #print(str(str(text_gor).split('\n')[2]).lstrip())
         filegor = open('/root/bot_herobot_chat/resurses/goroskop_files/' + spisok_znakov[i] + '.txt', 'w')  # /root/bot_herobot_chat
         filegor.write(str(str(text_gor).split('\n')[2]).lstrip())
         filegor.close()
@@ -876,8 +876,11 @@ def mainfunc():
                     elif event.obj.text.find('!погода на завтра в городе') != -1:
                         tommor = str(datetime.date.today()).split('-')
                         tommor[-1] = str(int(tommor[-1]) + 1)
+                        if len(str(int(tommor[-1]))) == 1:
+                            tommor[-1] = "0" + str(int(tommor[-1]))
                         tommor = '-'.join(tommor)
                         city = event.obj.text[27::] + '/' + tommor
+                        print(city)
                         result = wheather(city, 0, 0)
                         result = "Погода на завтра в городе " + city.capitalize().split('/')[0] + ':\n\n' + result
                         vk.messages.send(  # Отправляем собщение
