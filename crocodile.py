@@ -39,7 +39,7 @@ def vubor_slova():
     sent_message_ls("Твоё слово: " + messagecit[0].capitalize(), vedus_id, keyboardcet.get_keyboard())
     return [messagecit[1],messagecit[0]]
 
-'''
+
 f=open("resurses/crocodile_files/crocodile_hard.txt",mode="r")
 f1=open("resurses/crocodile_files/crocodile_hard1.txt",mode="w", encoding="utf-8")
 print(f.encoding)
@@ -52,7 +52,7 @@ for line in f:
 print(k)
 f.close()
 f1.close()
-'''
+
 #пустая клавиатура keyboard=keyboard1.get_empty_keyboard()
 
 vedus_id = ""
@@ -233,7 +233,7 @@ for event in longpoll.listen():
             slovo_ugadano = False
             igra_okonchena = False
             igra_nachata = False
-            
+
     #часть работы в личных сообщениях
     if event.type == VkBotEventType.MESSAGE_NEW and event.obj.text and event.from_user and event.obj.from_id != -183679552:
         input_text = event.obj.text
