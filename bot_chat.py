@@ -737,6 +737,52 @@ def mainfunc():
                             message='обновил'
                         )
 
+
+
+                    elif (event.obj.text == '!крокодил стата' or event.obj.text == '! крокодил стата'):
+                        f = open('resurses/crocodile_files/stat.txt', 'r')
+                        dism = {}
+                        for line in f:
+                            if line in dism:
+                                dism[line] += 1
+                            else:
+                                dism[line] = 1
+                        f.close()
+                        mat = []
+                        kolp = []
+                        for i in dism:
+                            kolp.append(dism[i])
+                        kolp.sort()
+                        kolp.reverse()
+                        jstr = []
+                        for i in kolp:
+                            for j in dism:
+                                if j == '' or j == '\n':
+                                    continue
+                                if str(dism[j]) == str(i) and j not in jstr:
+                                    jstr.append(j)
+                                    number_2 = ''
+                                    for k in str(dism[j]):
+                                        number_2 += smile[k]
+                                    fio_1 = requests.get("https://api.vk.com/method/users.get?user_ids=" + str(j)[
+                                                                                                           :-1:] + "&fields=bdate&access_token=b78c719302827104f6346bd3b63df9edd8dee2ef58f84a4e1a4f108cb149fed5d2d53c795ae00ee69f419&v=5.92")
+                                    first_name_1 = fio_1.text[14::].split(',')[1].split(':')[1][1:-1:]
+                                    last_name_1 = fio_1.text[14::].split(',')[2].split(':')[1][1:-1:]
+                                    mat.append(first_name_1 + ' ' + last_name_1 + ': ' + str(number_2) + ' раз(а) угадал слово.\n')
+                        for i in range(0, len(mat)):
+                            mat[i] = str(i + 1) + ") " + mat[i]
+                        mat = ''.join(mat)
+                        mat = "ТОП крокодила:\n\n" + mat
+                        vk.messages.send(
+                            chat_id=event.chat_id,
+                            random_id=get_random_id(),
+                            message=mat
+                        )
+
+
+
+
+
                     elif (event.obj.text == '!маты' or event.obj.text == '! маты') and event.obj.from_id == 195310233:
                         f = open('resurses/mat.txt', 'r')
                         dism = {}
