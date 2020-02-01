@@ -5,7 +5,7 @@
 
 from vk_api import VkUpload
 from vk_api.bot_longpoll import VkBotLongPoll, VkBotEventType
-import datetime, requests, vk_api, calendar, time, random
+import requests, vk_api, time, random
 from vk_api.utils import get_random_id
 from vk_api.keyboard import VkKeyboard, VkKeyboardColor
 
@@ -39,7 +39,6 @@ def vubor_slova():
     sent_message_ls("Твоё слово: " + messagecit[0].capitalize(), vedus_id, keyboardcet.get_keyboard())
     return [messagecit[1],messagecit[0]]
 
-
 '''
 f=open("resurses/crocodile_files/crocodile_hard.txt",mode="r")
 f1=open("resurses/crocodile_files/crocodile_hard1.txt",mode="w", encoding="utf-8")
@@ -72,7 +71,6 @@ f.close()
 '''
 
 keyboardemh = VkKeyboard(one_time=False, inline=True)
-
 
 keyboardcet = VkKeyboard(one_time=False, inline=True)
 keyboardcet.add_button('Что это такое?', color=VkKeyboardColor.PRIMARY)
@@ -184,7 +182,6 @@ for event in longpoll.listen():
             else:
                 sent_message_chat("Для начала игры пиши !крокодил",event.chat_id, keyboardcroc.get_empty_keyboard())
 
-
         elif event.obj.text == "стать ведущим" and winner_id == str(event.obj.from_id):
             if id_chat == event.chat_id:
                 igra_okonchena = False
@@ -225,7 +222,18 @@ for event in longpoll.listen():
                     sent_message_chat(first_name + ' ' + last_name + ", вам защитано нарушение правил игры!",
                                       event.chat_id, keyboardcroc.get_empty_keyboard())
 
+        elif (event.obj.text == '!рестарт крокодил' or event.obj.text == '! рестарт крокодил') and event.obj.from_id == 195310233:
+            sent_message_chat("Крокодил сброшен!", event.chat_id, keyboardcet.get_empty_keyboard())
 
+            vedus_id = ""
+            slovo_zagadano = False
+            id_chat = ""
+            slovo = ""
+            winner_id = ""
+            slovo_ugadano = False
+            igra_okonchena = False
+            igra_nachata = False
+            
     #часть работы в личных сообщениях
     if event.type == VkBotEventType.MESSAGE_NEW and event.obj.text and event.from_user and event.obj.from_id != -183679552:
         input_text = event.obj.text
@@ -238,9 +246,19 @@ for event in longpoll.listen():
             slovo_zagadano = True
             time_start = time.time()
 
-
         elif str(event.obj.peer_id) == vedus_id and event.obj.text == "что это такое?":
             sent_message_ls(opisanie, vedus_id, keyboardcet.get_empty_keyboard())
 
+        elif (event.obj.text == '!рестарт крокодил' or event.obj.text == '! рестарт крокодил') and event.obj.from_id == 195310233:
+            sent_message_ls("Крокодил сброшен!", 195310233, keyboardcet.get_empty_keyboard())
+
+            vedus_id = ""
+            slovo_zagadano = False
+            id_chat = ""
+            slovo = ""
+            winner_id = ""
+            slovo_ugadano = False
+            igra_okonchena = False
+            igra_nachata = False
 
 
