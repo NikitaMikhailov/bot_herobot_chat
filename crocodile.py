@@ -32,7 +32,7 @@ def sent_message_ls(text, user_id, keyboard):
 
 def vubor_slova():
     cit = random.randint(0, 402)
-    for linenum, line in enumerate(open("/root/bot_herobot_chat/resurses/crocodile_files/crocodile_hard1.txt", mode="r")):
+    for linenum, line in enumerate(open("/root/bot_herobot_chat/resurses/crocodile_files/crocodile_hard1.txt", mode="r", encoding="utf-8")): #/root/bot_herobot_chat/resurses/
         if linenum == cit:
             messagecit = (line.strip())
     messagecit = messagecit.split("***")
