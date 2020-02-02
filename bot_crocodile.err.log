@@ -180,3 +180,37 @@ Traceback (most recent call last):
   File "crocodile.py", line 38, in vubor_slova
     messagecit = messagecit.split("***")
 UnboundLocalError: local variable 'messagecit' referenced before assignment
+Traceback (most recent call last):
+  File "crocodile.py", line 173, in <module>
+    mass = vubor_slova()
+  File "crocodile.py", line 38, in vubor_slova
+    messagecit = messagecit.split("***")
+UnboundLocalError: local variable 'messagecit' referenced before assignment
+Traceback (most recent call last):
+  File "crocodile.py", line 173, in <module>
+    mass = vubor_slova()
+  File "crocodile.py", line 38, in vubor_slova
+    messagecit = messagecit.split("***")
+UnboundLocalError: local variable 'messagecit' referenced before assignment
+  File "crocodile.py", line 38
+    sent_message_ls(messagecit,195310233,keyboardcet.get_empty_keyboard())
+                                                                         ^
+TabError: inconsistent use of tabs and spaces in indentation
+  File "crocodile.py", line 38
+    sent_message_ls(messagecit,195310233,keyboardcet.get_empty_keyboard())
+                                                                         ^
+TabError: inconsistent use of tabs and spaces in indentation
+  File "crocodile.py", line 38
+    sent_message_ls(messagecit,195310233,keyboardcet.get_empty_keyboard())
+                                                                         ^
+TabError: inconsistent use of tabs and spaces in indentation
+  File "crocodile.py", line 38
+    sent_message_ls(messagecit,195310233,keyboardcet.get_empty_keyboard())
+                                                                         ^
+TabError: inconsistent use of tabs and spaces in indentation
+Traceback (most recent call last):
+  File "crocodile.py", line 173, in <module>
+    mass = vubor_slova()
+  File "crocodile.py", line 38, in vubor_slova
+    messagecit = messagecit.split("***")
+UnboundLocalError: local variable 'messagecit' referenced before assignment
