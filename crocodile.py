@@ -22,6 +22,7 @@ def sent_message_chat(text, chat_id, keyboard):
         keyboard=keyboard,
         message=text
     )
+
 def sent_message_ls(text, user_id, keyboard):
     vk.messages.send(
         user_id=user_id,
@@ -29,6 +30,7 @@ def sent_message_ls(text, user_id, keyboard):
         keyboard=keyboard,
         message=text
     )
+
 
 def vubor_slova():
     cit = random.randint(0, 402)
@@ -82,7 +84,7 @@ keyboardcroc.add_button('Стать ведущим', color=VkKeyboardColor.PRIMA
 
 for event in longpoll.listen():
 
-    if slovo_zagadano is True and time.time() - time_start > 300:
+    if slovo_zagadano is True and time.time() - time_start > 900:
         sent_message_chat("Ведущий не успел объяснить слово, игра окончена!", event.chat_id,
                           keyboardcroc.get_keyboard())
         vedus_id = ""
@@ -145,6 +147,18 @@ for event in longpoll.listen():
             else:
                 text += h
 
+        if (event.obj.text == '!рестарт крокодил' or event.obj.text == '! рестарт крокодил') and event.obj.from_id == 195310233:
+            sent_message_chat("Крокодил сброшен!", event.chat_id, keyboardcet.get_empty_keyboard())
+
+            vedus_id = ""
+            slovo_zagadano = False
+            id_chat = ""
+            slovo = ""
+            winner_id = ""
+            slovo_ugadano = False
+            igra_okonchena = False
+            igra_nachata = False
+
         if event.obj.text == '!крокодил' or event.obj.text == '! крокодил':
             if (id_chat == "" or id_chat == event.chat_id):
                 if vedus_id == "":
@@ -166,17 +180,21 @@ for event in longpoll.listen():
         if event.obj.text == "стать ведущим" and winner_id == "":
             if id_chat == event.chat_id:
                 if vedus_id == "":
-                    igra_nachata = False
-                    igra_okonchena = False
-                    vedus_id = str(event.obj.from_id)
+                    try:
+                        igra_nachata = False
+                        igra_okonchena = False
+                        vedus_id = str(event.obj.from_id)
 
-                    mass = vubor_slova()
-                    opisanie, slovo = mass[0], mass[1]
-                    slovo_zagadano = True
-                    time_start = time.time()
+                        mass = vubor_slova()
+                        opisanie, slovo = mass[0], mass[1]
+                        slovo_zagadano = True
+                        time_start = time.time()
 
-                    #!!!sent_message_ls("Твоё слово: ", vedus_id, keyboardemh.get_keyboard())
-                    sent_message_chat("Ведущий выбран, это " + first_name+' '+last_name+" , у него есть 5 минут на объяснение!", event.chat_id, keyboardcroc.get_empty_keyboard())
+                        #!!!sent_message_ls("Твоё слово: ", vedus_id, keyboardemh.get_keyboard())
+                        sent_message_chat("Ведущий выбран, это " + first_name+' '+last_name+" , у него есть 15 минут на объяснение!", event.chat_id, keyboardcroc.get_empty_keyboard())
+                    except:
+                        sent_message_chat("Чтобы стать ведущим нужно открыть доступ к личным сообщениям для бота!",
+                                          event.chat_id, keyboardcet.get_empty_keyboard())
                 else:
                     sent_message_chat("Ведущий уже выбран!", event.chat_id, keyboardcroc.get_empty_keyboard())
             else:
@@ -184,17 +202,20 @@ for event in longpoll.listen():
 
         elif event.obj.text == "стать ведущим" and winner_id == str(event.obj.from_id):
             if id_chat == event.chat_id:
-                igra_okonchena = False
-                igra_nachata = False
-                vedus_id = str(event.obj.from_id)
-                sent_message_chat(
-                    first_name + ' ' + last_name + " воспользовался правом стать ведущим, у него есть 5 минут на объяснение!",
-                    event.chat_id, keyboardcroc.get_empty_keyboard())
-
-                mass = vubor_slova()
-                opisanie, slovo = mass[0], mass[1]
-                slovo_zagadano = True
-                time_start = time.time()
+                try:
+                    igra_okonchena = False
+                    igra_nachata = False
+                    vedus_id = str(event.obj.from_id)
+                    sent_message_chat(
+                        first_name + ' ' + last_name + " воспользовался правом стать ведущим, у него есть 15 минут на объяснение!",
+                        event.chat_id, keyboardcroc.get_empty_keyboard())
+                    mass = vubor_slova()
+                    opisanie, slovo = mass[0], mass[1]
+                    slovo_zagadano = True
+                    time_start = time.time()
+                except:
+                    sent_message_chat("Чтобы стать ведущим нужно открыть доступ к личным сообщениям для бота!",
+                                      event.chat_id, keyboardcet.get_empty_keyboard())
 
             else:
                 sent_message_chat("Для начала игры пиши !крокодил",event.chat_id, keyboardcroc.get_empty_keyboard())
@@ -221,18 +242,6 @@ for event in longpoll.listen():
                 else:
                     sent_message_chat(first_name + ' ' + last_name + ", вам защитано нарушение правил игры!",
                                       event.chat_id, keyboardcroc.get_empty_keyboard())
-
-        elif (event.obj.text == '!рестарт крокодил' or event.obj.text == '! рестарт крокодил') and event.obj.from_id == 195310233:
-            sent_message_chat("Крокодил сброшен!", event.chat_id, keyboardcet.get_empty_keyboard())
-
-            vedus_id = ""
-            slovo_zagadano = False
-            id_chat = ""
-            slovo = ""
-            winner_id = ""
-            slovo_ugadano = False
-            igra_okonchena = False
-            igra_nachata = False
 
     #часть работы в личных сообщениях
     if event.type == VkBotEventType.MESSAGE_NEW and event.obj.text and event.from_user and event.obj.from_id != -183679552:
