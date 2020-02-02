@@ -57,3 +57,160 @@ Traceback (most recent call last):
   File "/usr/local/lib/python3.5/dist-packages/requests/adapters.py", line 529, in send
     raise ReadTimeout(e, request=request)
 requests.exceptions.ReadTimeout: HTTPSConnectionPool(host='lp.vk.com', port=443): Read timed out. (read timeout=35)
+Traceback (most recent call last):
+  File "crocodile.py", line 167, in <module>
+    mass = vubor_slova()
+  File "crocodile.py", line 35, in vubor_slova
+    for linenum, line in enumerate(open("resurses/crocodile_files/crocodile_hard.txt", mode="r")):
+  File "/usr/lib/python3.5/codecs.py", line 321, in decode
+    (result, consumed) = self._buffer_decode(data, self.errors, final)
+UnicodeDecodeError: 'utf-8' codec can't decode byte 0xe2 in position 0: invalid continuation byte
+Traceback (most recent call last):
+  File "crocodile.py", line 167, in <module>
+    mass = vubor_slova()
+  File "crocodile.py", line 35, in vubor_slova
+    for linenum, line in enumerate(open("/root/bot_herobot_chat/resurses/crocodile_files/crocodile_hard.txt", mode="r")):
+  File "/usr/lib/python3.5/codecs.py", line 321, in decode
+    (result, consumed) = self._buffer_decode(data, self.errors, final)
+UnicodeDecodeError: 'utf-8' codec can't decode byte 0xe2 in position 0: invalid continuation byte
+Traceback (most recent call last):
+  File "crocodile.py", line 48, in <module>
+    for line in f:
+  File "/usr/lib/python3.5/codecs.py", line 321, in decode
+    (result, consumed) = self._buffer_decode(data, self.errors, final)
+UnicodeDecodeError: 'utf-8' codec can't decode byte 0xe2 in position 1: invalid continuation byte
+Traceback (most recent call last):
+  File "crocodile.py", line 48, in <module>
+    for line in f:
+  File "/usr/lib/python3.5/codecs.py", line 321, in decode
+    (result, consumed) = self._buffer_decode(data, self.errors, final)
+UnicodeDecodeError: 'utf-8' codec can't decode byte 0xe2 in position 1: invalid continuation byte
+Traceback (most recent call last):
+  File "crocodile.py", line 48, in <module>
+    for line in f:
+  File "/usr/lib/python3.5/codecs.py", line 321, in decode
+    (result, consumed) = self._buffer_decode(data, self.errors, final)
+UnicodeDecodeError: 'utf-8' codec can't decode byte 0xe2 in position 1: invalid continuation byte
+Traceback (most recent call last):
+  File "crocodile.py", line 48, in <module>
+    for line in f:
+  File "/usr/lib/python3.5/codecs.py", line 321, in decode
+    (result, consumed) = self._buffer_decode(data, self.errors, final)
+UnicodeDecodeError: 'utf-8' codec can't decode byte 0xe2 in position 1: invalid continuation byte
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.5/dist-packages/urllib3/connectionpool.py", line 387, in _make_request
+    six.raise_from(e, None)
+  File "<string>", line 2, in raise_from
+  File "/usr/local/lib/python3.5/dist-packages/urllib3/connectionpool.py", line 383, in _make_request
+    httplib_response = conn.getresponse()
+  File "/usr/lib/python3.5/http/client.py", line 1197, in getresponse
+    response.begin()
+  File "/usr/lib/python3.5/http/client.py", line 297, in begin
+    version, status, reason = self._read_status()
+  File "/usr/lib/python3.5/http/client.py", line 258, in _read_status
+    line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
+  File "/usr/lib/python3.5/socket.py", line 575, in readinto
+    return self._sock.recv_into(b)
+  File "/usr/lib/python3.5/ssl.py", line 929, in recv_into
+    return self.read(nbytes, buffer)
+  File "/usr/lib/python3.5/ssl.py", line 791, in read
+    return self._sslobj.read(len, buffer)
+  File "/usr/lib/python3.5/ssl.py", line 575, in read
+    v = self._sslobj.read(len, buffer)
+socket.timeout: The read operation timed out
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.5/dist-packages/requests/adapters.py", line 449, in send
+    timeout=timeout
+  File "/usr/local/lib/python3.5/dist-packages/urllib3/connectionpool.py", line 641, in urlopen
+    _stacktrace=sys.exc_info()[2])
+  File "/usr/local/lib/python3.5/dist-packages/urllib3/util/retry.py", line 368, in increment
+    raise six.reraise(type(error), error, _stacktrace)
+  File "/usr/local/lib/python3.5/dist-packages/urllib3/packages/six.py", line 686, in reraise
+    raise value
+  File "/usr/local/lib/python3.5/dist-packages/urllib3/connectionpool.py", line 603, in urlopen
+    chunked=chunked)
+  File "/usr/local/lib/python3.5/dist-packages/urllib3/connectionpool.py", line 389, in _make_request
+    self._raise_timeout(err=e, url=url, timeout_value=read_timeout)
+  File "/usr/local/lib/python3.5/dist-packages/urllib3/connectionpool.py", line 307, in _raise_timeout
+    raise ReadTimeoutError(self, url, "Read timed out. (read timeout=%s)" % timeout_value)
+urllib3.exceptions.ReadTimeoutError: HTTPSConnectionPool(host='lp.vk.com', port=443): Read timed out. (read timeout=35)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "crocodile.py", line 83, in <module>
+    for event in longpoll.listen():
+  File "/usr/local/lib/python3.5/dist-packages/vk_api/bot_longpoll.py", line 285, in listen
+    for event in self.check():
+  File "/usr/local/lib/python3.5/dist-packages/vk_api/bot_longpoll.py", line 257, in check
+    timeout=self.wait + 10
+  File "/usr/local/lib/python3.5/dist-packages/requests/sessions.py", line 546, in get
+    return self.request('GET', url, **kwargs)
+  File "/usr/local/lib/python3.5/dist-packages/requests/sessions.py", line 533, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/usr/local/lib/python3.5/dist-packages/requests/sessions.py", line 646, in send
+    r = adapter.send(request, **kwargs)
+  File "/usr/local/lib/python3.5/dist-packages/requests/adapters.py", line 529, in send
+    raise ReadTimeout(e, request=request)
+requests.exceptions.ReadTimeout: HTTPSConnectionPool(host='lp.vk.com', port=443): Read timed out. (read timeout=35)
+Traceback (most recent call last):
+  File "crocodile.py", line 173, in <module>
+    mass = vubor_slova()
+  File "crocodile.py", line 38, in vubor_slova
+    messagecit = messagecit.split("***")
+UnboundLocalError: local variable 'messagecit' referenced before assignment
+Traceback (most recent call last):
+  File "crocodile.py", line 173, in <module>
+    mass = vubor_slova()
+  File "crocodile.py", line 38, in vubor_slova
+    messagecit = messagecit.split("***")
+UnboundLocalError: local variable 'messagecit' referenced before assignment
+Traceback (most recent call last):
+  File "crocodile.py", line 173, in <module>
+    mass = vubor_slova()
+  File "crocodile.py", line 38, in vubor_slova
+    messagecit = messagecit.split("***")
+UnboundLocalError: local variable 'messagecit' referenced before assignment
+Traceback (most recent call last):
+  File "crocodile.py", line 173, in <module>
+    mass = vubor_slova()
+  File "crocodile.py", line 38, in vubor_slova
+    messagecit = messagecit.split("***")
+UnboundLocalError: local variable 'messagecit' referenced before assignment
+Traceback (most recent call last):
+  File "crocodile.py", line 173, in <module>
+    mass = vubor_slova()
+  File "crocodile.py", line 38, in vubor_slova
+    messagecit = messagecit.split("***")
+UnboundLocalError: local variable 'messagecit' referenced before assignment
+Traceback (most recent call last):
+  File "crocodile.py", line 173, in <module>
+    mass = vubor_slova()
+  File "crocodile.py", line 38, in vubor_slova
+    messagecit = messagecit.split("***")
+UnboundLocalError: local variable 'messagecit' referenced before assignment
+  File "crocodile.py", line 38
+    sent_message_ls(messagecit,195310233,keyboardcet.get_empty_keyboard())
+                                                                         ^
+TabError: inconsistent use of tabs and spaces in indentation
+  File "crocodile.py", line 38
+    sent_message_ls(messagecit,195310233,keyboardcet.get_empty_keyboard())
+                                                                         ^
+TabError: inconsistent use of tabs and spaces in indentation
+  File "crocodile.py", line 38
+    sent_message_ls(messagecit,195310233,keyboardcet.get_empty_keyboard())
+                                                                         ^
+TabError: inconsistent use of tabs and spaces in indentation
+  File "crocodile.py", line 38
+    sent_message_ls(messagecit,195310233,keyboardcet.get_empty_keyboard())
+                                                                         ^
+TabError: inconsistent use of tabs and spaces in indentation
+Traceback (most recent call last):
+  File "crocodile.py", line 173, in <module>
+    mass = vubor_slova()
+  File "crocodile.py", line 38, in vubor_slova
+    messagecit = messagecit.split("***")
+UnboundLocalError: local variable 'messagecit' referenced before assignment
