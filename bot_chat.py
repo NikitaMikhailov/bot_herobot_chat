@@ -917,13 +917,17 @@ def mainfunc():
                             message='Кто сказал ' + flag2 + '?'
                         )
 
-                    elif event.obj.text.find('!погода на завтра в городе') != -1:
+                    elif event.obj.text.find('!погода на завтра в городе') != -1 or event.obj.text.find('! погода на завтра в городе') != -1:
+                        if event.obj.text.find('!погода на завтра в городе') != -1:
+                            inder=27
+                        else:
+                            inder=28
                         tommor = str(datetime.date.today()).split('-')
                         tommor[-1] = str(int(tommor[-1]) + 1)
                         if len(str(int(tommor[-1]))) == 1:
                             tommor[-1] = "0" + str(int(tommor[-1]))
                         tommor = '-'.join(tommor)
-                        city = event.obj.text[27::] + '/' + tommor
+                        city = event.obj.text[inder::] + '/' + tommor
                         print(city)
                         result = wheather(city, 0, 0)
                         result = "Погода на завтра в городе " + city.capitalize().split('/')[0] + ':\n\n' + result
@@ -957,8 +961,12 @@ def mainfunc():
                             message=result
                         )
 
-                    elif event.obj.text.find('!погода в городе') != -1:
-                        city = event.obj.text[17::]
+                    elif event.obj.text.find('!погода в городе') != -1 or event.obj.text.find('! погода в городе') != -1:
+                        if event.obj.text.find('!погода в городе') != -1:
+                            inder = 17
+                        else:
+                            inder = 18
+                        city = event.obj.text[18::]
                         result = wheather(city, 0, 0)
                         vk.messages.send(  # Отправляем собщение
                             chat_id=event.chat_id,
