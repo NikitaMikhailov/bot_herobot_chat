@@ -48,7 +48,7 @@ def vubor_slova():
     if len(messagecit) == 1:
         messagecit.append("Для данного слова нет описания 😔")
     print(messagecit)
-    sent_message_ls("Твоё слово: " + messagecit[0].capitalize(), vedus_id, keyboardcet.get_keyboard())
+    sent_message_ls("Твоё слово: " + messagecit[0].title(), vedus_id, keyboardcet.get_keyboard())
     return [messagecit[1],messagecit[0]]
 
 '''

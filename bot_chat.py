@@ -886,13 +886,15 @@ def mainfunc():
                         if flagbddate == True:
                             bd_date = bd_date.split('.')
                             zodiak = goroscop(bd_date)
+                            simbol_zodiak={'aries':'♈', 'taurus':'♉', 'gemini':'♊', 'cancer':'♋', 'leo':'♌','virgo':'♍',
+                                           'libra':'♎', 'scorpio':'♏', 'sagittarius':'♐','capricorn':'♑', 'aquarius':'♒', 'pisces':'♓'}
                             f = open('resurses/goroskop_files/' + zodiak + '.txt', 'r')
                             goroskp = f.read()
                             f.close()
                             vk.messages.send(  # Отправляем собщение
                                 chat_id=event.chat_id,
                                 random_id=get_random_id(),
-                                message=goroskp
+                                message=simbol_zodiak[zodiak]+' '+goroskp
                             )
                         else:
                             vk.messages.send(  # Отправляем собщение
