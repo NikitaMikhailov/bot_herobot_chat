@@ -34,7 +34,7 @@ def sent_message_ls(text, user_id, keyboard):
 
 def vubor_slova():
     cit = random.randint(0, 701)
-    for linenum, line in enumerate(open("resurses/crocodile_files/crocodile_hard1.txt",mode="r", encoding="utf-8")): #/root/bot_herobot_chat/resurses/
+    for linenum, line in enumerate(open("/root/bot_herobot_chat/resurses/crocodile_files/crocodile_hard1.txt",mode="r", encoding="utf-8")): #/root/bot_herobot_chat/resurses/
         if linenum == cit:
             messagecit = (line.strip())
     messagecit = messagecit.split("***")
@@ -247,7 +247,7 @@ for event in longpoll.listen():
                     slovo_zagadano = False
                     slovo = ""
 
-                    f1 = open('resurses/crocodile_files/stat.txt', 'a') #/root/bot_herobot_chat/
+                    f1 = open('/root/bot_herobot_chat/resurses/crocodile_files/stat.txt', 'a') #/root/bot_herobot_chat/
                     f1.write(str(winner_id) + '\n')
                     f1.close()
 
