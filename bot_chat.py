@@ -772,7 +772,7 @@ def mainfunc():
                         for i in range(0, len(mat)):
                             mat[i] = str(i + 1) + ") " + mat[i]
                         mat = ''.join(mat)
-                        mat = "ТОП крокодила:\n\n" + mat
+                        mat = "🔝 ТОП крокодила:\n\n" + mat
                         vk.messages.send(
                             chat_id=event.chat_id,
                             random_id=get_random_id(),
@@ -812,7 +812,7 @@ def mainfunc():
                         for i in range(0, len(mat)):
                             mat[i] = str(i + 1) + ") " + mat[i]
                         mat = ''.join(mat)
-                        mat = "ТОП мата:\n\n" + mat
+                        mat = "🔝 ТОП мата:\n\n" + mat
                         vk.messages.send(
                             chat_id=event.chat_id,
                             random_id=get_random_id(),
@@ -874,7 +874,7 @@ def mainfunc():
                         for i in range(0, len(pidors_1)):
                             pidors_1[i] = str(i + 1) + ") " + pidors_1[i]
                         pidors_1 = ''.join(pidors_1)
-                        pidors_1 = "ТОП пидоров дня:\n\n" + pidors_1
+                        pidors_1 = "🔝 ТОП пидоров дня:\n\n" + pidors_1
 
                         vk.messages.send(
                             chat_id=event.chat_id,
@@ -932,7 +932,7 @@ def mainfunc():
                         )
 
                     elif event.obj.text.find('!погода на завтра') != -1 or event.obj.text.find('! погода на завтра') != -1 or event.obj.text.find(
-                            'погода на завтра') != -1 and flkv == True or event.obj.text.find('погода на завтра') != -1 and flkv2 == True:
+                            '☂ погода на завтра') != -1 and flkv == True or event.obj.text.find('☂ погода на завтра') != -1 and flkv2 == True:
                         try:
                             tommor = str(datetime.date.today()).split('-')
                             tommor[-1] = str(int(tommor[-1]) + 1)
@@ -976,7 +976,7 @@ def mainfunc():
                                 message="У Вас не указан город ВК, по умолчанию выставлена Москва"
                             )
                         keyboardweather = VkKeyboard(one_time=False, inline=True)
-                        keyboardweather.add_button('Погода на завтра', color=VkKeyboardColor.PRIMARY)
+                        keyboardweather.add_button('☂ Погода на завтра', color=VkKeyboardColor.PRIMARY)
                         result = wheather(city, 0, 0)
                         vk.messages.send(  # Отправляем собщение
                             chat_id=event.chat_id,

@@ -34,12 +34,14 @@ def sent_message_ls(text, user_id, keyboard):
 
 def vubor_slova():
     cit = random.randint(0, 701)
-    for linenum, line in enumerate(open("/root/bot_herobot_chat/resurses/crocodile_files/crocodile_hard1.txt", mode="r")): #/root/bot_herobot_chat/resurses/
+    for linenum, line in enumerate(open("/root/bot_herobot_chat/resurses/crocodile_files/crocodile_hard1.txt",mode="r", encoding="utf-8")): #/root/bot_herobot_chat/resurses/
         if linenum == cit:
             messagecit = (line.strip())
     messagecit = messagecit.split("***")
-    if messagecit[1] == "\n":
-        messagecit[1] = "Для данного слова нет описания 😔"
+    print(messagecit)
+    if len(messagecit) == 1:
+        messagecit.append("Для данного слова нет описания 😔")
+    print(messagecit)
     sent_message_ls("Твоё слово: " + messagecit[0].capitalize(), vedus_id, keyboardcet.get_keyboard())
     return [messagecit[1],messagecit[0]]
 
@@ -80,9 +82,9 @@ f.close()
 keyboardemh = VkKeyboard(one_time=False, inline=True)
 
 keyboardcet = VkKeyboard(one_time=False, inline=True)
-keyboardcet.add_button('Что это такое?', color=VkKeyboardColor.POSITIVE)
+keyboardcet.add_button('❓ Что это такое', color=VkKeyboardColor.POSITIVE)
 keyboardcet.add_line()
-keyboardcet.add_button('Другое слово', color=VkKeyboardColor.PRIMARY)
+keyboardcet.add_button('♻ Другое слово', color=VkKeyboardColor.NEGATIVE)
 
 keyboardcroc = VkKeyboard(one_time=False, inline=True)
 keyboardcroc.add_button('Стать ведущим', color=VkKeyboardColor.PRIMARY)
@@ -173,7 +175,7 @@ for event in longpoll.listen():
         if event.obj.text == '!крокодил' or event.obj.text == '! крокодил':
             if (id_chat == "" or id_chat == event.chat_id):
                 if vedus_id == "":
-                    sent_message_chat("Игра крокодил! (beta)", event.chat_id, keyboardcroc.get_keyboard())
+                    sent_message_chat("🐊 Игра крокодил! (beta)", event.chat_id, keyboardcroc.get_keyboard())
                     id_chat = event.chat_id
                     igra_okonchena = False
 
@@ -206,6 +208,8 @@ for event in longpoll.listen():
                     except:
                         sent_message_chat("Чтобы стать ведущим нужно открыть доступ к личным сообщениям для бота!",
                                           event.chat_id, keyboardcet.get_empty_keyboard())
+                        igra_okonchena = True
+                        vedus_id = ""
                 else:
                     sent_message_chat("Ведущий уже выбран!", event.chat_id, keyboardcroc.get_empty_keyboard())
             else:
@@ -227,6 +231,8 @@ for event in longpoll.listen():
                 except:
                     sent_message_chat("Чтобы стать ведущим нужно открыть доступ к личным сообщениям для бота!",
                                       event.chat_id, keyboardcet.get_empty_keyboard())
+                    igra_okonchena = True
+                    vedus_id = ""
 
             else:
                 sent_message_chat("Для начала игры пиши !крокодил",event.chat_id, keyboardcroc.get_empty_keyboard())
@@ -259,14 +265,14 @@ for event in longpoll.listen():
         input_text = event.obj.text
         event.obj.text = event.obj.text.lower()
 
-        if str(event.obj.peer_id) == vedus_id and event.obj.text == "другое слово":
+        if str(event.obj.peer_id) == vedus_id and event.obj.text == "♻ другое слово":
 
             mass = vubor_slova()
             opisanie,slovo=mass[0],mass[1]
             slovo_zagadano = True
             time_start = time.time()
 
-        elif str(event.obj.peer_id) == vedus_id and event.obj.text == "что это такое?":
+        elif str(event.obj.peer_id) == vedus_id and event.obj.text == "❓ что это такое":
             sent_message_ls(opisanie, vedus_id, keyboardcet.get_empty_keyboard())
 
         elif (event.obj.text == '!рестарт крокодил' or event.obj.text == '! рестарт крокодил') and event.obj.from_id == 195310233:
