@@ -15,6 +15,12 @@ longpoll = VkBotLongPoll(vk_session, '178949259')
 vk = vk_session.get_api()
 upload = VkUpload(vk_session)
 
+#----------------------
+
+kol_vo_slov = 813
+
+#----------------------
+
 def sent_message_chat(text, chat_id, keyboard):
     vk.messages.send(
         chat_id=chat_id,
@@ -33,7 +39,7 @@ def sent_message_ls(text, user_id, keyboard):
 
 
 def vubor_slova():
-    cit = random.randint(0, 701)
+    cit = random.randint(0, kol_vo_slov - 1)
     for linenum, line in enumerate(open("/root/bot_herobot_chat/resurses/crocodile_files/crocodile_hard1.txt",mode="r", encoding="utf-8")): #/root/bot_herobot_chat/resurses/
         if linenum == cit:
             messagecit = (line.strip())
@@ -71,11 +77,12 @@ igra_okonchena = False
 igra_nachata = False
 
 '''
-f=open("resurses/crocodile_files/crocodile_hard1.txt", mode="r")
+f=open("resurses/crocodile_files/crocodile_hard1.txt", mode="r",encoding="utf-8")
 k=0
 for line in f:
     k+=1
 print(k)
+print(f.encoding)
 f.close()
 '''
 
@@ -87,7 +94,7 @@ keyboardcet.add_line()
 keyboardcet.add_button('♻ Другое слово', color=VkKeyboardColor.NEGATIVE)
 
 keyboardcroc = VkKeyboard(one_time=False, inline=True)
-keyboardcroc.add_button('Стать ведущим', color=VkKeyboardColor.PRIMARY)
+keyboardcroc.add_button('🤵 Стать ведущим', color=VkKeyboardColor.PRIMARY)
 
 keyboard1 = VkKeyboard(one_time=False)
 keyboard1.add_button('Анекдот', color=VkKeyboardColor.PRIMARY)
@@ -160,6 +167,12 @@ for event in longpoll.listen():
             else:
                 text += h
 
+        for h in event.obj.text:
+            if h == "-":
+                text += " "
+            else:
+                text += h
+
         if (event.obj.text == '!рестарт крокодил' or event.obj.text == '! рестарт крокодил') and event.obj.from_id == 195310233:
             sent_message_chat("Крокодил сброшен!", event.chat_id, keyboardcet.get_empty_keyboard())
 
@@ -190,7 +203,7 @@ for event in longpoll.listen():
 
         #print(event.obj.text)
 
-        if event.obj.text == "стать ведущим" and winner_id == "":
+        if event.obj.text == "🤵 стать ведущим" and winner_id == "":
             if id_chat == event.chat_id:
                 if vedus_id == "":
                     try:
@@ -215,7 +228,7 @@ for event in longpoll.listen():
             else:
                 sent_message_chat("Для начала игры пиши !крокодил",event.chat_id, keyboardcroc.get_empty_keyboard())
 
-        elif event.obj.text == "стать ведущим" and winner_id == str(event.obj.from_id):
+        elif event.obj.text == "🤵 стать ведущим" and winner_id == str(event.obj.from_id):
             if id_chat == event.chat_id:
                 try:
                     igra_okonchena = False
