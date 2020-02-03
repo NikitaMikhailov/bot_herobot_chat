@@ -33,11 +33,13 @@ def sent_message_ls(text, user_id, keyboard):
 
 
 def vubor_slova():
-    cit = random.randint(0, 402)
+    cit = random.randint(0, 701)
     for linenum, line in enumerate(open("/root/bot_herobot_chat/resurses/crocodile_files/crocodile_hard1.txt", mode="r")): #/root/bot_herobot_chat/resurses/
         if linenum == cit:
             messagecit = (line.strip())
     messagecit = messagecit.split("***")
+    if messagecit[1] == "\n":
+        messagecit[1] = "Для данного слова нет описания 😔"
     sent_message_ls("Твоё слово: " + messagecit[0].capitalize(), vedus_id, keyboardcet.get_keyboard())
     return [messagecit[1],messagecit[0]]
 
@@ -67,20 +69,28 @@ igra_okonchena = False
 igra_nachata = False
 
 '''
-f=open("resurses/crocodile_files/stat.txt", mode="w", encoding="utf-8")
-print(f.encoding)
+f=open("resurses/crocodile_files/crocodile_hard1.txt", mode="r")
+k=0
+for line in f:
+    k+=1
+print(k)
 f.close()
 '''
 
 keyboardemh = VkKeyboard(one_time=False, inline=True)
 
 keyboardcet = VkKeyboard(one_time=False, inline=True)
-keyboardcet.add_button('Что это такое?', color=VkKeyboardColor.PRIMARY)
+keyboardcet.add_button('Что это такое?', color=VkKeyboardColor.POSITIVE)
 keyboardcet.add_line()
-keyboardcet.add_button('Другое слово', color=VkKeyboardColor.NEGATIVE)
+keyboardcet.add_button('Другое слово', color=VkKeyboardColor.PRIMARY)
 
 keyboardcroc = VkKeyboard(one_time=False, inline=True)
 keyboardcroc.add_button('Стать ведущим', color=VkKeyboardColor.PRIMARY)
+
+keyboard1 = VkKeyboard(one_time=False)
+keyboard1.add_button('Анекдот', color=VkKeyboardColor.PRIMARY)
+keyboard1.add_button('Погода', color=VkKeyboardColor.PRIMARY)
+keyboard1.add_button('Гороскоп', color=VkKeyboardColor.PRIMARY)
 
 for event in longpoll.listen():
 
@@ -101,6 +111,7 @@ for event in longpoll.listen():
             vk.messages.send(
                 chat_id=event.chat_id,
                 random_id=get_random_id(),
+                keyboard=keyboard1.get_keyboard(),
                 message="Ведущий не выбран в отведенное время, игра окончена!"
             )
             id_chat = ""
