@@ -9,6 +9,7 @@ import requests, vk_api, time, random
 from vk_api.utils import get_random_id
 from vk_api.keyboard import VkKeyboard, VkKeyboardColor
 
+
 session = requests.Session()
 vk_session = vk_api.VkApi(token='b78c719302827104f6346bd3b63df9edd8dee2ef58f84a4e1a4f108cb149fed5d2d53c795ae00ee69f419')
 longpoll = VkBotLongPoll(vk_session, '178949259')
@@ -29,14 +30,15 @@ def sent_message_chat(text, chat_id, keyboard):
         message=text
     )
 
+
 def sent_message_ls(text, user_id, keyboard):
-    vk.messages.send(
+    message_ids = vk.messages.send(
         user_id=user_id,
         random_id=get_random_id(),
         keyboard=keyboard,
         message=text
     )
-
+    return message_ids
 
 def vubor_slova():
     cit = random.randint(0, kol_vo_slov - 1)
@@ -44,10 +46,8 @@ def vubor_slova():
         if linenum == cit:
             messagecit = (line.strip())
     messagecit = messagecit.split("***")
-    print(messagecit)
     if len(messagecit) == 1:
         messagecit.append("Для данного слова нет описания 😔")
-    print(messagecit)
     sent_message_ls("Твоё слово: " + messagecit[0].title(), vedus_id, keyboardcet.get_keyboard())
     return [messagecit[1],messagecit[0]]
 
@@ -75,6 +75,7 @@ winner_id = ""
 slovo_ugadano = False
 igra_okonchena = False
 igra_nachata = False
+
 
 '''
 f=open("resurses/crocodile_files/crocodile_hard1.txt", mode="r",encoding="utf-8")
@@ -148,13 +149,13 @@ for event in longpoll.listen():
         event.obj.text = event.obj.text.lower()
 
         fio = requests.get("https://api.vk.com/method/users.get?user_ids=" + str(
-            event.obj.from_id) + "&fields=bdate, city&access_token=b78c719302827104f6346bd3b63df9edd8dee2ef58f84a4e1a4f108cb149fed5d2d53c795ae00ee69f419&v=5.92")
+            event.obj.from_id) + "&fields=bdate, city, can_write_private_message&access_token=b78c719302827104f6346bd3b63df9edd8dee2ef58f84a4e1a4f108cb149fed5d2d53c795ae00ee69f419&v=5.92")
         first_name = fio.text[14::].split(',')[1].split(':')[1][1:-1:]
         last_name = fio.text[14::].split(',')[2].split(':')[1][1:-1:]
+        can_write_private_message=(fio.text[14::].split(',')[8].split(':')[1][:1:])
 
         if event.obj.text[:26:] == '[club178949259|ботхеработ]':
             event.obj.text = event.obj.text[27::]
-
 
         if event.obj.text[:30:] == '[club178949259|@club178949259]':
             event.obj.text = event.obj.text[31::]
@@ -163,15 +164,21 @@ for event in longpoll.listen():
 
         for h in event.obj.text:
             if h == "ё":
-                text += "e"
+                text += "е"
             else:
                 text += h
+        event.obj.text = text
+        input_text = text
 
+        text = ""
         for h in event.obj.text:
             if h == "-":
                 text += " "
             else:
                 text += h
+
+        event.obj.text = text
+        input_text = text
 
         if (event.obj.text == '!рестарт крокодил' or event.obj.text == '! рестарт крокодил') and event.obj.from_id == 195310233:
             sent_message_chat("Крокодил сброшен!", event.chat_id, keyboardcet.get_empty_keyboard())
@@ -217,10 +224,12 @@ for event in longpoll.listen():
                         time_start = time.time()
 
                         #!!!sent_message_ls("Твоё слово: ", vedus_id, keyboardemh.get_keyboard())
-                        sent_message_chat("Ведущий выбран, это " + first_name+' '+last_name+" , у него есть 15 минут на объяснение!", event.chat_id, keyboardcroc.get_empty_keyboard())
+                        sent_message_chat("Ведущий выбран, это " + first_name+' '+last_name+" , у него есть 15 минут на объяснение!",
+                                          event.chat_id, keyboardcroc.get_empty_keyboard())
                     except:
                         sent_message_chat("Чтобы стать ведущим нужно открыть доступ к личным сообщениям для бота!",
                                           event.chat_id, keyboardcet.get_empty_keyboard())
+                        time_end = time.time() - 30
                         igra_okonchena = True
                         vedus_id = ""
                 else:
@@ -234,16 +243,17 @@ for event in longpoll.listen():
                     igra_okonchena = False
                     igra_nachata = False
                     vedus_id = str(event.obj.from_id)
+                    mass = vubor_slova()
                     sent_message_chat(
                         first_name + ' ' + last_name + " воспользовался правом стать ведущим, у него есть 15 минут на объяснение!",
                         event.chat_id, keyboardcroc.get_empty_keyboard())
-                    mass = vubor_slova()
                     opisanie, slovo = mass[0], mass[1]
                     slovo_zagadano = True
                     time_start = time.time()
                 except:
                     sent_message_chat("Чтобы стать ведущим нужно открыть доступ к личным сообщениям для бота!",
                                       event.chat_id, keyboardcet.get_empty_keyboard())
+                    time_end = time.time() - 30
                     igra_okonchena = True
                     vedus_id = ""
 
@@ -251,7 +261,7 @@ for event in longpoll.listen():
                 sent_message_chat("Для начала игры пиши !крокодил",event.chat_id, keyboardcroc.get_empty_keyboard())
 
         elif slovo_zagadano is True and id_chat == event.chat_id:
-            if input_text == slovo: #and str(event.obj.from_id) != vedus_id:
+            if str(input_text) == str(slovo): #and str(event.obj.from_id) != vedus_id:
                 if str(event.obj.from_id) != vedus_id:
                     sent_message_chat("Слово угадано игроком " + first_name + ' ' + last_name + "!", event.chat_id, keyboardcroc.get_empty_keyboard())
 
@@ -269,6 +279,12 @@ for event in longpoll.listen():
                     slovo_ugadano = True
                     igra_okonchena = True
                     time_end = time.time()
+                    try:
+                        message_id=sent_message_ls("проверка",int(winner_id),keyboardcroc.get_empty_keyboard())
+                        rt = requests.get('https://api.vk.com/method/messages.delete?message_ids=' + str(
+                            message_id) + '&delete_for_all=1&access_token=b78c719302827104f6346bd3b63df9edd8dee2ef58f84a4e1a4f108cb149fed5d2d53c795ae00ee69f419&v=5.92')
+                    except:
+                        time_end = time.time()-30
                 else:
                     sent_message_chat(first_name + ' ' + last_name + ", вам защитано нарушение правил игры!",
                                       event.chat_id, keyboardcroc.get_empty_keyboard())
