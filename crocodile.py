@@ -18,7 +18,7 @@ upload = VkUpload(vk_session)
 
 #----------------------
 
-kol_vo_slov = 813
+kol_vo_slov = 1865
 
 #----------------------
 
