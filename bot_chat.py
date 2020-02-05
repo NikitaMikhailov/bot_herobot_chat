@@ -740,14 +740,17 @@ def mainfunc():
 
 
                     elif (event.obj.text == '!крокодил стата' or event.obj.text == '! крокодил стата'):
-                        f = open('/root/bot_herobot_chat/resurses/crocodile_files/stat.txt', 'r')
+                        f = open('/root/bot_herobot_chat/resurses/crocodile_files/stat1.txt', 'r')
                         dism = {}
                         for line in f:
-                            if line in dism:
-                                dism[line] += 1
-                            else:
-                                dism[line] = 1
+                            g=line.split("***")
+                            if str(event.chat_id) == g[1][:-1:]:
+                                if g[0] in dism:
+                                    dism[g[0]] += 1
+                                else:
+                                    dism[g[0]] = 1
                         f.close()
+
                         mat = []
                         kolp = []
                         for i in dism:
@@ -764,8 +767,8 @@ def mainfunc():
                                     number_2 = ''
                                     for k in str(dism[j]):
                                         number_2 += smile[k]
-                                    fio_1 = requests.get("https://api.vk.com/method/users.get?user_ids=" + str(j)[
-                                                                                                           :-1:] + "&fields=bdate&access_token=b78c719302827104f6346bd3b63df9edd8dee2ef58f84a4e1a4f108cb149fed5d2d53c795ae00ee69f419&v=5.92")
+                                    fio_1 = requests.get("https://api.vk.com/method/users.get?user_ids=" + str(j)
+                                                         + "&fields=bdate&access_token=b78c719302827104f6346bd3b63df9edd8dee2ef58f84a4e1a4f108cb149fed5d2d53c795ae00ee69f419&v=5.92")
                                     first_name_1 = fio_1.text[14::].split(',')[1].split(':')[1][1:-1:]
                                     last_name_1 = fio_1.text[14::].split(',')[2].split(':')[1][1:-1:]
                                     mat.append(first_name_1 + ' ' + last_name_1 + ': ' + str(number_2) + ' раз(а) угадал слово.\n')
