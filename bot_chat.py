@@ -782,7 +782,7 @@ def mainfunc():
                             message=mat
                         )
 
-                    elif (event.obj.text == '!маты' or event.obj.text == '! маты') and event.obj.from_id == 195310233:
+                    elif (event.obj.text == '!маты' or event.obj.text == '! маты'):
                         f = open('resurses/mat.txt', 'r')
                         dism = {}
                         for line in f:
