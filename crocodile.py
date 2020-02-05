@@ -18,7 +18,7 @@ upload = VkUpload(vk_session)
 
 #----------------------
 
-kol_vo_slov = 813
+kol_vo_slov = 1865
 
 #----------------------
 
@@ -77,7 +77,7 @@ igra_okonchena = False
 igra_nachata = False
 
 
-'''
+
 f=open("resurses/crocodile_files/crocodile_hard1.txt", mode="r",encoding="utf-8")
 k=0
 for line in f:
@@ -85,7 +85,7 @@ for line in f:
 print(k)
 print(f.encoding)
 f.close()
-'''
+
 
 keyboardemh = VkKeyboard(one_time=False, inline=True)
 
@@ -271,7 +271,7 @@ for event in longpoll.listen():
                     slovo = ""
 
                     f1 = open('/root/bot_herobot_chat/resurses/crocodile_files/stat.txt', 'a') #/root/bot_herobot_chat/
-                    f1.write(str(winner_id) + '\n')
+                    f1.write(str(winner_id) + '***' +str(event.chat_id) +'\n')
                     f1.close()
 
                     sent_message_chat("У угадавшего есть 30 секунд, чтобы стать ведущим!", event.chat_id, keyboardcroc.get_keyboard())
@@ -280,7 +280,7 @@ for event in longpoll.listen():
                     igra_okonchena = True
                     time_end = time.time()
                     try:
-                        message_id=sent_message_ls("проверка",int(winner_id),keyboardcroc.get_empty_keyboard())
+                        message_id=sent_message_ls("&#8203;",int(winner_id),keyboardcroc.get_empty_keyboard())
                         rt = requests.get('https://api.vk.com/method/messages.delete?message_ids=' + str(
                             message_id) + '&delete_for_all=1&access_token=b78c719302827104f6346bd3b63df9edd8dee2ef58f84a4e1a4f108cb149fed5d2d53c795ae00ee69f419&v=5.92')
                     except:
