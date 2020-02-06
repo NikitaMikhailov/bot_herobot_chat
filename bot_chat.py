@@ -345,6 +345,7 @@ def mainfunc():
 
                 # получение даты рождения, имени и фамилии
                 if event.from_chat and event.obj.from_id != -183679552:
+                    print(event)
                     fio = requests.get("https://api.vk.com/method/users.get?user_ids=" + str(
                         event.obj.from_id) + "&fields=bdate, city&access_token=b78c719302827104f6346bd3b63df9edd8dee2ef58f84a4e1a4f108cb149fed5d2d53c795ae00ee69f419&v=5.92")
                     first_name = fio.text[14::].split(',')[1].split(':')[1][1:-1:]
@@ -740,7 +741,7 @@ def mainfunc():
 
 
                     elif (event.obj.text == '!крокодил стата' or event.obj.text == '! крокодил стата'):
-                        f = open('/root/bot_herobot_chat/resurses/crocodile_files/stat.txt', 'r')
+                        f = open('/root/bot_herobot_chat/resurses/crocodile_files/stat.txt', 'r') #/root/bot_herobot_chat/
                         dism = {}
                         for line in f:
                             g=line.split("***")
