@@ -18,7 +18,7 @@ upload = VkUpload(vk_session)
 
 #----------------------
 
-kol_vo_slov = 1865
+kol_vo_slov = 3290
 
 #----------------------
 
@@ -51,20 +51,7 @@ def vubor_slova():
     sent_message_ls("Твоё слово: " + messagecit[0].title(), vedus_id, keyboardcet.get_keyboard())
     return [messagecit[1],messagecit[0]]
 
-'''
-f=open("resurses/crocodile_files/crocodile_hard.txt",mode="r")
-f1=open("resurses/crocodile_files/crocodile_hard1.txt",mode="w", encoding="utf-8")
-print(f.encoding)
-print(f1.encoding)
-k=0
-for line in f:
-    k+=1
-    f1.write(line)
-    #print(line.split("***"))
-print(k)
-f.close()
-f1.close()
-'''
+
 #пустая клавиатура keyboard=keyboard1.get_empty_keyboard()
 
 vedus_id = ""
@@ -75,17 +62,6 @@ winner_id = ""
 slovo_ugadano = False
 igra_okonchena = False
 igra_nachata = False
-
-
-'''
-f=open("resurses/crocodile_files/crocodile_hard1.txt", mode="r",encoding="utf-8")
-k=0
-for line in f:
-    k+=1
-print(k)
-print(f.encoding)
-f.close()
-'''
 
 keyboardemh = VkKeyboard(one_time=False, inline=True)
 
@@ -197,8 +173,6 @@ for event in longpoll.listen():
             if (id_chat == "" or id_chat == event.chat_id):
                 if vedus_id == "":
                     sent_message_chat("🐊 Игра крокодил! (beta)", event.chat_id, keyboardcroc.get_keyboard())
-
-                    #------------------------------------------------
                     rt = requests.get('https://api.vk.com/method/messages.getConversationMembers?peer_id=200000000'+
                                       str(event.chat_id) +'&fields=count,items,profiles1&access_token=b78c719302827104f'
                                                           '6346bd3b63df9edd8dee2ef58f84a4e1a4f108cb149fed5d2d53c795ae00ee69f419&v=5.92')
@@ -208,8 +182,6 @@ for event in longpoll.listen():
                         spisok_uchastnikov.append("[id"+str(i['id'])+'|&#8203;]')
                     #print(''.join(spisok_uchastnikov))
                     sent_message_chat("Началась игра крокодил!"+''.join(spisok_uchastnikov), event.chat_id, keyboardcroc.get_empty_keyboard())
-                    #------------------------------------------------
-
                     id_chat = event.chat_id
                     igra_okonchena = False
 

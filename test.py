@@ -42,4 +42,56 @@ zapros = json.loads(rt.text)
 
 for i in (zapros["response"]['profiles']):
     print(i['id'])
+#-------------------------------------------------------------------------------------------------------------
+slov=["q","w","e","r","t","y","u","i","o","p","a","s","d","f","g","h","j","k","l","z","x","c","v","b","n","m"]
+slov1={"q":"","w":"","e":"е","r":"","t":"т","y":"у","u":"","i":"","o":"о","p":"р","a":"а","s":"","d":"","f":"","g":"","h":"н",
+       "j":"","k":"к","l":"","z":"","x":"х","c":"с","v":"","b":"в","n":"","m":"м","-":" ","3":"з"}
+f1 = open("resurses/crocodile_files/new.txt",mode="w",encoding="utf-8")
+f = open("resurses/crocodile_files/baza.txt","r")
+k=f.read()
+k=k.split(") ")
+d=[]
+for i in k:
+    i=i.split(" ")
+    i=i[0].lower()
+    t=''
+    for j in i:
+        if j in slov1:
+            t += slov1[j]
+        else:
+            t += j
+    d.append(t)
+for i in d:
+    for j in i:
+        if j in slov:
+            print(i)
+print(d)
+for i in d:
+    f1.write(i+'\n')
+    #print(t)
+
+
+f1.close()
+f.close()
+#-------------------------------------------------------------------------------------------------------------
+f=open("resurses/crocodile_files/crocodile_hard.txt",mode="r")
+f1=open("resurses/crocodile_files/crocodile_hard1.txt",mode="w", encoding="utf-8")
+print(f.encoding)
+print(f1.encoding)
+k=0
+for line in f:
+    k+=1
+    f1.write(line)
+    #print(line.split("***"))
+print(k)
+f.close()
+f1.close()
+#-------------------------------------------------------------------------------------------------------------
+f=open("resurses/crocodile_files/crocodile_hard1.txt", mode="r",encoding="utf-8")
+k=0
+for line in f:
+    k+=1
+print(k)
+print(f.encoding)
+f.close()
 '''
