@@ -77,7 +77,7 @@ igra_okonchena = False
 igra_nachata = False
 
 
-
+'''
 f=open("resurses/crocodile_files/crocodile_hard1.txt", mode="r",encoding="utf-8")
 k=0
 for line in f:
@@ -85,7 +85,7 @@ for line in f:
 print(k)
 print(f.encoding)
 f.close()
-
+'''
 
 keyboardemh = VkKeyboard(one_time=False, inline=True)
 
@@ -152,7 +152,6 @@ for event in longpoll.listen():
             event.obj.from_id) + "&fields=bdate, city, can_write_private_message&access_token=b78c719302827104f6346bd3b63df9edd8dee2ef58f84a4e1a4f108cb149fed5d2d53c795ae00ee69f419&v=5.92")
         first_name = fio.text[14::].split(',')[1].split(':')[1][1:-1:]
         last_name = fio.text[14::].split(',')[2].split(':')[1][1:-1:]
-        can_write_private_message=(fio.text[14::].split(',')[8].split(':')[1][:1:])
 
         if event.obj.text[:26:] == '[club178949259|ботхеработ]':
             event.obj.text = event.obj.text[27::]

@@ -969,7 +969,7 @@ def mainfunc():
                             inder = 17
                         else:
                             inder = 18
-                        city = event.obj.text[18::]
+                        city = event.obj.text[inder::]
                         result = wheather(city, 0, 0)
                         vk.messages.send(  # Отправляем собщение
                             chat_id=event.chat_id,
