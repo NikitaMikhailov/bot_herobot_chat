@@ -74,18 +74,27 @@ for i in d:
 f1.close()
 f.close()
 #-------------------------------------------------------------------------------------------------------------
-f=open("resurses/crocodile_files/crocodile_hard.txt",mode="r")
-f1=open("resurses/crocodile_files/crocodile_hard1.txt",mode="w", encoding="utf-8")
+'''
+f = open("resurses/crocodile_files/word_rus.txt",mode="r", encoding="utf-8")
+f1 = open("resurses/crocodile_files/word_rus1.txt",mode="w", encoding="utf-8")
 print(f.encoding)
 print(f1.encoding)
-k=0
+k = 0
 for line in f:
-    k+=1
-    f1.write(line)
+    k += 1
+    a = ''
+    for i in line:
+        if i == '-':
+            a += ' '
+        else:
+            a += i
+    #print(line, a)
+    f1.write(a.lower())
     #print(line.split("***"))
 print(k)
 f.close()
 f1.close()
+'''
 #-------------------------------------------------------------------------------------------------------------
 f=open("resurses/crocodile_files/crocodile_hard1.txt", mode="r",encoding="utf-8")
 k=0

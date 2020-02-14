@@ -18,7 +18,7 @@ upload = VkUpload(vk_session)
 
 #----------------------
 
-kol_vo_slov = 3290
+kol_vo_slov = 3290+34010
 
 #----------------------
 
@@ -83,6 +83,7 @@ for event in longpoll.listen():
     if slovo_zagadano is True and time.time() - time_start > 900:
         sent_message_chat("Ведущий не успел объяснить слово, игра окончена!", event.chat_id,
                           keyboardcroc.get_keyboard())
+        sent_message_chat("&#8203;", event.chat_id,keyboard1.get_keyboard())
         vedus_id = ""
         slovo_zagadano = False
         slovo = ""
