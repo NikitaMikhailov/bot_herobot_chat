@@ -5,7 +5,7 @@
 
 from vk_api import VkUpload
 from vk_api.bot_longpoll import VkBotLongPoll, VkBotEventType
-import requests, vk_api, time, random, json
+import requests, vk_api, time, random, json, wikipedia
 from vk_api.utils import get_random_id
 from vk_api.keyboard import VkKeyboard, VkKeyboardColor
 
@@ -303,6 +303,13 @@ for event in longpoll.listen():
             time_start = time.time()
 
         elif str(event.obj.peer_id) == vedus_id and event.obj.text == "❓ что это такое":
+            try:
+                g = wikipedia.page(slovo)
+                opisanie = g.content.split('\n')[0]
+            except wikipedia.exceptions.DisambiguationError as e:
+                k = e.options
+                g = wikipedia.page(k[1])
+                opisanie = g.content.split('\n')[0]
             sent_message_ls(opisanie, vedus_id, keyboardcet.get_empty_keyboard())
 
         elif (event.obj.text == '!рестарт крокодил' or event.obj.text == '! рестарт крокодил') and event.obj.from_id == 195310233:

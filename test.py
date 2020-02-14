@@ -74,7 +74,6 @@ for i in d:
 f1.close()
 f.close()
 #-------------------------------------------------------------------------------------------------------------
-'''
 f = open("resurses/crocodile_files/word_rus.txt",mode="r", encoding="utf-8")
 f1 = open("resurses/crocodile_files/word_rus1.txt",mode="w", encoding="utf-8")
 print(f.encoding)
@@ -94,7 +93,6 @@ for line in f:
 print(k)
 f.close()
 f1.close()
-'''
 #-------------------------------------------------------------------------------------------------------------
 f=open("resurses/crocodile_files/crocodile_hard1.txt", mode="r",encoding="utf-8")
 k=0
@@ -104,3 +102,19 @@ print(k)
 print(f.encoding)
 f.close()
 '''
+import wikipedia
+wikipedia.set_lang("ru")
+'''
+g = wikipedia.search("ансамбль")
+print(g)
+g = wikipedia.page(g[0])
+print(g)
+'''
+try:
+    g = wikipedia.page("амбразура")
+    print(g.content.split('\n')[0])
+except wikipedia.exceptions.DisambiguationError as e:
+    k = e.options
+    g = wikipedia.page(k[1])
+    print(g.content.split('\n')[0])
+
