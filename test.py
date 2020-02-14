@@ -101,20 +101,30 @@ for line in f:
 print(k)
 print(f.encoding)
 f.close()
-'''
+#-------------------------------------------------------------------------------------------------------------
 import wikipedia
 wikipedia.set_lang("ru")
-'''
+#-----------
 g = wikipedia.search("ансамбль")
 print(g)
 g = wikipedia.page(g[0])
 print(g)
-'''
+#-----------
 try:
-    g = wikipedia.page("амбразура")
+    g = wikipedia.page("Миропорядок")
     print(g.content.split('\n')[0])
 except wikipedia.exceptions.DisambiguationError as e:
     k = e.options
+    print(k)
     g = wikipedia.page(k[1])
     print(g.content.split('\n')[0])
-
+#-------------------------------------------------------------------------------------------------------------
+import requests
+slovo = "фрахтовка"
+f = requests.get('https://ru.wiktionary.org/wiki/'+slovo)
+print(f.text)
+#-------------------------------------------------------------------------------------------------------------
+'''
+import wikipedia
+wikipedia.set_lang("ru")
+print(wikipedia.summary("наука"))

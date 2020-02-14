@@ -305,6 +305,8 @@ for event in longpoll.listen():
         elif str(event.obj.peer_id) == vedus_id and event.obj.text == "❓ что это такое":
             wikipedia.set_lang("ru")
             try:
+                opisanie = wikipedia.summary(slovo).split("\n")[0]
+                '''
                 try:
                     g = wikipedia.page(slovo)
                     opisanie = g.content.split('\n')[0]
@@ -312,6 +314,7 @@ for event in longpoll.listen():
                     k = e.options
                     g = wikipedia.page(k[1])
                     opisanie = g.content.split('\n')[0]
+                '''
             except:
                 opisanie = "Для данного слова нет описания 😔"
             sent_message_ls(opisanie, vedus_id, keyboardcet.get_empty_keyboard())
