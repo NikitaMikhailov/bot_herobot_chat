@@ -303,13 +303,17 @@ for event in longpoll.listen():
             time_start = time.time()
 
         elif str(event.obj.peer_id) == vedus_id and event.obj.text == "❓ что это такое":
+            wikipedia.set_lang("ru")
             try:
-                g = wikipedia.page(slovo)
-                opisanie = g.content.split('\n')[0]
-            except wikipedia.exceptions.DisambiguationError as e:
-                k = e.options
-                g = wikipedia.page(k[1])
-                opisanie = g.content.split('\n')[0]
+                try:
+                    g = wikipedia.page(slovo)
+                    opisanie = g.content.split('\n')[0]
+                except wikipedia.exceptions.DisambiguationError as e:
+                    k = e.options
+                    g = wikipedia.page(k[1])
+                    opisanie = g.content.split('\n')[0]
+            except:
+                opisanie = "Для данного слова нет описания 😔"
             sent_message_ls(opisanie, vedus_id, keyboardcet.get_empty_keyboard())
 
         elif (event.obj.text == '!рестарт крокодил' or event.obj.text == '! рестарт крокодил') and event.obj.from_id == 195310233:
