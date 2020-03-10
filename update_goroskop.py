@@ -2,7 +2,7 @@ from vk_api.utils import get_random_id
 from vk_api.bot_longpoll import VkBotLongPoll, VkBotEventType
 import bs4, random, requests, vk_api
 
-f=open('token.txt','r')
+f=open('/root/bot_herobot_chat/token.txt','r')
 token=f.read()
 f.close()
 

@@ -10,7 +10,7 @@ from vk_api.utils import get_random_id
 from vk_api.keyboard import VkKeyboard, VkKeyboardColor
 
 #защита от пидарасов
-f=open('token.txt','r')
+f=open('/root/bot_herobot_chat/token.txt','r')
 token=f.read()
 f.close()
 

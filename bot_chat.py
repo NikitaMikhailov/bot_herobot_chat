@@ -34,7 +34,7 @@ fltm2 = False
 flaggoroscop = False
 
 #защита от пидарасов
-f=open('token.txt','r')
+f=open('/root/bot_herobot_chat/token.txt','r')
 token=f.read()
 f.close()
 

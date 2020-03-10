@@ -8,7 +8,7 @@ from vk_api.bot_longpoll import VkBotLongPoll, VkBotEventType
 from vk_api import VkUpload
 import random, requests, vk_api, time
 
-f=open('token.txt','r')
+f=open('/root/bot_herobot_chat/token.txt','r')
 token=f.read()
 f.close()
 
