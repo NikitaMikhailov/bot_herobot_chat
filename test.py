@@ -20,7 +20,7 @@ from vk_api.utils import get_random_id
 from vk_api.keyboard import VkKeyboard, VkKeyboardColor
 
 session = requests.Session()
-vk_session = vk_api.VkApi(token='b78c719302827104f6346bd3b63df9edd8dee2ef58f84a4e1a4f108cb149fed5d2d53c795ae00ee69f419')
+vk_session = vk_api.VkApi(token='705c3fcc0cfb0bdcf449d510b3ec247f114169fefc6166dcdd6e0103c9149ed6348f60178513c0b4aadae')
 longpoll = VkBotLongPoll(vk_session, '178949259')
 vk = vk_session.get_api()
 upload = VkUpload(vk_session)
@@ -85,6 +85,7 @@ for line in f:
     for i in line:
         if i == '-':
             a += ' '
+
         else:
             a += i
     #print(line, a)
@@ -124,7 +125,25 @@ slovo = "фрахтовка"
 f = requests.get('https://ru.wiktionary.org/wiki/'+slovo)
 print(f.text)
 #-------------------------------------------------------------------------------------------------------------
-'''
 import wikipedia
 wikipedia.set_lang("ru")
 print(wikipedia.summary("наука"))
+#-------------------------------------------------------------------------------------------------------------
+import requests
+slovo = "время"
+key = "dict.1.1.20200214T095827Z.292b7555a3b6a6c5.47588341e06fd43416f84a5289a1f9705c585875"
+f= requests.get('https://dictionary.yandex.net/api/v1/dicservice.json/lookup?key='+ key +'&lang=ru-ru&text='+slovo)
+print(f.text)
+#-------------------------------------------------------------------------------------------------------------
+'''
+import  requests,bs4
+slovo = "улица"
+f = requests.get('https://ru.wiktionary.org/wiki/' + slovo)
+f.encoding = 'utf-8'
+#print(f.text)
+k=(bs4.BeautifulSoup(f.text,"html.parser"))
+#print(k.find(id="Значение"))
+k=k.prettify()
+r=f.text.index('class="mw-headline" id="Значение"')
+g=f.text[r::].index('\n')
+print(f.text[r::].split('\n')[1])

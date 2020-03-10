@@ -11,7 +11,7 @@ from vk_api.keyboard import VkKeyboard, VkKeyboardColor
 
 
 session = requests.Session()
-vk_session = vk_api.VkApi(token='b78c719302827104f6346bd3b63df9edd8dee2ef58f84a4e1a4f108cb149fed5d2d53c795ae00ee69f419')
+vk_session = vk_api.VkApi(token='705c3fcc0cfb0bdcf449d510b3ec247f114169fefc6166dcdd6e0103c9149ed6348f60178513c0b4aadae')
 longpoll = VkBotLongPoll(vk_session, '178949259')
 vk = vk_session.get_api()
 upload = VkUpload(vk_session)
@@ -42,7 +42,7 @@ def sent_message_ls(text, user_id, keyboard):
 
 def vubor_slova():
     cit = random.randint(0, kol_vo_slov - 1)
-    for linenum, line in enumerate(open("/root/bot_herobot_chat/resurses/crocodile_files/crocodile_hard1.txt",mode="r", encoding="utf-8")): #/root/bot_herobot_chat/resurses/
+    for linenum, line in enumerate(open("resurses/crocodile_files/crocodile_hard1.txt",mode="r", encoding="utf-8")): #/root/bot_herobot_chat/resurses/
         if linenum == cit:
             messagecit = (line.strip())
     messagecit = messagecit.split("***")
@@ -83,7 +83,6 @@ for event in longpoll.listen():
     if slovo_zagadano is True and time.time() - time_start > 900:
         sent_message_chat("Ведущий не успел объяснить слово, игра окончена!", event.chat_id,
                           keyboardcroc.get_keyboard())
-        sent_message_chat("&#8203;", event.chat_id,keyboard1.get_keyboard())
         vedus_id = ""
         slovo_zagadano = False
         slovo = ""
@@ -159,16 +158,22 @@ for event in longpoll.listen():
         input_text = text
 
         if (event.obj.text == '!рестарт крокодил' or event.obj.text == '! рестарт крокодил') and event.obj.from_id == 195310233:
-            sent_message_chat("Крокодил сброшен!", event.chat_id, keyboard1.get_keyboard())
+            if igra_nachata is True:
+                sent_message_chat("Крокодил сброшен!", event.chat_id, keyboard1.get_empty_keyboard())
+                sent_message_chat("🐊 Игра крокодил! (beta)", event.chat_id, keyboardcroc.get_keyboard())
 
-            vedus_id = ""
-            slovo_zagadano = False
-            id_chat = ""
-            slovo = ""
-            winner_id = ""
-            slovo_ugadano = False
+                vedus_id = ""
+                slovo_zagadano = False
+                id_chat = ""
+                slovo = ""
+                winner_id = ""
+                slovo_ugadano = False
+
+                id_chat = event.chat_id
             igra_okonchena = False
-            igra_nachata = False
+            igra_nachata = True
+            time_start_croc = time.time()
+
 
         if event.obj.text == '!крокодил' or event.obj.text == '! крокодил':
             if (id_chat == "" or id_chat == event.chat_id):
@@ -256,7 +261,7 @@ for event in longpoll.listen():
                     slovo_zagadano = False
                     slovo = ""
 
-                    f1 = open('/root/bot_herobot_chat/resurses/crocodile_files/stat.txt', 'a') #/root/bot_herobot_chat/
+                    f1 = open('resurses/crocodile_files/stat.txt', 'a') #/root/bot_herobot_chat/
                     f1.write(str(winner_id) + '***' +str(event.chat_id) +'\n')
                     f1.close()
 
@@ -273,7 +278,7 @@ for event in longpoll.listen():
                         time_end = time.time()-30
                 else:
 
-                    f1 = open('/root/bot_herobot_chat/resurses/crocodile_files/stat.txt','r')  # /root/bot_herobot_chat/
+                    f1 = open('resurses/crocodile_files/stat.txt','r')  # /root/bot_herobot_chat/
                     flag_udalil_ochko = False
                     spisok_pobed = []
                     for line in f1:
@@ -283,7 +288,7 @@ for event in longpoll.listen():
                         else:
                             spisok_pobed.append(line)
                     f1.close()
-                    f1 = open('/root/bot_herobot_chat/resurses/crocodile_files/stat.txt','w')  # /root/bot_herobot_chat/
+                    f1 = open('resurses/crocodile_files/stat.txt','w')  # /root/bot_herobot_chat/
                     f1.write(''.join(spisok_pobed))
                     f1.close()
 
