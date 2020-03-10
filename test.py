@@ -20,7 +20,7 @@ from vk_api.utils import get_random_id
 from vk_api.keyboard import VkKeyboard, VkKeyboardColor
 
 session = requests.Session()
-vk_session = vk_api.VkApi(token='705c3fcc0cfb0bdcf449d510b3ec247f114169fefc6166dcdd6e0103c9149ed6348f60178513c0b4aadae')
+vk_session = vk_api.VkApi(token='')
 longpoll = VkBotLongPoll(vk_session, '178949259')
 vk = vk_session.get_api()
 upload = VkUpload(vk_session)

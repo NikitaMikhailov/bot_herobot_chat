@@ -33,8 +33,14 @@ fltm1 = False
 fltm2 = False
 flaggoroscop = False
 
+#защита от пидарасов
+f=open('token.txt','r')
+token=f.read()
+f.close()
+
+
 session = requests.Session()
-vk_session = vk_api.VkApi(token='2956d05b8c9adc4484a001badf6a58db1a8377e650be4fe6a2aefc1f6fe4db011f184e71dbf82dd3b96a9')
+vk_session = vk_api.VkApi(token=token)
 longpoll = VkBotLongPoll(vk_session, '178949259')
 vk = vk_session.get_api()
 upload = VkUpload(vk_session)
@@ -347,7 +353,7 @@ def mainfunc():
                 if event.from_chat and event.obj.from_id != -183679552:
                     print(event)
                     fio = requests.get("https://api.vk.com/method/users.get?user_ids=" + str(
-                        event.obj.from_id) + "&fields=bdate, city&access_token=2956d05b8c9adc4484a001badf6a58db1a8377e650be4fe6a2aefc1f6fe4db011f184e71dbf82dd3b96a9&v=5.92")
+                        event.obj.from_id) + "&fields=bdate, city&access_token="+token+"&v=5.92")
                     first_name = fio.text[14::].split(',')[1].split(':')[1][1:-1:]
                     last_name = fio.text[14::].split(',')[2].split(':')[1][1:-1:]
                     try:
@@ -769,7 +775,7 @@ def mainfunc():
                                     for k in str(dism[j]):
                                         number_2 += smile[k]
                                     fio_1 = requests.get("https://api.vk.com/method/users.get?user_ids=" + str(j)
-                                                         + "&fields=bdate&access_token=2956d05b8c9adc4484a001badf6a58db1a8377e650be4fe6a2aefc1f6fe4db011f184e71dbf82dd3b96a9&v=5.92")
+                                                         + "&fields=bdate&access_token="+token+"&v=5.92")
                                     first_name_1 = fio_1.text[14::].split(',')[1].split(':')[1][1:-1:]
                                     last_name_1 = fio_1.text[14::].split(',')[2].split(':')[1][1:-1:]
                                     mat.append(first_name_1 + ' ' + last_name_1 + ': ' + str(number_2) + ' раз(а) угадал слово.\n')
@@ -809,7 +815,7 @@ def mainfunc():
                                     for k in str(dism[j]):
                                         number_2 += smile[k]
                                     fio_1 = requests.get("https://api.vk.com/method/users.get?user_ids=" + str(j)[
-                                                                                                           :-1:] + "&fields=bdate&access_token=2956d05b8c9adc4484a001badf6a58db1a8377e650be4fe6a2aefc1f6fe4db011f184e71dbf82dd3b96a9&v=5.92")
+                                                                                                           :-1:] + "&fields=bdate&access_token="+token+"&v=5.92")
                                     first_name_1 = fio_1.text[14::].split(',')[1].split(':')[1][1:-1:]
                                     last_name_1 = fio_1.text[14::].split(',')[2].split(':')[1][1:-1:]
                                     mat.append(first_name_1 + ' ' + last_name_1 + ': ' + str(number_2) + ' раз(а)\n')

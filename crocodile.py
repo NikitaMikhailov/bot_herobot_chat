@@ -9,9 +9,13 @@ import requests, vk_api, time, random, json, wikipedia
 from vk_api.utils import get_random_id
 from vk_api.keyboard import VkKeyboard, VkKeyboardColor
 
+#защита от пидарасов
+f=open('token.txt','r')
+token=f.read()
+f.close()
 
 session = requests.Session()
-vk_session = vk_api.VkApi(token='2956d05b8c9adc4484a001badf6a58db1a8377e650be4fe6a2aefc1f6fe4db011f184e71dbf82dd3b96a9')
+vk_session = vk_api.VkApi(token=token)
 longpoll = VkBotLongPoll(vk_session, '178949259')
 vk = vk_session.get_api()
 upload = VkUpload(vk_session)
@@ -126,8 +130,7 @@ for event in longpoll.listen():
         event.obj.text = event.obj.text.lower()
 
         fio = requests.get("https://api.vk.com/method/users.get?user_ids=" + str(
-            event.obj.from_id) + "&fields=bdate, city, can_write_private_message&access_token=2956d05b8c9adc4484a001bad"
-                                 "f6a58db1a8377e650be4fe6a2aefc1f6fe4db011f184e71dbf82dd3b96a9&v=5.92")
+            event.obj.from_id) + "&fields=bdate, city, can_write_private_message&access_token="+token+"&v=5.92")
         first_name = fio.text[14::].split(',')[1].split(':')[1][1:-1:]
         last_name = fio.text[14::].split(',')[2].split(':')[1][1:-1:]
 
@@ -180,8 +183,7 @@ for event in longpoll.listen():
                 if vedus_id == "":
                     sent_message_chat("🐊 Игра крокодил! (beta)", event.chat_id, keyboardcroc.get_keyboard())
                     rt = requests.get('https://api.vk.com/method/messages.getConversationMembers?peer_id=200000000'+
-                                      str(event.chat_id) +'&fields=count,items,profiles1&access_token=2956d05b8c9adc4'
-                                                          '484a001badf6a58db1a8377e650be4fe6a2aefc1f6fe4db011f184e71dbf82dd3b96a9&v=5.92')
+                                      str(event.chat_id) +'&fields=count,items,profiles1&access_token='+token+'&v=5.92')
                     zapros = json.loads(rt.text)
                     spisok_uchastnikov = []
                     for i in (zapros["response"]['profiles']):
@@ -273,7 +275,7 @@ for event in longpoll.listen():
                     try:
                         message_id=sent_message_ls("&#8203;",int(winner_id),keyboardcroc.get_empty_keyboard())
                         rt = requests.get('https://api.vk.com/method/messages.delete?message_ids=' + str(
-                            message_id) + '&delete_for_all=1&access_token=2956d05b8c9adc4484a001badf6a58db1a8377e650be4fe6a2aefc1f6fe4db011f184e71dbf82dd3b96a9&v=5.92')
+                            message_id) + '&delete_for_all=1&access_token='+token+'&v=5.92')
                     except:
                         time_end = time.time()-30
                 else:
