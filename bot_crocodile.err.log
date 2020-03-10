@@ -3984,3 +3984,83 @@ Traceback (most recent call last):
   File "/usr/local/lib/python3.5/dist-packages/vk_api/vk_api.py", line 646, in method
     raise error
 vk_api.exceptions.ApiError: [27] Group authorization failed: group revoke access for this token.
+Traceback (most recent call last):
+  File "crocodile.py", line 19, in <module>
+    longpoll = VkBotLongPoll(vk_session, '178949259')
+  File "/usr/local/lib/python3.5/dist-packages/vk_api/bot_longpoll.py", line 218, in __init__
+    self.update_longpoll_server()
+  File "/usr/local/lib/python3.5/dist-packages/vk_api/bot_longpoll.py", line 231, in update_longpoll_server
+    response = self.vk.method('groups.getLongPollServer', values)
+  File "/usr/local/lib/python3.5/dist-packages/vk_api/vk_api.py", line 646, in method
+    raise error
+vk_api.exceptions.ApiError: [5] User authorization failed: invalid access_token (4).
+Traceback (most recent call last):
+  File "crocodile.py", line 19, in <module>
+    longpoll = VkBotLongPoll(vk_session, '178949259')
+  File "/usr/local/lib/python3.5/dist-packages/vk_api/bot_longpoll.py", line 218, in __init__
+    self.update_longpoll_server()
+  File "/usr/local/lib/python3.5/dist-packages/vk_api/bot_longpoll.py", line 231, in update_longpoll_server
+    response = self.vk.method('groups.getLongPollServer', values)
+  File "/usr/local/lib/python3.5/dist-packages/vk_api/vk_api.py", line 646, in method
+    raise error
+vk_api.exceptions.ApiError: [5] User authorization failed: invalid access_token (4).
+Traceback (most recent call last):
+  File "crocodile.py", line 19, in <module>
+    longpoll = VkBotLongPoll(vk_session, '178949259')
+  File "/usr/local/lib/python3.5/dist-packages/vk_api/bot_longpoll.py", line 218, in __init__
+    self.update_longpoll_server()
+  File "/usr/local/lib/python3.5/dist-packages/vk_api/bot_longpoll.py", line 231, in update_longpoll_server
+    response = self.vk.method('groups.getLongPollServer', values)
+  File "/usr/local/lib/python3.5/dist-packages/vk_api/vk_api.py", line 646, in method
+    raise error
+vk_api.exceptions.ApiError: [5] User authorization failed: invalid access_token (4).
+Traceback (most recent call last):
+  File "crocodile.py", line 19, in <module>
+    longpoll = VkBotLongPoll(vk_session, '178949259')
+  File "/usr/local/lib/python3.5/dist-packages/vk_api/bot_longpoll.py", line 218, in __init__
+    self.update_longpoll_server()
+  File "/usr/local/lib/python3.5/dist-packages/vk_api/bot_longpoll.py", line 231, in update_longpoll_server
+    response = self.vk.method('groups.getLongPollServer', values)
+  File "/usr/local/lib/python3.5/dist-packages/vk_api/vk_api.py", line 646, in method
+    raise error
+vk_api.exceptions.ApiError: [5] User authorization failed: invalid access_token (4).
+Traceback (most recent call last):
+  File "crocodile.py", line 19, in <module>
+    longpoll = VkBotLongPoll(vk_session, '178949259')
+  File "/usr/local/lib/python3.5/dist-packages/vk_api/bot_longpoll.py", line 218, in __init__
+    self.update_longpoll_server()
+  File "/usr/local/lib/python3.5/dist-packages/vk_api/bot_longpoll.py", line 231, in update_longpoll_server
+    response = self.vk.method('groups.getLongPollServer', values)
+  File "/usr/local/lib/python3.5/dist-packages/vk_api/vk_api.py", line 646, in method
+    raise error
+vk_api.exceptions.ApiError: [5] User authorization failed: invalid access_token (4).
+Traceback (most recent call last):
+  File "crocodile.py", line 19, in <module>
+    longpoll = VkBotLongPoll(vk_session, '178949259')
+  File "/usr/local/lib/python3.5/dist-packages/vk_api/bot_longpoll.py", line 218, in __init__
+    self.update_longpoll_server()
+  File "/usr/local/lib/python3.5/dist-packages/vk_api/bot_longpoll.py", line 231, in update_longpoll_server
+    response = self.vk.method('groups.getLongPollServer', values)
+  File "/usr/local/lib/python3.5/dist-packages/vk_api/vk_api.py", line 646, in method
+    raise error
+vk_api.exceptions.ApiError: [5] User authorization failed: invalid access_token (4).
+Traceback (most recent call last):
+  File "crocodile.py", line 19, in <module>
+    longpoll = VkBotLongPoll(vk_session, '178949259')
+  File "/usr/local/lib/python3.5/dist-packages/vk_api/bot_longpoll.py", line 218, in __init__
+    self.update_longpoll_server()
+  File "/usr/local/lib/python3.5/dist-packages/vk_api/bot_longpoll.py", line 231, in update_longpoll_server
+    response = self.vk.method('groups.getLongPollServer', values)
+  File "/usr/local/lib/python3.5/dist-packages/vk_api/vk_api.py", line 646, in method
+    raise error
+vk_api.exceptions.ApiError: [5] User authorization failed: invalid access_token (4).
+Traceback (most recent call last):
+  File "crocodile.py", line 19, in <module>
+    longpoll = VkBotLongPoll(vk_session, '178949259')
+  File "/usr/local/lib/python3.5/dist-packages/vk_api/bot_longpoll.py", line 218, in __init__
+    self.update_longpoll_server()
+  File "/usr/local/lib/python3.5/dist-packages/vk_api/bot_longpoll.py", line 231, in update_longpoll_server
+    response = self.vk.method('groups.getLongPollServer', values)
+  File "/usr/local/lib/python3.5/dist-packages/vk_api/vk_api.py", line 646, in method
+    raise error
+vk_api.exceptions.ApiError: [5] User authorization failed: invalid access_token (4).
