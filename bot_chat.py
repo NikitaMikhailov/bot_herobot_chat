@@ -629,6 +629,7 @@ def mainfunc():
 
                     # обработка срока армии Антона(нужно доделать прогресс бар)
                     elif event.obj.text == '!антон' or event.obj.text == '! антон':
+                        '''
                         aa = datetime.date.today()
                         bb = datetime.date(2020, 7, 3)
                         cc = bb - aa
@@ -664,6 +665,14 @@ def mainfunc():
                             message='Антон вернётся к нам через ' + str(dateAntonfinish) + ' ' + Antontime(
                                 dateAntonfinish) + '\nОн уже служит ' + str(dateAntonstart) + ' ' + Antontime(
                                 dateAntonstart) + '\nУже прошло ' + str(percent) + '% Aрмии.' + '\n' + progress_bar
+                        )
+                        '''
+
+                        vk.messages.send(  # Отправляем собщение
+                            chat_id=event.chat_id,
+                            random_id=get_random_id(),
+                            attachment='audio195310233_456240687',
+                            message='Антон вернулся к нам, с чем мы его и поздравляем!'
                         )
 
                     # обработка однословных команд бота
