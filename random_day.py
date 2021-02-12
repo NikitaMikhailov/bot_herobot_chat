@@ -4,12 +4,22 @@
 #!/bin/sh -
 
 from vk_api.utils import get_random_id
-from vk_api.bot_longpoll import VkBotLongPoll, VkBotEventType
+from vk_api.bot_longpoll import VkBotLongPoll
 from vk_api import VkUpload
-import random, requests, vk_api, time
+import random
+import requests
+import vk_api
+import time
+import bot_functions
+import bot_variable
 
-f=open('/root/bot_herobot_chat/token.txt','r')
-token=f.read()
+if bot_variable.flag_repository:
+    start_path = ""
+else:
+    start_path = '/root/bot_herobot_chat/'
+
+f = open('{}token.txt'.format(start_path), 'r')
+token = f.read()
 f.close()
 
 session = requests.Session()
@@ -18,17 +28,15 @@ longpoll = VkBotLongPoll(vk_session, '178949259')
 vk = vk_session.get_api()
 upload = VkUpload(vk_session)
 
-spisok_chata = {195310233:"Никита Михайлов",38375746:"Антон Фокин",120727528:"Ольга Меркулова",51556033:"Петр Евдокимов",
-                  13069991:"Андрей Петранов",20765196:"Катя Горюнова",109828457:"Александр Маслов",206947265:"Fidl Di-Di",
-                  12403758:"Вика Карпеева",135053737:"Анастасия Живых"}
-pidor_id = random.choice(list(spisok_chata.keys()))
-pidor = spisok_chata[pidor_id]
 
-f1 = open('/root/bot_herobot_chat/resurses/pidors.txt', 'a')
+pidor_id = random.choice(list(bot_variable.spisok_chata.keys()))
+pidor = bot_variable.spisok_chata[pidor_id]
+
+f1 = open('{}resurses/pidors.txt'.format(start_path), 'a')
 f1.write(str(pidor_id)+'\n')
 f1.close()
 
-f1 = open('/root/bot_herobot_chat/resurses/pidor_today.txt', 'w')
+f1 = open('{}resurses/pidor_today.txt'.format(start_path), 'w')
 f1.write(str(pidor))
 f1.close()
 

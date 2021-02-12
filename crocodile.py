@@ -130,9 +130,9 @@ for event in longpoll.listen():
         event.obj.text = event.obj.text.lower()
 
         fio = requests.get("https://api.vk.com/method/users.get?user_ids=" + str(
-            event.obj.from_id) + "&fields=bdate, city, can_write_private_message&access_token="+token+"&v=5.92")
-        first_name = fio.text[14::].split(',')[1].split(':')[1][1:-1:]
-        last_name = fio.text[14::].split(',')[2].split(':')[1][1:-1:]
+            event.obj.from_id) + "&fields=bdate, city, can_write_private_message&access_token="+token+"&v=5.92").json()
+        first_name = fio["response"][0]["first_name"]
+        last_name = fio["response"][0]["last_name"]
 
         if event.obj.text[:26:] == '[club178949259|ботхеработ]':
             event.obj.text = event.obj.text[27::]
