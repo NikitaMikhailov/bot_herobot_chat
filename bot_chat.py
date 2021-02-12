@@ -579,17 +579,6 @@ def mainfunc(event):
             )
 
         elif text_message.replace(" ", "") == '!пидоры' and (event.chat_id == 1 or event.chat_id == 5):
-            spisok_chata = {195310233: "Никита Михайлов",
-                            38375746: "Антон Фокин",
-                            120727528: "Ольга Меркулова",
-                            51556033: "Петр Евдокимов",
-                            13069991: "Андрей Петранов",
-                            20765196: "Катя Евдокимова",
-                            109828457: "Александр Маслов",
-                            206947265: "Fidl Di-Di",
-                            12403758: "Вика Карпеева",
-                            135053737: "Анастасия Живых",
-                            36611284: "Андрей Коваленко"}
             pidors = open('resurses/pidors.txt', 'r')
             dism = {}
             for line in pidors:
@@ -598,7 +587,7 @@ def mainfunc(event):
                 else:
                     dism[line] = 1
             pidors.close()
-            for i in spisok_chata:
+            for i in bot_variable.spisok_chata:
                 if str(i) not in dism:
                     dism[i] = 0
             pidors_1 = []
@@ -613,13 +602,13 @@ def mainfunc(event):
                 for j in dism:
                     if j == '' or j == '\n':
                         continue
-                    if str(dism[j]) == str(i) and j not in jstr and spisok_chata[int(j)] not in nstr:
-                        nstr.append(spisok_chata[int(j)])
+                    if str(dism[j]) == str(i) and j not in jstr and bot_variable.spisok_chata[int(j)] not in nstr:
+                        nstr.append(bot_variable.spisok_chata[int(j)])
                         jstr.append(j)
                         number_1 = ''
                         for k in str(dism[j]):
                             number_1 += smile[k]
-                        pidors_1.append(spisok_chata[int(j)] + ': ' + number_1 + ' раз(а)\n')
+                        pidors_1.append(bot_variable.spisok_chata[int(j)] + ': ' + number_1 + ' раз(а)\n')
 
             for i in range(0, len(pidors_1)):
                 pidors_1[i] = str(i + 1) + ") " + pidors_1[i]
@@ -636,20 +625,16 @@ def mainfunc(event):
             if flagbddate:
                 bd_date = bd_date.split('.')
                 zodiak = bot_functions.goroscop_user(bd_date)
-                simbol_zodiak = {'aries': '♈', 'taurus': '♉', 'gemini': '♊', 'cancer': '♋', 'leo': '♌',
-                                 'virgo': '♍',
-                                 'libra': '♎', 'scorpio': '♏', 'sagittarius': '♐', 'capricorn': '♑',
-                                 'aquarius': '♒', 'pisces': '♓'}
                 f = open('resurses/goroskop_files/' + zodiak + '.txt', 'r')
                 goroskp = f.read()
                 f.close()
                 vk.messages.send(  # Отправляем собщение
                     chat_id=event.chat_id,
                     random_id=get_random_id(),
-                    message=simbol_zodiak[zodiak] + ' ' + goroskp
+                    message=bot_variable.simbol_zodiak[zodiak] + ' ' + goroskp
                 )
             else:
-                vk.messages.send(  # Отправляем собщение
+                vk.messages.send(
                     chat_id=event.chat_id,
                     random_id=get_random_id(),
                     message='У тебя нет даты Рождения ВК'
@@ -788,7 +773,7 @@ def mainfunc(event):
             a = random.randint(0, 2)
             if random.randint(0, 1) == 1 and event.obj.from_id == 51556033:
                 a = 2
-            vk.messages.send(  # Отправляем собщение
+            vk.messages.send(
                 chat_id=event.chat_id,
                 random_id=get_random_id(),
                 message=bot_variable.list_answer_no[a]
@@ -796,7 +781,7 @@ def mainfunc(event):
 
         elif not flagtime and (text_message[-3::] == "300" or text_message[-6::] == "триста"):
             a = random.randint(0, 4)
-            vk.messages.send(  # Отправляем собщение
+            vk.messages.send(
                 chat_id=event.chat_id,
                 random_id=get_random_id(),
                 message=bot_variable.list_answer_300[a]
@@ -839,6 +824,6 @@ except Exception as err:
     vk.messages.send(
         user_id=195310233,
         random_id=get_random_id(),
-        message='Возникла ошибка: \n{}\nВ bot_herobot_chat.'.format(str(err))
+        message='Возникла ошибка:\n{}\nв bot_herobot_chat.'.format(str(err))
     )
     mainfunc()
