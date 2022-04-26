@@ -146,14 +146,15 @@ def request_forecast(city_id):
     res = requests.get("http://api.openweathermap.org/data/2.5/forecast",
                        params={'id': city_id, 'units': 'metric', 'lang': 'ru', 'APPID': bot_variable.appid})
     data = res.json()
-    # print('city:', data['city']['name'], data['city']['country'])
     result_2 = []
     for i in data['list']:
-        (i['dt_txt'])[:16], \
-        '{0:+3.0f}'.format(i['main']['temp']), \
-        '{0:2.0f}'.format(i['wind']['speed']) + " м/с", \
-        get_wind_direction(i['wind']['deg']), \
-        i['weather'][0]['description']
+        if (i['dt_txt'])[11:16] != '15:00' and (i['dt_txt'])[11:16] != '21:00' and (i['dt_txt'])[11:16] != '03:00' and (i['dt_txt'])[11:16] != '09:00':
+            result_2.append((i['dt_txt'])[8:10] + '.' + (i['dt_txt'])[5:7] + bot_variable.im_text_time[(i['dt_txt'])[11:16]] + \
+                  '{0:+3.0f}'.format(i['main']['temp']) + '°C' + \
+                  '{0:2.0f}'.format(i['wind']['speed']) + " м/с " + \
+                  get_wind_direction(i['wind']['deg']) + ' ' + \
+                  bot_variable.im_text[i['weather'][0]['description']])
+
     return '\n'.join(result_2)
 
 
