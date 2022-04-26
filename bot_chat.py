@@ -69,7 +69,7 @@ if bot_variable.flag_hello_message:
         vk.messages.send(
             chat_id=i,
             random_id=get_random_id(),
-            keyboard=bot_variable.keyboard1.get_keyboard(),
+            keyboard=keyboard1.get_keyboard(),
             message=hello_message
         )
 
@@ -280,7 +280,7 @@ def main(event):
                 chat_id=event.chat_id,
                 random_id=get_random_id(),
                 # attachment='audio195310233_456240687',
-                message='Команда выведена из использования.'
+                message='Ишь, чё вспомнил.'
             )
 
         elif text_message.replace(" ", "") == '!мысль' \
@@ -486,7 +486,6 @@ def main(event):
                         number_2 = ''
                         for k in str(dism[j]):
                             number_2 += smile[k]
-
                         mat.append(bot_functions.name_about_id(j[:-1:])[0] + ' ' +
                                    bot_functions.name_about_id(j[:-1:])[1] + ': ' + str(number_2) + ' раз(а)\n')
 

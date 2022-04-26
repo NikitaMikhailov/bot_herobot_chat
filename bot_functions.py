@@ -23,13 +23,26 @@ f.close()
 
 
 def goroscop_update():
-    for symbol in range(0, 12):
-        file_req = requests.get("http://astroscope.ru/horoskop/ejednevniy_goroskop/" + bot_variable.
-                                spisok_znakov[symbol] + ".html")
-        file_req.encoding = 'utf-8'
-        text_gor = (bs4.BeautifulSoup(file_req.text, "html.parser").find('div', 'col-12'))
-        filegor = open('{}resurses/goroskop_files/{}.txt'.format(start_path, bot_variable.spisok_znakov[symbol]), 'w')
-        filegor.write(str(str(text_gor).split('\n')[2]).lstrip())
+    '''
+    https: // api.vk.com / method / wall.get?owner_id = -193489972 & domain = neural_horo & access_token = 2
+    aa1daed74f8c22f9bdf7ae61a6336799724fbbb102ec7e77e759a112ebf29a808b081524ce7d2824410e & v = 5.131 & offset = 1 & count = 1 & filter = all
+    '''
+
+    f_1 = open('{}token_2.txt'.format(start_path), 'r')
+    token_1 = f_1.read()
+    f_1.close()
+
+    file_req = requests.get("https://api.vk.com/method/wall.get?owner_id=-193489972&domain=neural_horo&access_token=" +
+                                token_1 + "&v=5.131&offset=1&count=1&filter=all").json()
+
+    goroskop_text = (file_req['response']['items'][0]['text']).split('\n')
+    goroskop_text_1 = []
+    for i in goroskop_text:
+        if i != '':
+            goroskop_text_1.append(i)
+    for i in range(12):
+        filegor = open('{}resurses/goroskop_files/{}.txt'.format(start_path, bot_variable.spisok_znakov[i]), 'w', encoding='utf-8')
+        filegor.write(goroskop_text_1[i])
         filegor.close()
 
 
