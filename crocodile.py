@@ -5,13 +5,18 @@
 
 from vk_api import VkUpload
 from vk_api.bot_longpoll import VkBotLongPoll, VkBotEventType
-import requests, vk_api, time, random, json, wikipedia
+import requests
+import vk_api
+import time
+import random
+import json
+import wikipedia
 from vk_api.utils import get_random_id
 from vk_api.keyboard import VkKeyboard, VkKeyboardColor
 
-#защита от пидарасов
-f=open('/root/bot_herobot_chat/token.txt','r')
-token=f.read()
+# защита от пидарасов
+f = open('/root/bot_herobot_chat/token.txt', 'r')
+token = f.read()
 f.close()
 
 session = requests.Session()
@@ -20,11 +25,12 @@ longpoll = VkBotLongPoll(vk_session, '178949259')
 vk = vk_session.get_api()
 upload = VkUpload(vk_session)
 
-#----------------------
+# ----------------------
 
 kol_vo_slov = 3290+34010
 
-#----------------------
+# ----------------------
+
 
 def sent_message_chat(text, chat_id, keyboard):
     vk.messages.send(
@@ -44,9 +50,10 @@ def sent_message_ls(text, user_id, keyboard):
     )
     return message_ids
 
+
 def vubor_slova():
     cit = random.randint(0, kol_vo_slov - 1)
-    for linenum, line in enumerate(open("resurses/crocodile_files/crocodile_hard1.txt",mode="r", encoding="utf-8")): #/root/bot_herobot_chat/resurses/
+    for linenum, line in enumerate(open("resurses/crocodile_files/crocodile_hard1.txt",mode="r", encoding="utf-8")):
         if linenum == cit:
             messagecit = (line.strip())
     messagecit = messagecit.split("***")
@@ -56,7 +63,7 @@ def vubor_slova():
     return [messagecit[1],messagecit[0]]
 
 
-#пустая клавиатура keyboard=keyboard1.get_empty_keyboard()
+# пустая клавиатура keyboard=keyboard1.get_empty_keyboard()
 
 vedus_id = ""
 slovo_zagadano = False
@@ -124,8 +131,9 @@ for event in longpoll.listen():
             id_chat = ""
             igra_nachata = False
 
-    #часть работы в чате
-    if event.type == VkBotEventType.MESSAGE_NEW and event.obj.text and event.from_chat and event.obj.from_id != -183679552:
+    # часть работы в чате
+    if event.type == VkBotEventType.MESSAGE_NEW and event.obj.text and event.from_chat and\
+            event.obj.from_id != -183679552:
         input_text = event.obj.text.lower()
         event.obj.text = event.obj.text.lower()
 
@@ -217,7 +225,8 @@ for event in longpoll.listen():
                         slovo_zagadano = True
                         time_start = time.time()
 
-                        sent_message_chat("Ведущий выбран, это " + first_name+' '+last_name+" , у него есть 15 минут на объяснение!",
+                        sent_message_chat("Ведущий выбран, это " + first_name + ' ' + last_name +
+                                          " , у него есть 15 минут на объяснение!",
                                           event.chat_id, keyboardcroc.get_empty_keyboard())
                     except:
                         sent_message_chat("Чтобы стать ведущим нужно открыть доступ к личным сообщениям для бота!",
@@ -238,7 +247,8 @@ for event in longpoll.listen():
                     vedus_id = str(event.obj.from_id)
                     mass = vubor_slova()
                     sent_message_chat(
-                        first_name + ' ' + last_name + " воспользовался правом стать ведущим, у него есть 15 минут на объяснение!",
+                        first_name + ' ' + last_name +
+                        " воспользовался правом стать ведущим, у него есть 15 минут на объяснение!",
                         event.chat_id, keyboardcroc.get_empty_keyboard())
                     opisanie, slovo = mass[0], mass[1]
                     slovo_zagadano = True
@@ -254,51 +264,56 @@ for event in longpoll.listen():
                 sent_message_chat("Для начала игры пиши !крокодил",event.chat_id, keyboardcroc.get_empty_keyboard())
 
         elif slovo_zagadano is True and id_chat == event.chat_id:
-            if str(input_text) == str(slovo): #and str(event.obj.from_id) != vedus_id:
+            if str(input_text) == str(slovo):  # and str(event.obj.from_id) != vedus_id:
                 if str(event.obj.from_id) != vedus_id:
-                    sent_message_chat("Слово угадано игроком " + first_name + ' ' + last_name + "!", event.chat_id, keyboardcroc.get_empty_keyboard())
+                    sent_message_chat("Слово угадано игроком " + first_name + ' ' + last_name + "!", event.chat_id,
+                                      keyboardcroc.get_empty_keyboard())
 
                     winner_id = str(event.obj.from_id)
                     vedus_id = ""
                     slovo_zagadano = False
                     slovo = ""
 
-                    f1 = open('resurses/crocodile_files/stat.txt', 'a') #/root/bot_herobot_chat/
-                    f1.write(str(winner_id) + '***' +str(event.chat_id) +'\n')
+                    f1 = open('resurses/crocodile_files/stat.txt', 'a')
+                    f1.write(str(winner_id) + '***' + str(event.chat_id) + '\n')
                     f1.close()
 
-                    sent_message_chat("У угадавшего есть 30 секунд, чтобы стать ведущим!", event.chat_id, keyboardcroc.get_keyboard())
+                    sent_message_chat("У угадавшего есть 30 секунд, чтобы стать ведущим!", event.chat_id,
+                                      keyboardcroc.get_keyboard())
 
                     slovo_ugadano = True
                     igra_okonchena = True
                     time_end = time.time()
                     try:
-                        message_id=sent_message_ls("&#8203;",int(winner_id),keyboardcroc.get_empty_keyboard())
+                        message_id = sent_message_ls("&#8203;", int(winner_id), keyboardcroc.get_empty_keyboard())
                         rt = requests.get('https://api.vk.com/method/messages.delete?message_ids=' + str(
                             message_id) + '&delete_for_all=1&access_token='+token+'&v=5.92')
                     except:
                         time_end = time.time()-30
                 else:
 
-                    f1 = open('resurses/crocodile_files/stat.txt','r')  # /root/bot_herobot_chat/
+                    f1 = open('resurses/crocodile_files/stat.txt','r')
                     flag_udalil_ochko = False
                     spisok_pobed = []
                     for line in f1:
-                        if line == str(event.obj.from_id)+"***"+str(event.chat_id)+"\n" and flag_udalil_ochko is False:
+                        if line == str(event.obj.from_id) + "***" + str(event.chat_id) + "\n" and\
+                                flag_udalil_ochko is False:
                             flag_udalil_ochko = True
                             continue
                         else:
                             spisok_pobed.append(line)
                     f1.close()
-                    f1 = open('resurses/crocodile_files/stat.txt','w')  # /root/bot_herobot_chat/
+                    f1 = open('resurses/crocodile_files/stat.txt', 'w')
                     f1.write(''.join(spisok_pobed))
                     f1.close()
 
-                    sent_message_chat(first_name + ' ' + last_name + ", вам защитано нарушение правил игры, у вас стало на одно угаданное слово меньше!",
+                    sent_message_chat(first_name + ' ' + last_name +
+                                      ", вам защитано нарушение правил игры, у вас стало на одно угаданное слово меньше!",
                                       event.chat_id, keyboardcroc.get_empty_keyboard())
 
-    #часть работы в личных сообщениях
-    if event.type == VkBotEventType.MESSAGE_NEW and event.obj.text and event.from_user and event.obj.from_id != -183679552:
+    # часть работы в личных сообщениях
+    if event.type == VkBotEventType.MESSAGE_NEW and event.obj.text and event.from_user and\
+            event.obj.from_id != -183679552:
         input_text = event.obj.text
         event.obj.text = event.obj.text.lower()
 
@@ -326,7 +341,8 @@ for event in longpoll.listen():
                 opisanie = "Для данного слова нет описания 😔"
             sent_message_ls(opisanie, vedus_id, keyboardcet.get_empty_keyboard())
 
-        elif (event.obj.text == '!рестарт крокодил' or event.obj.text == '! рестарт крокодил') and event.obj.from_id == 195310233:
+        elif (event.obj.text == '!рестарт крокодил' or event.obj.text == '! рестарт крокодил') and\
+                event.obj.from_id == 195310233:
             sent_message_ls("Крокодил сброшен!", 195310233, keyboardcet.get_empty_keyboard())
 
             vedus_id = ""

@@ -15,34 +15,6 @@ from vk_api import VkUpload
 from vk_api.bot_longpoll import VkBotLongPoll, VkBotEventType
 from vk_api.keyboard import VkKeyboard, VkKeyboardColor
 
-# -------------------------------------------------------------
-keyboard1 = VkKeyboard(one_time=False)
-keyboard1.add_button('Анекдот', color=VkKeyboardColor.PRIMARY)
-keyboard1.add_button('Погода', color=VkKeyboardColor.PRIMARY)
-keyboard1.add_button('Гороскоп', color=VkKeyboardColor.PRIMARY)
-# -------------------------------------------------------------
-keyboard2 = VkKeyboard(one_time=False)
-keyboard2.add_button('Анекдот', color=VkKeyboardColor.PRIMARY)
-keyboard2.add_button('Погода', color=VkKeyboardColor.PRIMARY)
-keyboard2.add_button('Гороскоп', color=VkKeyboardColor.PRIMARY)
-keyboard2.add_line()
-keyboard2.add_button('Цитата', color=VkKeyboardColor.PRIMARY)
-keyboard2.add_button('Мысль', color=VkKeyboardColor.PRIMARY)
-keyboard2.add_button('Факт', color=VkKeyboardColor.PRIMARY)
-# -------------------------------------------------------------
-keyboard3 = VkKeyboard(one_time=False)
-keyboard3.add_button('Анекдот', color=VkKeyboardColor.PRIMARY)
-keyboard3.add_button('Погода', color=VkKeyboardColor.PRIMARY)
-keyboard3.add_button('Гороскоп', color=VkKeyboardColor.PRIMARY)
-keyboard3.add_line()
-keyboard3.add_button('Цитата', color=VkKeyboardColor.PRIMARY)
-keyboard3.add_button('Мысль', color=VkKeyboardColor.PRIMARY)
-keyboard3.add_button('Факт', color=VkKeyboardColor.PRIMARY)
-keyboard3.add_line()
-keyboard3.add_button('Отстань', color=VkKeyboardColor.NEGATIVE)
-keyboard3.add_button('Вернись', color=VkKeyboardColor.POSITIVE)
-# -------------------------------------------------------------
-
 if bot_variable.flag_repository:
     start_path = ""
 else:
@@ -68,13 +40,14 @@ if bot_variable.flag_hello_message:
         vk.messages.send(
             chat_id=i,
             random_id=get_random_id(),
-            keyboard=keyboard1.get_keyboard(),
+            keyboard=bot_variable.keyboard1.get_keyboard(),
             message=hello_message
         )
 
 
-def mainfunc(event):
+def main(event):
     # эти флаги отвечают за работу со стопом активности бота
+    global like_you, messagecit, anecdot, last_people, flag_eat_2
     flagtime = False
     fltm1 = False
     fltm2 = False
@@ -125,6 +98,13 @@ def mainfunc(event):
         for i in range(len(bot_variable.list_name)):
             if text_message.find(bot_variable.list_name[i]) != -1:
                 flagobr = True
+
+        # флаг на обращение к пидору
+
+        flagobrpidor = False
+        for i in text_message.split(" "):
+            if i == "пидор":
+                flagobrpidor = True
 
         # флаг на триггер к картинке "пить"
 
@@ -199,7 +179,7 @@ def mainfunc(event):
                 f1.close()
             except vk_api.exceptions.VkApiError:
                 vk.messages.send(
-                    user_id=195310233,
+                    user_id=bot_variable.my_id,
                     random_id=get_random_id(),
                     message='Возникла ошибка в доступе к личным сообщениям, id пользователя {} имя пользователя {} {}.'. \
                         format(str(event.obj.from_id), first_name, last_name)
@@ -225,14 +205,14 @@ def mainfunc(event):
             vk.messages.send(
                 chat_id=event.chat_id,
                 random_id=get_random_id(),
-                keyboard=keyboard1.get_keyboard(),
+                keyboard=bot_variable.keyboard1.get_keyboard(),
                 message='Клавиатура тип 1 включена.'
             )
         elif text_message.replace(" ", "") == '!клавиатура2вкл':
             vk.messages.send(
                 chat_id=event.chat_id,
                 random_id=get_random_id(),
-                keyboard=keyboard2.get_keyboard(),
+                keyboard=bot_variable.keyboard2.get_keyboard(),
                 message='Клавиатура тип 2 включена.'
             )
         elif text_message.replace(" ", "") == '!клавиатура3вкл':
@@ -240,7 +220,7 @@ def mainfunc(event):
                 vk.messages.send(
                     chat_id=event.chat_id,
                     random_id=get_random_id(),
-                    keyboard=keyboard3.get_keyboard(),
+                    keyboard=bot_variable.keyboard3.get_keyboard(),
                     message='Клавиатура тип 3 включена.'
                 )
             else:
@@ -253,75 +233,8 @@ def mainfunc(event):
             vk.messages.send(
                 chat_id=event.chat_id,
                 random_id=get_random_id(),
-                keyboard=keyboard1.get_empty_keyboard(),
+                keyboard=bot_variable.keyboard1.get_empty_keyboard(),
                 message='Клавиатура выключена'
-            )
-
-        # обработка выключения бота на время (нужно доделать для разных чатов)
-
-        elif text_message.replace(" ", "") == '!отъебись' and event.chat_id == 1:
-            fltm1 = False
-            stoptime2 = time.time()
-            flagtime = True
-            fltm2 = True
-            vk.messages.send(  # Отправляем собщение
-                chat_id=event.chat_id,
-                random_id=get_random_id(),
-                message='Я ухожу, но обещаю вернуться!\n(На один час)'
-            )
-
-        elif text_message.replace(" ", "") == '!отстань' and event.chat_id == 1 or \
-                text_message == 'отстань' and flkv or text_message == 'отстань' and flkv2:
-            fltm2 = False
-            stoptime1 = time.time()
-            flagtime = True
-            fltm1 = True
-            vk.messages.send(
-                chat_id=event.chat_id,
-                random_id=get_random_id(),
-                message='Я ухожу, но обещаю вернуться!\n(На 10 минут)'
-            )
-
-        elif flagtime and text_message.replace(" ", "") == '!вернись' and \
-                event.chat_id == 1 or flagtime and text_message == 'вернись' and flkv or \
-                flagtime and text_message == 'вернись' and flkv2:
-            flagtime = False
-            fltm1 = False
-            fltm2 = False
-            vk.messages.send(  # Отправляем собщение
-                chat_id=event.chat_id,
-                random_id=get_random_id(),
-                message='Я вернулся!'
-            )
-
-        elif not flagtime and text_message.replace(" ", "") == '!вернись' \
-                and event.chat_id == 1 or not flagtime and text_message == 'вернись' and flkv \
-                or not flagtime and text_message == 'вернись' and flkv2:
-            flagtime = False
-            fltm1 = False
-            fltm2 = False
-            vk.messages.send(  # Отправляем собщение
-                chat_id=event.chat_id,
-                random_id=get_random_id(),
-                message='Я и не уходил от Вас'
-            )
-
-        if fltm1 and flagtime and time.time() - stoptime1 >= 600:
-            flagtime = False
-            fltm1 = False
-            vk.messages.send(  # Отправляем собщение
-                chat_id=event.chat_id,
-                random_id=get_random_id(),
-                message='Я вернулся!'
-            )
-
-        if fltm2 and flagtime and time.time() - stoptime2 >= 3600:
-            flagtime = False
-            fltm2 = False
-            vk.messages.send(
-                chat_id=event.chat_id,
-                random_id=get_random_id(),
-                message='Я вернулся!'
             )
 
         # обработка однословных команд бота
@@ -392,9 +305,7 @@ def mainfunc(event):
                 message=str(messagecit)
             )
 
-
-        elif text_message.replace(" ", "") == '!анекдот' \
-                or text_message == 'анекдот' and (flkv or flkv2):
+        elif text_message.replace(" ", "") == '!анекдот' or text_message == 'анекдот' and (flkv or flkv2):
             anes = random.randint(0, 135500)
             for linenum, line in enumerate(open('resurses/anec.txt', 'r')):
                 if linenum == anes:
@@ -410,7 +321,7 @@ def mainfunc(event):
             )
 
         elif text_message.replace(" ", "") == '!обновигороскоп':
-            if event.obj.from_id == 195310233:
+            if event.obj.from_id == bot_variable.my_id:
                 bot_functions.goroscop_update()
                 vk.messages.send(
                     chat_id=event.chat_id,
@@ -466,12 +377,10 @@ def mainfunc(event):
                         number_2 = ''
                         for k in str(sl[j]):
                             number_2 += smile[k]
-                        fio_1 = requests.get("https://api.vk.com/method/users.get?user_ids=" + str(j)
-                                             + "&fields=bdate&access_token=" + token + "&v=5.92").json()
-                        first_name_1 = fio_1["response"][0]["first_name"]
-                        last_name_1 = fio_1["response"][0]["last_name"]
-                        stats.append(first_name_1 + ' ' + last_name_1 + ': ' + str(
-                            number_2) + ' слов(а).\n')
+
+                        stats.append(bot_functions.name_about_id(str(j))[0] + ' ' +
+                                     bot_functions.name_about_id(str(j))[1] + ': ' + str(number_2) + ' слов(а).\n')
+
             for i in range(0, len(stats)):
                 stats[i] = str(i + 1) + ") " + stats[i]
             stats = ''.join(stats)
@@ -481,8 +390,6 @@ def mainfunc(event):
                 random_id=get_random_id(),
                 message=stats
             )
-
-
 
         elif text_message.replace(" ", "") == '!крокодилстата':
             f = open('{}resurses/crocodile_files/stat.txt'.format(start_path), 'r')
@@ -512,12 +419,9 @@ def mainfunc(event):
                         number_2 = ''
                         for k in str(dism[j]):
                             number_2 += smile[k]
-                        fio_1 = requests.get("https://api.vk.com/method/users.get?user_ids=" + str(j)
-                                             + "&fields=bdate&access_token=" + token + "&v=5.92").json()
-                        first_name_1 = fio_1["response"][0]["first_name"]
-                        last_name_1 = fio_1["response"][0]["last_name"]
-                        mat.append(first_name_1 + ' ' + last_name_1 + ': ' + str(
-                            number_2) + ' раз(а) угадал слово.\n')
+                        mat.append(bot_functions.name_about_id(str(j))[0] + ' ' +
+                                   bot_functions.name_about_id(str(j))[1] + ': ' + str(number_2) +
+                                   ' раз(а) угадал слово.\n')
             for i in range(0, len(mat)):
                 mat[i] = str(i + 1) + ") " + mat[i]
             mat = ''.join(mat)
@@ -553,11 +457,10 @@ def mainfunc(event):
                         number_2 = ''
                         for k in str(dism[j]):
                             number_2 += smile[k]
-                        fio_1 = requests.get("https://api.vk.com/method/users.get?user_ids=" + str(j)
-                                             + "&fields=bdate&access_token=" + token + "&v=5.92").json()
-                        first_name_1 = fio_1["response"][0]["first_name"]
-                        last_name_1 = fio_1["response"][0]["last_name"]
-                        mat.append(first_name_1 + ' ' + last_name_1 + ': ' + str(number_2) + ' раз(а)\n')
+
+                        mat.append(bot_functions.name_about_id(j[:-1:])[0] + ' ' +
+                                   bot_functions.name_about_id(j[:-1:])[1] + ': ' + str(number_2) + ' раз(а)\n')
+
             for i in range(0, len(mat)):
                 mat[i] = str(i + 1) + ") " + mat[i]
             mat = ''.join(mat)
@@ -575,7 +478,17 @@ def mainfunc(event):
             vk.messages.send(
                 chat_id=event.chat_id,
                 random_id=get_random_id(),
-                message="Сегодня пидор дня " + pidor_2
+                message="Сегодня пидор дня " + pidor_2.split(" --- ")[0]
+            )
+
+        elif flagobrpidor and (event.chat_id == 1 or event.chat_id == 5):
+            f1 = open('resurses/pidor_today.txt', 'r')
+            pidor_2 = f1.read()
+            f1.close()
+            vk.messages.send(
+                chat_id=event.chat_id,
+                random_id=get_random_id(),
+                message=("[id" + pidor_2.split(" --- ")[1]) + '|&#8203;]'
             )
 
         elif text_message.replace(" ", "") == '!пидоры' and (event.chat_id == 1 or event.chat_id == 5):
@@ -654,45 +567,37 @@ def mainfunc(event):
                 message='Кто сказал ' + flag_eat_2 + '?'
             )
 
-        elif text_message.find('!погода на завтра в городе') != -1 or text_message.find(
-                '! погода на завтра в городе') != -1:
-            if text_message.find('!погода на завтра в городе') != -1:
-                inder = 27
+        elif text_message.find('!прогноз в городе') != -1 or text_message.find(
+                '! прогноз в городе') != -1:
+            if text_message.find('!прогноз в городе') != -1:
+                inder = 18
             else:
-                inder = 28
-            tommor = str(datetime.date.today()).split('-')
-            tommor[-1] = str(int(tommor[-1]) + 1)
-            if len(str(int(tommor[-1]))) == 1:
-                tommor[-1] = "0" + str(int(tommor[-1]))
-            tommor = '-'.join(tommor)
-            city_1 = text_message[inder::] + '/' + tommor
-            result = bot_functions.wheather(city_1, 0, 0)
-            result = "Погода на завтра в городе " + city_1.capitalize().split('/')[0] + ':\n\n' + result
+                inder = 19
+
+            city_1 = text_message[inder::]
+            result = bot_functions.wheather_tomm(city_1)
+            result = "Прогноз в городе " + city_1.capitalize().split('/')[0] + ':\n\n' + result
             vk.messages.send(
                 chat_id=event.chat_id,
                 random_id=get_random_id(),
                 message=result
             )
 
-        elif text_message.find('!погода на завтра') != -1 \
-                or text_message.find('! погода на завтра') != -1 \
-                or text_message.find('☂ погода на завтра') != -1 and (flkv or flkv2):
-            tommor = str(datetime.date.today()).split('-')
-            tommor[-1] = str(int(tommor[-1]) + 1)
-            if len(str(int(tommor[-1]))) == 1:
-                tommor[-1] = "0" + str(int(tommor[-1]))
-            tommor = '-'.join(tommor)
+        elif text_message.find('!прогноз') != -1 \
+                or text_message.find('! прогноз') != -1 \
+                or text_message.find('☂ прогноз') != -1 and (flkv or flkv2):
+
             if flag_city:
-                city = str(city).lower() + '/' + tommor
+                city = str(city).lower()
             else:
-                city = "москва" + '/' + tommor
+                city = "москва"
                 vk.messages.send(
                     chat_id=event.chat_id,
                     random_id=get_random_id(),
                     message="У Вас не указан город ВК, по умолчанию выставлена Москва"
                 )
-            result = bot_functions.wheather(city, 0, 0)
-            result = "Погода на завтра в городе " + city.capitalize().split('/')[0] + ':\n\n' + result
+            result = bot_functions.wheather_tomm(city)
+            result = "Прогноз в городе " + city.capitalize().split('/')[0] + ':\n\n' + result
             vk.messages.send(
                 chat_id=event.chat_id,
                 random_id=get_random_id(),
@@ -705,7 +610,7 @@ def mainfunc(event):
             else:
                 inder = 18
             city_1 = text_message[inder::]
-            result = bot_functions.wheather(city_1, 0, 0)
+            result = bot_functions.wheather_today(city_1)
             vk.messages.send(  # Отправляем собщение
                 chat_id=event.chat_id,
                 random_id=get_random_id(),
@@ -725,8 +630,8 @@ def mainfunc(event):
                     message="У Вас не указан город ВК, по умолчанию выставлена Москва"
                 )
             keyboardweather = VkKeyboard(one_time=False, inline=True)
-            keyboardweather.add_button('☂ Погода на завтра', color=VkKeyboardColor.PRIMARY)
-            result = bot_functions.wheather(city, 0, 0)
+            keyboardweather.add_button('☂ Прогноз', color=VkKeyboardColor.PRIMARY)
+            result = bot_functions.wheather_today(city)
             vk.messages.send(  # Отправляем собщение
                 chat_id=event.chat_id,
                 random_id=get_random_id(),
@@ -735,6 +640,8 @@ def mainfunc(event):
             )
 
         elif text_message.find('купи слона') != -1 or text_message.find('!купи слона') != -1:
+            if text_message.find('!купи слона') != -1:
+                text_message = "".join(text_message.split("!"))
             vk.messages.send(
                 chat_id=event.chat_id,
                 random_id=get_random_id(),
@@ -798,15 +705,15 @@ def mainfunc(event):
             vk.messages.send(
                 chat_id=event.chat_id,
                 random_id=get_random_id(),
-                message='Пиздуй учиться, ' + first_name + '!'
+                message='Пиздуй работать, ' + first_name + '!'
             )
 
-        elif not flagtime and (text_message.split(' ')[-1] == "чо" or text_message.split(' ')[-1] == "че" \
+        elif not flagtime and (text_message.split(' ')[-1] == "чо" or text_message.split(' ')[-1] == "че"
                                or text_message.split(' ')[-1] == "чё"):
             vk.messages.send(
                 chat_id=event.chat_id,
                 random_id=get_random_id(),
-                message='Хуй через плечо!'
+                message='Перекинь через плечо!'
             )
 
         elif text_message.split(' ')[-1] == "да" and not flagtime:
@@ -817,13 +724,19 @@ def mainfunc(event):
             )
 
 
-try:
+if __name__ == "__main__":
     for event in longpoll.listen():
-        mainfunc(event)
-except Exception as err:
-    vk.messages.send(
-        user_id=195310233,
-        random_id=get_random_id(),
-        message='Возникла ошибка:\n{}\nв bot_herobot_chat.'.format(str(err))
-    )
-    mainfunc()
+        main(event)
+
+'''        
+if __name__ == "__main__":
+    try:
+        for event in longpoll.listen():
+            main(event)
+    except Exception as err:
+        vk.messages.send(
+            user_id=bot_variable.my_id,
+            random_id=get_random_id(),
+            message='Возникла ошибка:\n{}\nв bot_herobot_chat.'.format(str(err))
+        )
+'''

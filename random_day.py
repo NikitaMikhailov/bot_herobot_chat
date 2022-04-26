@@ -37,7 +37,7 @@ f1.write(str(pidor_id)+'\n')
 f1.close()
 
 f1 = open('{}resurses/pidor_today.txt'.format(start_path), 'w')
-f1.write(str(pidor))
+f1.write(str(pidor) + " --- " + str(pidor_id))
 f1.close()
 
 vk.messages.send(

@@ -66,7 +66,7 @@ week_result = {}
 for i in sl:
     week_result[i] = int(sl[i]) - int(sl_1[i])
 
-file_word_in_week = open('word_in_week.txt'.format(start_path), 'w', encoding='utf-8')
+file_word_in_week = open('{}word_in_week.txt'.format(start_path), 'w', encoding='utf-8')
 for i in sl:
     file_word_in_week.write(i+'*_*'+str(sl[i])+'\n')
 file_word_in_week.close()

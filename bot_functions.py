@@ -9,12 +9,10 @@ import requests
 import bot_variable
 import time
 
-
 if bot_variable.flag_repository:
     start_path = ""
 else:
     start_path = '/root/bot_herobot_chat/'
-
 
 f = open('{}token.txt'.format(start_path), 'r')
 token = f.read()
@@ -33,6 +31,7 @@ def goroscop_update():
         filegor = open('{}resurses/goroskop_files/{}.txt'.format(start_path, bot_variable.spisok_znakov[symbol]), 'w')
         filegor.write(str(str(text_gor).split('\n')[2]).lstrip())
         filegor.close()
+
 
 # вычисление знака зодиака пользователя по дате рождения
 
@@ -99,68 +98,91 @@ def goroscop_user(bd_date):
         else:
             return 'capricorn'
 
-# формированиие отдельных частей погоды
-
-
-def wheather_day(temperature, index_temp, zavtra, image, index_img, wind, index_wind):
-    weather = temperature[index_temp + zavtra].getText()
-    image1 = image[index_img].getText()
-    image1_1 = ''
-    for i in image1:
-        if i != '\n':
-            image1_1 += i
-    image1 = image1_1
-    image1 = image1.split(', ')
-    cloud = bot_variable.im_text[image1[0]]
-
-    if len(image1) == 2:
-        if image1[1].find("снег") != -1:
-            rain = bot_variable.im_text_2["снег"]
-        if image1[1].find("дождь") != -1:
-            rain = bot_variable.im_text_2["дождь"]
-    else:
-        rain = ''
-
-    wind_rtrn = '{}, {} м/с.'.format((str(wind[index_wind + zavtra]).split(' ')[3][7:-5:1]),
-                                     (wind[index_wind + zavtra].getText()))
-    wind_rtrn = wind_rtrn.split(' ')[1::]
-    wind_rtrn[0] = wind_rtrn[0].split('\n')
-    wind_rtrn[0] = ''.join(wind_rtrn[0][-1::])
-    wind_rtrn = ' '.join(wind_rtrn[:-1:]).replace("\n", "")
-
-    return cloud, weather, wind_rtrn, rain
 
 # формирование ответа с погодой
+def get_wind_direction(deg):
+    l = ['С ', 'СВ', ' В', 'ЮВ', 'Ю ', 'ЮЗ', ' З', 'СЗ']
+    for i in range(0, 8):
+        step = 45.
+        min = i * step - 45 / 2.
+        max = i * step + 45 / 2.
+        if i == 0 and deg > 360 - 45 / 2.:
+            deg = deg - 360
+        if deg >= min and deg <= max:
+            res = l[i]
+            break
+    return res
 
 
-def wheather(city: str, zavtra: int, zavtra_1: int):
-    city = city.replace(" ", "-")
-    request = requests.get("https://sinoptik.com.ru/погода-" + city)
-    b = bs4.BeautifulSoup(request.text, "html.parser")
+def get_city_id(s_city_name):
+    res = requests.get("http://api.openweathermap.org/data/2.5/find",
+                       params={'q': s_city_name, 'type': 'like', 'units': 'metric', 'lang': 'ru',
+                               'APPID': bot_variable.appid})
+    data = res.json()
+    cities = ["{} ({})".format(d['name'], d['sys']['country'])
+              for d in data['list']]
+    city_id = data['list'][0]['id']
+
+    assert isinstance(city_id, int)
+    return city_id
+
+
+# Запрос текущей погоды
+def request_current_weather(city_id):
+    res = requests.get("http://api.openweathermap.org/data/2.5/weather",
+                       params={'id': city_id, 'units': 'metric', 'lang': 'ru', 'APPID': bot_variable.appid})
+    data = res.json()
+    print(data)
+    result_1 = bot_variable.im_text[data['weather'][0]['description']] + ' ' + data['weather'][0]['description'] + \
+               "\nТемпература сейчас: " + str(round(data['main']['temp'])) + '°C' + \
+               "\nОщущается как: " + str(round(data['main']['feels_like'])) + '°C' + \
+               "\nВетер: " + str(round(data['wind']['speed'])) + 'м/с' + get_wind_direction(data['wind']['deg'])
+
+    return result_1
+
+
+# Прогноз
+def request_forecast(city_id):
+    res = requests.get("http://api.openweathermap.org/data/2.5/forecast",
+                       params={'id': city_id, 'units': 'metric', 'lang': 'ru', 'APPID': bot_variable.appid})
+    data = res.json()
+    # print('city:', data['city']['name'], data['city']['country'])
+    result_2 = []
+    for i in data['list']:
+        (i['dt_txt'])[:16], \
+        '{0:+3.0f}'.format(i['main']['temp']), \
+        '{0:2.0f}'.format(i['wind']['speed']) + " м/с", \
+        get_wind_direction(i['wind']['deg']), \
+        i['weather'][0]['description']
+    return '\n'.join(result_2)
+
+
+def wheather_today(city: str):
     try:
-        article = b.find_all("div", "weather__article_description-text")
-        temperature = b.find_all("div", "table__temp")
-        image = b.find_all("div", "table__time_img")
-        wind = b.find_all("div", "table__wind")
-
-        cloud1, weather1, wind1, rain1 = wheather_day(temperature, 0, zavtra, image, 0, wind, 0)
-        cloud2, weather2, wind2, rain2 = wheather_day(temperature, 2, zavtra, image, 2, wind, 2)
-        cloud3, weather3, wind3, rain3 = wheather_day(temperature, 4, zavtra, image, 4, wind, 4)
-        cloud4, weather4, wind4, rain4 = wheather_day(temperature, 6, zavtra, image, 6, wind, 6)
-
-        result = ''
-        result = result + ('Ночью : {}{} {},\nВетер: {}.'.format(cloud1, rain1, weather1, wind1)) + '\n\n'
-        result = result + ('Утром : {}{} {},\nВетер: {}.'.format(cloud2, rain2, weather2, wind2)) + '\n\n'
-        result = result + ('Днём : {}{} {},\nВетер: {}.'.format(cloud3, rain3, weather3, wind3)) + '\n\n'
-        result = result + ('Вечером : {}{} {},\nВетер: {}.'.format(cloud4, rain4, weather4, wind4)) + '\n\n'
-        result += article[0 + zavtra_1].getText()
+        city = city.replace(" ", "-")
+        request = requests.get("https://sinoptik.ua/погода-" + city)
+        b = bs4.BeautifulSoup(request.text, "html.parser")
+        city_ids = get_city_id(city)
+        article = b.find_all("div", "description")
+        result = request_current_weather(city_ids)
+        result += '\n' + article[0].getText()
         return result
     except IndexError:
-        return 'Такого города не найдено.'
+        return 'Что-то пошло не так...'
+
+
+def wheather_tomm(city: str):
+    try:
+        city = city.replace(" ", "-")
+        request = requests.get("https://sinoptik.ua/погода-" + city)
+        b = bs4.BeautifulSoup(request.text, "html.parser")
+        city_ids = get_city_id(city)
+        return request_forecast(city_ids)
+    except IndexError:
+        return 'Что-то пошло не так...'
+
 
 # преобразование текста сообщения
-
-
 def text_transform(text_message: str):
     evtxt = ''
     for i in range(0, len(text_message)):
@@ -170,21 +192,20 @@ def text_transform(text_message: str):
         text_message = text_message.lower()
     else:
         text_message = evtxt.lower()
-    if text_message[:24:] == 'club178949259|ботхеработ':
-        text_message = text_message[25::]
+    if text_message[:33:] == 'club178949259|violet copernicium ':
+        text_message = text_message[33::]
         flkv = True
     else:
         flkv = False
-    if text_message[:28:] == 'club178949259|@club178949259':
+    if text_message[:29:] == 'club178949259|@club178949259 ':
         text_message = text_message[29::]
         flkv2 = True
     else:
         flkv2 = False
     return flkv, flkv2, text_message
 
+
 # получение даты рождения, имени и фамилии, города
-
-
 def requests_fio_city_bddate(event):
     fio_json = requests.get("https://api.vk.com/method/users.get?user_ids=" + str(
         event.obj.from_id) + "&fields=bdate, city&access_token=" + token + "&v=5.92").json()
@@ -195,6 +216,7 @@ def requests_fio_city_bddate(event):
         city_user = fio_json["response"][0]["city"]["title"]
         flag_city = True
     except KeyError:
+        city_user = None
         flag_city = False
 
     try:
@@ -206,11 +228,18 @@ def requests_fio_city_bddate(event):
         bd_date = None
     return city_user, flag_city, first_name, last_name, bd_date, flagbddate
 
+
 # получение текущего дня
-
-
 def today_without_zero():
     day = time.strftime("%d", time.localtime())
     if day[0] == '0':
         day = day[1::]
     return day
+
+
+def name_about_id(user_id: str):
+    fio_1 = requests.get("https://api.vk.com/method/users.get?user_ids=" + user_id
+                         + "&fields=bdate&access_token=" + token + "&v=5.92").json()
+    first_name_1 = fio_1["response"][0]["first_name"]
+    last_name_1 = fio_1["response"][0]["last_name"]
+    return [first_name_1, last_name_1]
