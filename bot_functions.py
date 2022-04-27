@@ -23,10 +23,6 @@ f.close()
 
 
 def goroscop_update():
-    '''
-    https: // api.vk.com / method / wall.get?owner_id = -193489972 & domain = neural_horo & access_token = 2
-    aa1daed74f8c22f9bdf7ae61a6336799724fbbb102ec7e77e759a112ebf29a808b081524ce7d2824410e & v = 5.131 & offset = 1 & count = 1 & filter = all
-    '''
 
     f_1 = open('{}token_2.txt'.format(start_path), 'r')
     token_1 = f_1.read()
@@ -41,8 +37,10 @@ def goroscop_update():
         if i != '':
             goroskop_text_1.append(i)
     for i in range(12):
+        print('{}resurses/goroskop_files/{}.txt'.format(start_path, bot_variable.spisok_znakov[i]))
+        print(goroskop_text_1[i])
         filegor = open('{}resurses/goroskop_files/{}.txt'.format(start_path, bot_variable.spisok_znakov[i]), 'w', encoding='utf-8')
-        filegor.write(goroskop_text_1[i])
+        filegor.write(goroskop_text_1[i][1::])
         filegor.close()
 
 
@@ -162,7 +160,7 @@ def request_forecast(city_id):
     result_2 = []
     for i in data['list']:
         if (i['dt_txt'])[11:16] != '15:00' and (i['dt_txt'])[11:16] != '21:00' and (i['dt_txt'])[11:16] != '03:00' and (i['dt_txt'])[11:16] != '09:00':
-            result_2.append((i['dt_txt'])[8:10] + '.' + (i['dt_txt'])[5:7] + bot_variable.im_text_time[(i['dt_txt'])[11:16]] + \
+            result_2.append(bot_variable.im_text_day[(i['dt_txt'])[11:16]] + (i['dt_txt'])[8:10] + '.' + (i['dt_txt'])[5:7] + ' ' + \
                   '{0:+3.0f}'.format(i['main']['temp']) + '°C' + \
                   '{0:2.0f}'.format(i['wind']['speed']) + " м/с " + \
                   get_wind_direction(i['wind']['deg']) + ' ' + \
