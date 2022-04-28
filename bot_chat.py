@@ -679,11 +679,11 @@ def main(event):
         elif text_message.find('!кубик') != -1:
             kub = text_message[7::]
             try:
-                vypalo = random.randint(1, int(kub))
+                result_int = random.randint(1, int(kub))
                 vk.messages.send(
                     chat_id=event.chat_id,
                     random_id=get_random_id(),
-                    message='Выпало число {}'.format(vypalo)
+                    message='Выпало число {}'.format(result_int)
                 )
             except ValueError:
                 vk.messages.send(
@@ -691,6 +691,15 @@ def main(event):
                     random_id=get_random_id(),
                     message='С твоим числом что-то не так..'
                 )
+
+        elif text_message.find('!список участников') != -1:
+            bot_functions.dialog_users_list(event.chat_id)
+            vk.messages.send(
+                chat_id=event.chat_id,
+                random_id=get_random_id(),
+                message='OK'
+            )
+
 
         elif text_message == 'ну и ладно' and not flagtime:
             image_url = 'https://pp.userapi.com/c851120/v851120719/d26d3/-orcQNPA2gI.jpg'
@@ -755,16 +764,3 @@ def main(event):
 if __name__ == "__main__":
     for event in longpoll.listen():
         main(event)
-
-'''        
-if __name__ == "__main__":
-    try:
-        for event in longpoll.listen():
-            main(event)
-    except Exception as err:
-        vk.messages.send(
-            user_id=bot_variable.my_id,
-            random_id=get_random_id(),
-            message='Возникла ошибка:\n{}\nв bot_herobot_chat.'.format(str(err))
-        )
-'''

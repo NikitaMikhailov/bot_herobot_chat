@@ -23,13 +23,12 @@ f.close()
 
 
 def goroscop_update():
-
     f_1 = open('{}token_2.txt'.format(start_path), 'r')
     token_1 = f_1.read()
     f_1.close()
 
     file_req = requests.get("https://api.vk.com/method/wall.get?owner_id=-193489972&domain=neural_horo&access_token=" +
-                                token_1 + "&v=5.131&offset=1&count=1&filter=all").json()
+                            token_1 + "&v=5.131&offset=1&count=1&filter=all").json()
 
     goroskop_text = (file_req['response']['items'][0]['text']).split('\n')
     goroskop_text_1 = []
@@ -39,7 +38,8 @@ def goroscop_update():
     for i in range(12):
         print('{}resurses/goroskop_files/{}.txt'.format(start_path, bot_variable.spisok_znakov[i]))
         print(goroskop_text_1[i])
-        filegor = open('{}resurses/goroskop_files/{}.txt'.format(start_path, bot_variable.spisok_znakov[i]), 'w', encoding='utf-8')
+        filegor = open('{}resurses/goroskop_files/{}.txt'.format(start_path, bot_variable.spisok_znakov[i]), 'w',
+                       encoding='utf-8')
         filegor.write(goroskop_text_1[i][1::])
         filegor.close()
 
@@ -140,8 +140,10 @@ def get_city_id(s_city_name):
 
 # Запрос текущей погоды
 def request_current_weather(city_id):
+
     res = requests.get("http://api.openweathermap.org/data/2.5/weather",
                        params={'id': city_id, 'units': 'metric', 'lang': 'ru', 'APPID': bot_variable.appid})
+
     data = res.json()
     print(data)
     result_1 = bot_variable.im_text[data['weather'][0]['description']] + ' ' + data['weather'][0]['description'] + \
@@ -154,17 +156,23 @@ def request_current_weather(city_id):
 
 # Прогноз
 def request_forecast(city_id):
+
     res = requests.get("http://api.openweathermap.org/data/2.5/forecast",
                        params={'id': city_id, 'units': 'metric', 'lang': 'ru', 'APPID': bot_variable.appid})
+
     data = res.json()
     result_2 = []
     for i in data['list']:
-        if (i['dt_txt'])[11:16] != '15:00' and (i['dt_txt'])[11:16] != '21:00' and (i['dt_txt'])[11:16] != '03:00' and (i['dt_txt'])[11:16] != '09:00':
-            result_2.append(bot_variable.im_text_day[(i['dt_txt'])[11:16]] + (i['dt_txt'])[8:10] + '.' + (i['dt_txt'])[5:7] + ' ' + \
-                  '{0:+3.0f}'.format(i['main']['temp']) + '°C' + \
-                  '{0:2.0f}'.format(i['wind']['speed']) + " м/с " + \
-                  get_wind_direction(i['wind']['deg']) + ' ' + \
-                  bot_variable.im_text[i['weather'][0]['description']])
+        if (i['dt_txt'])[11:16] != '15:00' and (i['dt_txt'])[11:16] != '21:00' and (i['dt_txt'])[11:16] != '03:00' and (
+                                                                                                                       i[
+                                                                                                                           'dt_txt'])[
+                                                                                                                       11:16] != '09:00':
+            result_2.append(
+                bot_variable.im_text_day[(i['dt_txt'])[11:16]] + (i['dt_txt'])[8:10] + '.' + (i['dt_txt'])[5:7] + ' ' + \
+                '{0:+3.0f}'.format(i['main']['temp']) + '°C' + \
+                '{0:2.0f}'.format(i['wind']['speed']) + " м/с " + \
+                get_wind_direction(i['wind']['deg']) + ' ' + \
+                bot_variable.im_text[i['weather'][0]['description']])
 
     return '\n'.join(result_2)
 
@@ -219,8 +227,10 @@ def text_transform(text_message: str):
 
 # получение даты рождения, имени и фамилии, города
 def requests_fio_city_bddate(event):
+
     fio_json = requests.get("https://api.vk.com/method/users.get?user_ids=" + str(
         event.obj.from_id) + "&fields=bdate, city&access_token=" + token + "&v=5.92").json()
+
     first_name = fio_json["response"][0]["first_name"]
     last_name = fio_json["response"][0]["last_name"]
 
@@ -249,9 +259,30 @@ def today_without_zero():
     return day
 
 
+# получение имени и фамилии по айди
 def name_about_id(user_id: str):
+
     fio_1 = requests.get("https://api.vk.com/method/users.get?user_ids=" + user_id
                          + "&fields=bdate&access_token=" + token + "&v=5.92").json()
+
     first_name_1 = fio_1["response"][0]["first_name"]
     last_name_1 = fio_1["response"][0]["last_name"]
     return [first_name_1, last_name_1]
+
+
+# получение списка участников чата по его айди
+def dialog_users_list(chat_id: str):
+    # chat_id = 1
+    f_1 = open('{}token.txt'.format(start_path), 'r')
+    token_1 = f_1.read()
+    f_1.close()
+
+    list_users = requests.get("https://api.vk.com/method/messages.getConversationMembers?peer_id=" +
+                              str(2000000000 + int(chat_id)) + "&access_token=" + token_1 + "&v=5.131").json()
+
+    count_users = (list_users["response"]["count"])
+    list_users_rtrn = []
+    for i in (list_users["response"]["profiles"]):
+        if "type" not in i:
+            list_users_rtrn.append(str(i["id"]) + " " + i["first_name"] + " " + i["last_name"])
+    return count_users, list_users_rtrn
