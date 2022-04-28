@@ -106,7 +106,7 @@ def main():
             pizdabol_id = i
 
     vk.messages.send(
-        user_id=195310233,
+        user_id=bot_variable.my_id,
         random_id=get_random_id(),
         message='Пиздабол недели обновлен в фоновом режиме, это [id' + str(pizdabol_id) + '|' + pizdabol + "]"
     )

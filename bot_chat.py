@@ -17,32 +17,6 @@ import bot_functions
 import bot_variable
 
 # -------------------------------------------------------------
-keyboard1 = VkKeyboard(one_time=False)
-keyboard1.add_button('Анекдот', color=VkKeyboardColor.PRIMARY)
-keyboard1.add_button('Погода', color=VkKeyboardColor.PRIMARY)
-keyboard1.add_button('Гороскоп', color=VkKeyboardColor.PRIMARY)
-# -------------------------------------------------------------
-keyboard2 = VkKeyboard(one_time=False)
-keyboard2.add_button('Анекдот', color=VkKeyboardColor.PRIMARY)
-keyboard2.add_button('Погода', color=VkKeyboardColor.PRIMARY)
-keyboard2.add_button('Гороскоп', color=VkKeyboardColor.PRIMARY)
-keyboard2.add_line()
-keyboard2.add_button('Цитата', color=VkKeyboardColor.PRIMARY)
-keyboard2.add_button('Мысль', color=VkKeyboardColor.PRIMARY)
-keyboard2.add_button('Факт', color=VkKeyboardColor.PRIMARY)
-# -------------------------------------------------------------
-keyboard3 = VkKeyboard(one_time=False)
-keyboard3.add_button('Анекдот', color=VkKeyboardColor.PRIMARY)
-keyboard3.add_button('Погода', color=VkKeyboardColor.PRIMARY)
-keyboard3.add_button('Гороскоп', color=VkKeyboardColor.PRIMARY)
-keyboard3.add_line()
-keyboard3.add_button('Цитата', color=VkKeyboardColor.PRIMARY)
-keyboard3.add_button('Мысль', color=VkKeyboardColor.PRIMARY)
-keyboard3.add_button('Факт', color=VkKeyboardColor.PRIMARY)
-keyboard3.add_line()
-keyboard3.add_button('Отстань', color=VkKeyboardColor.NEGATIVE)
-keyboard3.add_button('Вернись', color=VkKeyboardColor.POSITIVE)
-# -------------------------------------------------------------
 
 if bot_variable.flag_repository:
     start_path = ""
@@ -69,7 +43,7 @@ if bot_variable.flag_hello_message:
         vk.messages.send(
             chat_id=i,
             random_id=get_random_id(),
-            keyboard=keyboard1.get_keyboard(),
+            keyboard=bot_variable.keyboard1.get_keyboard(),
             message=hello_message
         )
 
@@ -234,14 +208,14 @@ def main(event):
             vk.messages.send(
                 chat_id=event.chat_id,
                 random_id=get_random_id(),
-                keyboard=keyboard1.get_keyboard(),
+                keyboard=bot_variable.keyboard1.get_keyboard(),
                 message='Клавиатура тип 1 включена.'
             )
         elif text_message.replace(" ", "") == '!клавиатура2вкл':
             vk.messages.send(
                 chat_id=event.chat_id,
                 random_id=get_random_id(),
-                keyboard=keyboard2.get_keyboard(),
+                keyboard=bot_variable.keyboard2.get_keyboard(),
                 message='Клавиатура тип 2 включена.'
             )
         elif text_message.replace(" ", "") == '!клавиатура3вкл':
@@ -249,7 +223,7 @@ def main(event):
                 vk.messages.send(
                     chat_id=event.chat_id,
                     random_id=get_random_id(),
-                    keyboard=keyboard3.get_keyboard(),
+                    keyboard=bot_variable.keyboard3.get_keyboard(),
                     message='Клавиатура тип 3 включена.'
                 )
             else:
@@ -262,7 +236,7 @@ def main(event):
             vk.messages.send(
                 chat_id=event.chat_id,
                 random_id=get_random_id(),
-                keyboard=keyboard1.get_empty_keyboard(),
+                keyboard=bot_variable.keyboard1.get_empty_keyboard(),
                 message='Клавиатура выключена'
             )
 
